@@ -4,25 +4,28 @@
 
 **URL:** https://chettana33.github.io/phathiao-dashboard/
 
+## หน้าต่างๆ
+
+- **ภาพรวม** — โครงสร้าง 4 ชั้น + พันธมิตร + ซัพพลาย (ไฟล์ `content/overview.md`)
+- **สถานะงาน** — สถานะเครื่องมือ + Master Data (ไฟล์ `content/status.md`)
+- **Checkpoint** — ดึง `CHECKPOINT_LATEST.md` จาก knowledge-brain อัตโนมัติตอน build (ทุก push + ทุกวัน 00:00 UTC)
+- **MEMORY** — พี่เจ_MEMORY (ไฟล์ `content/memory.md` — copy จาก Vault, AI อัปเดตให้)
+- **ลำดับถัดไป** — roadmap (ไฟล์ `content/roadmap.md`)
+- **กระดานไอเดีย** — ช่องพิมพ์ในเว็บ → เก็บ Firestore (`phathiao-dashboard` project) — เห็นร่วมกันทุกเครื่อง
+
 ## วิธีอัปเดต
 
-1. แก้ไฟล์ใน `content/` (`overview.md` · `status.md` · `roadmap.md` · `ideas.md`)
-2. commit + push ไป `main` — GitHub Actions build + deploy อัตโนมัติ
-3. เปิด URL อีกครั้ง (หรือ refresh) ดูผล
-
-หรือรัน build ในเครื่องก่อน push:
-
-```bash
-python build.py
-# สร้าง docs/index.html — ตรวจได้ก่อน push
-```
+1. แก้ไฟล์ใน `content/` → commit + push → GitHub Actions build + deploy อัตโนมัติ
+2. หรือรัน `python build.py` ในเครื่อง (สร้าง `docs/index.html` ตรวจก่อน push)
+3. โน้ต/ไอเดีย: พิมพ์ในเว็บเลย (ไม่ต้องแก้ไฟล์)
 
 ## โครงสร้าง
 
 ```text
-content/*.md   <- ต้นทาง (แก้ตรงนี้)
+content/*.md   <- ต้นทาง (แก้ตรงนี้) — checkpoint.md ถูก workflow ดึงทับอัตโนมัติ
 build.py       <- แปลง .md -> HTML (ไม่ใช้ lib ภายนอก)
 docs/          <- ผล build (deploy ขึ้น Pages)
+firestore.rules + firebase.json <- rules กระดานไอเดีย (deploy: firebase deploy --only firestore:rules)
 .github/workflows/deploy.yml <- build + deploy อัตโนมัติ
 ```
 
@@ -30,3 +33,4 @@ docs/          <- ผล build (deploy ขึ้น Pages)
 
 - repo สาธารณะ — **ห้าม** password/token/ราคา margin ภายใน/ข้อมูลลับ
 - ทุกไฟล์ใน content ใช้ภาษาไทย, ตาราง + bullet ตาม format กลาง
+- `content/checkpoint.md` = ดึงทับอัตโนมัติ — ห้ามแก้เอง (จะโดนทับ)

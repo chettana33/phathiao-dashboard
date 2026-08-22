@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build phathiao-dashboard: content/*.md -> docs/index.html"""
+"""Build phathiao-dashboard: content/*.md + checkpoint -> docs/index.html"""
 import os
 import re
 import html
@@ -12,12 +12,13 @@ OUT = ROOT / "docs"
 NAV_ITEMS = [
     ("overview", "ภาพรวม"),
     ("status", "สถานะงาน"),
+    ("checkpoint", "Checkpoint"),
+    ("memory", "MEMORY"),
     ("roadmap", "ลำดับถัดไป"),
     ("ideas", "กระดานไอเดีย"),
 ]
 
 def inline(text):
-    """Convert inline markdown: bold, italic, links, code."""
     text = html.escape(text)
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
     text = re.sub(r'\*(.+?)\*', r'<em>\1</em>', text)
@@ -26,7 +27,6 @@ def inline(text):
     return text
 
 def parse_md(text):
-    """Parse markdown to HTML blocks. Supports headings, tables, lists, code, blockquote, hr."""
     blocks = []
     lines = text.split("\n")
     i = 0
@@ -146,6 +146,19 @@ def build():
         if not src.exists():
             continue
         body = parse_md(src.read_text(encoding="utf-8"))
+        if key == "ideas":
+            body += """
+<div class="notes-box">
+  <h3>📝 พิมพ์ไอเดีย/โน้ต</h3>
+  <input type="text" id="note-name" placeholder="ชื่อคุณ (ไม่บังคับ)" maxlength="100">
+  <textarea id="note-text" placeholder="พิมพ์ไอเดียตรงนี้... (สูงสุด 2000 ตัวอักษร)" maxlength="2000" rows="3"></textarea>
+  <div class="note-actions">
+    <button class="btn" id="note-submit">บันทึกโน้ต</button>
+    <span id="note-msg" class="muted"></span>
+  </div>
+</div>
+<div id="notes-list" class="notes-list"><p class="muted">กำลังโหลดโน้ต...</p></div>
+"""
         sections.append(f'<section id="{key}" class="section">{body}</section>')
 
     html_doc = f"""<!DOCTYPE html>
@@ -158,6 +171,7 @@ def build():
 :root {{
   --bg:#0f172a; --card:#1e293b; --card2:#273449; --line:#334155;
   --text:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --good:#4ade80; --warn:#facc15; --bad:#f87171;
+  --accent2:#818cf8;
 }}
 * {{ box-sizing:border-box; margin:0; padding:0; }}
 body {{ background:var(--bg); color:var(--text); font-family:'Segoe UI','Noto Sans Thai',Tahoma,sans-serif; line-height:1.6; }}
@@ -198,6 +212,15 @@ tr:nth-child(even) td {{ background:rgba(255,255,255,.02); }}
 .tag.warn {{ background:rgba(250,204,21,.15); color:var(--warn); }}
 .tag.bad {{ background:rgba(248,113,113,.15); color:var(--bad); }}
 .tag.muted {{ background:var(--card2); color:var(--muted); }}
+.btn {{ border:0; border-radius:9px; padding:9px 16px; font-weight:700; cursor:pointer; background:var(--accent); color:#0b1220; font-size:13px; }}
+.btn:hover {{ opacity:.9; }}
+.muted {{ color:var(--muted); font-size:13px; }}
+.notes-box {{ background:var(--card2); border:1px solid var(--line); border-radius:12px; padding:14px; margin:14px 0; }}
+.notes-box input, .notes-box textarea {{ width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:14px; background:#0f172a; color:var(--text); margin:4px 0; }}
+.note-actions {{ display:flex; align-items:center; gap:12px; margin-top:8px; }}
+.notes-list {{ margin-top:14px; }}
+.note-card {{ background:var(--card2); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:8px 0; }}
+.note-card .note-meta {{ color:var(--muted); font-size:11px; margin-top:6px; }}
 footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; border-top:1px solid var(--line); }}
 @media (max-width:640px) {{
   .section {{ padding:16px; }}
@@ -217,7 +240,63 @@ footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; b
 {''.join(sections)}
 </main>
 <footer>อัปเดตล่าสุด: {os.environ.get('BUILD_TIME', '')} · แก้ไฟล์ใน content/*.md แล้ว build ใหม่</footer>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script>
+const firebaseConfig = {{
+  apiKey: "AIzaSyDznvjBOYJviSVPwj9TESkuZrDANKHxqxA",
+  authDomain: "phathiao-dashboard.firebaseapp.com",
+  projectId: "phathiao-dashboard",
+  storageBucket: "phathiao-dashboard.firebasestorage.app",
+  messagingSenderId: "228151129172",
+  appId: "1:228151129172:web:6de75a7b39fb76a01ee9c1"
+}};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function loadNotes() {{
+  try {{
+    const snap = await db.collection('dashboard_notes').orderBy('created', 'desc').limit(50).get();
+    const list = document.getElementById('notes-list');
+    if (snap.empty) {{
+      list.innerHTML = '<p class="muted">ยังไม่มีโน้ต — พิมพ์แรกเลย!</p>';
+      return;
+    }}
+    list.innerHTML = snap.docs.map(d => {{
+      const data = d.data();
+      const name = data.name ? data.name : 'ไม่ระบุชื่อ';
+      const date = data.created && data.created.toDate ? data.created.toDate().toLocaleString('th-TH') : '';
+      return '<div class="note-card"><div>' + escapeHtml(data.text) + '</div><div class="note-meta">✍️ ' + escapeHtml(name) + ' · ' + date + '</div></div>';
+    }}).join('');
+  }} catch (e) {{
+    document.getElementById('notes-list').innerHTML = '<p class="muted">โหลดโน้ตไม่ได้: ' + escapeHtml(String(e.message || e)) + '</p>';
+  }}
+}}
+
+function escapeHtml(s) {{
+  return String(s).replace(/[&<>"']/g, c => ({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[c]));
+}}
+
+document.getElementById('note-submit').addEventListener('click', async () => {{
+  const text = document.getElementById('note-text').value.trim();
+  const name = document.getElementById('note-name').value.trim();
+  const msg = document.getElementById('note-msg');
+  if (!text) {{ msg.textContent = 'กรอกข้อความก่อน'; return; }}
+  msg.textContent = 'กำลังบันทึก...';
+  try {{
+    await db.collection('dashboard_notes').add({{
+      text: text,
+      name: name || 'ไม่ระบุชื่อ',
+      created: firebase.firestore.FieldValue.serverTimestamp()
+    }});
+    document.getElementById('note-text').value = '';
+    msg.textContent = '✅ บันทึกแล้ว';
+    loadNotes();
+  }} catch (e) {{
+    msg.textContent = '❌ บันทึกไม่ได้: ' + e.message;
+  }}
+}});
+
 document.querySelectorAll('.nav-link').forEach(a => {{
   a.addEventListener('click', e => {{
     e.preventDefault();
@@ -230,6 +309,7 @@ document.querySelectorAll('.nav-link').forEach(a => {{
 (function() {{
   const first = document.querySelector('.section');
   if (first) first.style.display = 'block';
+  loadNotes();
 }})();
 </script>
 </body>

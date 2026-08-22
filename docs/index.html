@@ -8,6 +8,7 @@
 :root {
   --bg:#0f172a; --card:#1e293b; --card2:#273449; --line:#334155;
   --text:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --good:#4ade80; --warn:#facc15; --bad:#f87171;
+  --accent2:#818cf8;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
 body { background:var(--bg); color:var(--text); font-family:'Segoe UI','Noto Sans Thai',Tahoma,sans-serif; line-height:1.6; }
@@ -48,6 +49,15 @@ tr:nth-child(even) td { background:rgba(255,255,255,.02); }
 .tag.warn { background:rgba(250,204,21,.15); color:var(--warn); }
 .tag.bad { background:rgba(248,113,113,.15); color:var(--bad); }
 .tag.muted { background:var(--card2); color:var(--muted); }
+.btn { border:0; border-radius:9px; padding:9px 16px; font-weight:700; cursor:pointer; background:var(--accent); color:#0b1220; font-size:13px; }
+.btn:hover { opacity:.9; }
+.muted { color:var(--muted); font-size:13px; }
+.notes-box { background:var(--card2); border:1px solid var(--line); border-radius:12px; padding:14px; margin:14px 0; }
+.notes-box input, .notes-box textarea { width:100%; padding:9px 10px; border:1px solid var(--line); border-radius:8px; font-family:inherit; font-size:14px; background:#0f172a; color:var(--text); margin:4px 0; }
+.note-actions { display:flex; align-items:center; gap:12px; margin-top:8px; }
+.notes-list { margin-top:14px; }
+.note-card { background:var(--card2); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:8px 0; }
+.note-card .note-meta { color:var(--muted); font-size:11px; margin-top:6px; }
 footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; border-top:1px solid var(--line); }
 @media (max-width:640px) {
   .section { padding:16px; }
@@ -61,7 +71,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
     <h1>🗺️ พาเที่ยว Dashboard</h1>
     <span class="sub">ภาพรวมธุรกิจ Ichino Tour — กระดานโน้ต พี่เจ &amp; พาเที่ยว</span>
   </div>
-  <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
+  <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#checkpoint" class="nav-link" data-target="checkpoint">Checkpoint</a><a href="#memory" class="nav-link" data-target="memory">MEMORY</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
 </header>
 <main>
 <section id="overview" class="section"><h1>🗺️ ภาพรวมธุรกิจ Ichino Tour</h1>
@@ -89,7 +99,34 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <p class="num"><strong>Master Data เสร็จก่อน</strong> (เปิดทางทุกอย่าง) — verify RAW 2,138 + ตรวจ rate + เติม supplier บัส</p>
 <p class="num">ตรวจเนื้อหาเว็บ (ราคา/เบอร์/LINE) กับพี่เจ</p>
 <p class="num">Restaurant polish (JLOS) → Hotel → Bus → Attraction</p>
-<p class="num">B2B outreach — Smile Travel (#40) คิวแรก</p></section><section id="roadmap" class="section"><h1>🗓️ ลำดับถัดไป (Roadmap)</h1>
+<p class="num">B2B outreach — Smile Travel (#40) คิวแรก</p></section><section id="checkpoint" class="section"><h1>📌 Checkpoint ล่าสุด</h1>
+<blockquote>ไฟล์นี้ถูก <strong>ดึงทับอัตโนมัติ</strong> จาก <code>phathiao-knowledge-brain</code> ตอน build (ทุก push + ทุกวัน 00:00 UTC)</blockquote>
+<blockquote>ห้ามแก้เอง — จะโดนทับ</blockquote>
+<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><hr>
+<p>title: &quot;พี่เจ_MEMORY — บันทึกทบทวนระบบ (กันลืม)&quot;</p>
+<p>type: &quot;note&quot;</p>
+<p>tags: [&quot;memory&quot;, &quot;recap&quot;, &quot;พี่เจ&quot;, &quot;okf&quot;]</p>
+<p>status: &quot;active&quot;</p>
+<p>created: 2026-08-22T13:02:00+07:00</p>
+<p>last_updated: 2026-08-22T14:30:00+07:00</p>
+<p>version: &quot;1.0&quot;</p>
+<p>owner: &quot;พี่เจ &amp; พาเที่ยว&quot;</p>
+<p>source_of_truth: &quot;Obsidian &amp; GitHub&quot;</p>
+<hr>
+<h1>🧠 พี่เจ_MEMORY — ทบทวนว่าระบบเราทำอะไรไปแล้วบ้าง</h1>
+<p>โน้ตนี้เขียนไว้ให้พี่เจอ่านกันลืม — อัปเดตเมื่อระบบเปลี่ยน ไม่ใช่บันทึกรายวัน</p>
+<h2>ระบบของเรา</h2>
+<div class="table-wrap"><table><thead><tr><th>ระบบ</th><th>บทบาท</th><th>มาตรฐาน/รายละเอียด</th></tr></thead><tbody><tr><td>Obsidian Vault (<code>H:\My Drive\พาเที่ยว\Obsidian-Vault</code>)</td><td>สมองที่ 2 ให้ AI ทุกค่าย — เก็บความรู้, SOP, checkpoint</td><td>LLM Wiki / OKF + timestamp ทุกไฟล์</td></tr><tr><td>GitHub (<code>chettana33</code>)</td><td>Source of Truth — โปรเจกต์ 15 ตัว</td><td>commit/push ผ่าน checkpoint script กลาง</td></tr><tr><td>Google Drive (<code>H:\My Drive</code>)</td><td>ข้อมูลดิบ: Excel, Docs, Sheets, ภาพ</td><td>แผนที่ 33 โฟลเดอร์ใน MASTER_INDEX_DRIVE</td></tr><tr><td>DSH (DeepSeek Harness)</td><td>Execution — รันงาน AI</td><td>ใช้ Serena slim + Thin MCP</td></tr><tr><td>Discord (#ai-activity-log)</td><td>Audit log กลางทุกค่าย</td><td>START / PROGRESS / ALERT / BLOCKED / DONE</td></tr></tbody></table></div>
+<h2>งาน Automation ที่มีแล้ว</h2>
+<div class="table-wrap"><table><thead><tr><th>ระบบ</th><th>ทำอะไร</th><th>ตำแหน่ง/หมายเหตุ</th></tr></thead><tbody><tr><td>สคริปต์กลาง <code>checkpoint_workflow.py</code></td><td>pull โปรเจกต์, ทับ <code>CHECKPOINT_LATEST.md</code>, commit+push, Discord START/DONE, sync Google Docs 6 ฉบับ, <code>--convert</code> Quick Capture จากมือถือ</td><td><code>D:\GitHub\phathiao-knowledge-brain\tools\</code> — ใช้ตัวเดียว ห้ามสร้างซ้ำ</td></tr><tr><td><code>monitor_cgman.py</code></td><td>จับเมล <code>rsv@cgman.jp</code> (จ–ศ ~18:00–19:00 JST) → โหลดใบขอรถ King BUS <code>MMDD_千栄交通㈱_貸切バス手配依頼書.xlsx</code> + LINE แจ้ง</td><td><code>C:\Users\chett\.config\opencode\gmail-monitor\</code></td></tr><tr><td><code>taicho_gsheets.py</code></td><td>อ่านใบขอรถ (ทุก tab) → diff vs 台帳 Google Sheets → apply หลังพี่เจอนุมัติ → สร้าง PDF 台帳</td><td><code>D:\GitHub\phathiao-knowledge-brain\tools\</code> — <code>diff</code> / <code>apply</code> / <code>pdf</code></td></tr><tr><td><code>taicho_auto.py</code></td><td>ตรวจใบใหม่ vs 台帳 อัตโนมัติ → diff → apply เอง → LINE สรุป (dedupe 1 ครั้ง/ไฟล์)</td><td><code>D:\GitHub\phathiao-knowledge-brain\tools\</code> — <code>--dry-run</code> พรีวิว; state ใน <code>taicho_auto_state.json</code></td></tr><tr><td><code>daily-news-line-bot</code></td><td>LINE bot: ข่าวรายวัน + พยากรณ์อากาศ (กทม. 5 เขต / โตเกียว/โอซาก้า/ฮอกไกโด) + สแกนราคาทัวร์ญี่ปุ่น 6 เจ้า</td><td>repo <code>D:\GitHub\daily-news-line-bot</code> — Python + LINE API + GitHub Actions</td></tr><tr><td><code>MASTER_INDEX_DRIVE</code></td><td>regenerate แผนที่ Drive อัตโนมัติทุกปิดงาน (โฟลเดอร์ใหม่ขึ้นเอง; เติมคำอธิบายที่ <code>tools/index_descriptions.json</code>)</td><td>0 token — อยู่ในสคริปต์กลาง</td></tr><tr><td>Apps Script</td><td>งานอัตโนมัติบน Google Workspace (Docs/Sheets/Drive/Gmail) เมื่อพี่เจ้าขอ</td><td>เก็บใน repo <code>KIMONO-Land-Operation-Workspace</code></td></tr><tr><td>Master data pipeline scripts</td><td>verify RAW / extract rates / extract bus / apply ลง MASTER (ใช้กับ PC-001)</td><td><code>C:\Users\chett\.Deepseek\</code> — <code>verify_round<em>.py</code>, <code>extract_rates.py</code>, <code>extract_bus.py</code>, <code>apply_</em>.py</code></td></tr><tr><td><code>build_sales_kit.py</code></td><td>สร้าง PDF Sales Kit (PyMuPDF, ฟอนต์ Tahoma รองรับไทย)</td><td>ดู <code>04_Sales_Marketing/Sales_Kit_Thailand_Rep.md</code></td></tr></tbody></table></div>
+<h2>หลักการที่ตกลงกันแล้ว</h2>
+<ul><li>Format กลางของ Vault: tables + nested bullets + wikilinks; tree เฉพาะ static ใน code block; ห้าม branch symbols — ดู <code>00_SOP_Master/01_AI_Protocols/note-format-standard.md</code></li><li>AI ใหม่ต้องอ่าน <code>AGENTS_3LAYER.md</code> → <code>AGENTS.md</code> ก่อนทำงาน</li><li>Checkpoint กลางไฟล์เดียว: <code>03_AI_Checkpoints/CHECKPOINT_LATEST.md</code> — สคริปต์ทับทุกปิดงาน, คงไว้แค่ <code>## Pending Tasks</code></li></ul>
+<h2>การ์ดงาน (Project Card)</h2>
+<ul><li>แต่ละงานใหญ่มี 1 การ์ด ตอบครบ: ต้นทาง / เชื่อมโยง / สถานะ / ขั้นตอน / ผลลัพธ์ / หน้าตาตอนเสร็จ / เกณฑ์เสร็จ / ทำไมเป็นแบบนี้</li><li>Template: <code>00_SOP_Master/01_AI_Protocols/project-card-template.md</code></li><li>ดัชนีการ์ด: [[03_AI_Checkpoints/PC_INDEX|PC_INDEX]] — PC-001..PC-005</li></ul>
+<h2>งานใหญ่ที่ค้าง</h2>
+<ul><li>ปรับ .md ทั้ง vault+repo เป็น format ใหม่ (เริ่มโปรเอกสารหลัก)</li><li>Master data: verify RAW 1,323, เติม supplier บัส, rate 13</li><li>B2B Smile Travel, ทดลอง slim, ขยาย Thin MCP 14 repo</li></ul>
+<h2>กำหนดการ</h2>
+<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><h1>🗓️ ลำดับถัดไป (Roadmap)</h1>
 <blockquote>เส้นทางจากวันนี้ ไปหาลูกค้าใหม่ผ่าน Ichino Tour</blockquote>
 <h2>ลำดับหลัก (ตกลงกับพี่เจแล้ว)</h2>
 <p class="num"><strong>Master Data เสร็จ</strong> — ปลดล็อกทุกอย่าง (ราคาตอบไว = quotation ไว = ปิดดีลไว)</p>
@@ -100,15 +137,83 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <div class="table-wrap"><table><thead><tr><th>ทาง</th><th>ทำยังไง</th><th>สถานะ</th></tr></thead><tbody><tr><td>B2B direct</td><td>ทักหา 50 เจ้า ในนาม Ichino Tour (ไม่ใช่ freelancer) + แนบ Sales Kit</td><td>ยังไม่เริ่ม</td></tr><tr><td>เว็บ + content</td><td>ลงโปรแกรมทัวร์จริง (NRT09/KIX67/CTS01) → คนค้นหาเจอ → contact form</td><td>ยังไม่เริ่ม</td></tr><tr><td>ต่อยอดลูกค้าเก่า</td><td>HAI/ma-meow มีงานต่อเนื่อง — ขยายงาน + ขออ้างอิง</td><td>ดูแลอยู่</td></tr></tbody></table></div>
 <h2>ขั้นถัดไปทันที</h2>
 <ul><li>[ ] รอหลักฐาน verify RAW (อีเมล supplier / ชื่อ List เดิม)</li><li>[ ] พี่เจตรวจ rate 13 + เติม supplier บัส</li><li>[ ] ตรวจเนื้อหาเว็บ (ราคา/เบอร์/LINE)</li></ul></section><section id="ideas" class="section"><h1>💡 กระดานไอเดีย</h1>
-<blockquote>ตรงนี้พี่เจกับ AI เขียนไอเดียเพิ่มได้ตลอด — แต่ละบรรทัดลงวันที่</blockquote>
-<blockquote>แก้ไฟล์นี้ (content/ideas.md) แล้ว build ใหม่ หรือบอก AI ให้เพิ่มให้</blockquote>
-<h2>ไอเดีย</h2>
-<ul><li>[ ] <strong>2026-08-22 · ใช้ Ichino Tour เป็นหน้าฉากหาลูกค้า</strong> — วางแนวทาง 5 ขั้น: ตกลง Kim (✅ เสร็จ) → Master Data (กำลังทำ) → หาลูกค้า 3 ทาง → ปิดดีล → ส่งมอบ/ต่อยอด</li><li>[ ] <strong>2026-08-22 · กระดานนี้</strong> — dashboard ภาพรวม พี่เจกับ AI เห็นภาพเดียวกัน เปิดดูเมื่อไหร่ก็ได้ 0 token</li><li>[ ] <strong>Master Data เสร็จแล้วเอาไปทำอะไร</strong> — quotation ราคาจริง / เว็บ content จริง / JLOS module / ใบเสนอราคา 48 ชม. เป็นจุดขาย</li></ul>
-<h2>ไอเดียที่ยังไม่กลั่น</h2>
-<ul><li>(ว่าง — เขียนเพิ่มได้เลย)</li></ul></section>
+<blockquote><strong>2 ช่องทางเขียน:</strong></blockquote>
+<blockquote>- <strong>พิมพ์ในเว็บ</strong> (ช่องด้านล่าง) → เก็บ Firestore → เห็นทุกเครื่อง</blockquote>
+<blockquote>- <strong>บอก AI</strong> → AI เขียนลงไฟล์นี้ (<code>content/ideas.md</code>) → push → เว็บอัปเดต</blockquote>
+<p>&gt;</p>
+<blockquote>โน้ตที่พิมพ์ในเว็บ อยู่ด้านล่างช่องนี้ (โหลดจาก Firestore)</blockquote>
+<h2>ไอเดีย (AI เขียน)</h2>
+<ul><li>[ ] <strong>2026-08-22 · ใช้ Ichino Tour เป็นหน้าฉากหาลูกค้า</strong> — ตกลง Kim (✅) → Master Data (กำลังทำ) → หาลูกค้า 3 ทาง → ปิดดีล → ส่งมอบ/ต่อยอด</li><li>[ ] <strong>2026-08-22 · กระดานนี้</strong> — dashboard ภาพรวม พี่เจกับ AI เห็นภาพเดียวกัน เปิดดูเมื่อไหร่ก็ได้ 0 token</li><li>[ ] <strong>Master Data เสร็จแล้วเอาไปทำอะไร</strong> — quotation ราคาจริง / เว็บ content จริง / JLOS module / ใบเสนอราคา 48 ชม. เป็นจุดขาย</li></ul>
+<div class="notes-box">
+  <h3>📝 พิมพ์ไอเดีย/โน้ต</h3>
+  <input type="text" id="note-name" placeholder="ชื่อคุณ (ไม่บังคับ)" maxlength="100">
+  <textarea id="note-text" placeholder="พิมพ์ไอเดียตรงนี้... (สูงสุด 2000 ตัวอักษร)" maxlength="2000" rows="3"></textarea>
+  <div class="note-actions">
+    <button class="btn" id="note-submit">บันทึกโน้ต</button>
+    <span id="note-msg" class="muted"></span>
+  </div>
+</div>
+<div id="notes-list" class="notes-list"><p class="muted">กำลังโหลดโน้ต...</p></div>
+</section>
 </main>
 <footer>อัปเดตล่าสุด:  · แก้ไฟล์ใน content/*.md แล้ว build ใหม่</footer>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDznvjBOYJviSVPwj9TESkuZrDANKHxqxA",
+  authDomain: "phathiao-dashboard.firebaseapp.com",
+  projectId: "phathiao-dashboard",
+  storageBucket: "phathiao-dashboard.firebasestorage.app",
+  messagingSenderId: "228151129172",
+  appId: "1:228151129172:web:6de75a7b39fb76a01ee9c1"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function loadNotes() {
+  try {
+    const snap = await db.collection('dashboard_notes').orderBy('created', 'desc').limit(50).get();
+    const list = document.getElementById('notes-list');
+    if (snap.empty) {
+      list.innerHTML = '<p class="muted">ยังไม่มีโน้ต — พิมพ์แรกเลย!</p>';
+      return;
+    }
+    list.innerHTML = snap.docs.map(d => {
+      const data = d.data();
+      const name = data.name ? data.name : 'ไม่ระบุชื่อ';
+      const date = data.created && data.created.toDate ? data.created.toDate().toLocaleString('th-TH') : '';
+      return '<div class="note-card"><div>' + escapeHtml(data.text) + '</div><div class="note-meta">✍️ ' + escapeHtml(name) + ' · ' + date + '</div></div>';
+    }).join('');
+  } catch (e) {
+    document.getElementById('notes-list').innerHTML = '<p class="muted">โหลดโน้ตไม่ได้: ' + escapeHtml(String(e.message || e)) + '</p>';
+  }
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+document.getElementById('note-submit').addEventListener('click', async () => {
+  const text = document.getElementById('note-text').value.trim();
+  const name = document.getElementById('note-name').value.trim();
+  const msg = document.getElementById('note-msg');
+  if (!text) { msg.textContent = 'กรอกข้อความก่อน'; return; }
+  msg.textContent = 'กำลังบันทึก...';
+  try {
+    await db.collection('dashboard_notes').add({
+      text: text,
+      name: name || 'ไม่ระบุชื่อ',
+      created: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    document.getElementById('note-text').value = '';
+    msg.textContent = '✅ บันทึกแล้ว';
+    loadNotes();
+  } catch (e) {
+    msg.textContent = '❌ บันทึกไม่ได้: ' + e.message;
+  }
+});
+
 document.querySelectorAll('.nav-link').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
@@ -121,6 +226,7 @@ document.querySelectorAll('.nav-link').forEach(a => {
 (function() {
   const first = document.querySelector('.section');
   if (first) first.style.display = 'block';
+  loadNotes();
 })();
 </script>
 </body>

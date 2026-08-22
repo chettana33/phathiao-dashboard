@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"  # daily rebuild — pull latest checkpoint
 
 permissions:
   contents: read
@@ -24,10 +26,16 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Pull latest checkpoint from knowledge-brain
+        run: |
+          curl -fsSL -o content/checkpoint.md \
+            "https://raw.githubusercontent.com/chettana33/phathiao-knowledge-brain/main/03_AI_Checkpoints/CHECKPOINT_LATEST.md" \
+            || echo "# Checkpoint — ดึงไม่ได้ (เครือข่าย/ไฟล์เปลี่ยนที่)" > content/checkpoint.md
+
       - name: Build dashboard
         run: python build.py
         env:
-          BUILD_TIME: ${{ github.event.head_commit.timestamp }}
+          BUILD_TIME: ${{ github.event.head_commit.timestamp || github.event.repository.updated_at }}
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

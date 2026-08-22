@@ -1,0 +1,17 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // dashboard_notes: anyone can read (public dashboard), anyone can add a note,
+    // but text size is limited and delete/update only via console (no direct write).
+    match /dashboard_notes/{noteId} {
+      allow read: if true;
+      allow create: if request.resource.data.text is string
+                    && request.resource.data.text.size() >= 1
+                    && request.resource.data.text.size() <= 2000
+                    && request.resource.data.created is timestamp
+                    && request.resource.data.name is string
+                    && request.resource.data.name.size() <= 100;
+      allow update, delete: if false;
+    }
+  }
+}
