@@ -145,7 +145,13 @@ def build():
         src = CONTENT / f"{key}.md"
         if not src.exists():
             continue
-        body = parse_md(src.read_text(encoding="utf-8"))
+        raw = src.read_text(encoding="utf-8")
+        # strip YAML frontmatter (--- ... --- at top) for cleaner display
+        if raw.startswith("---"):
+            m = re.match(r'^---\n.*?\n---\n', raw, re.S)
+            if m:
+                raw = raw[m.end():]
+        body = parse_md(raw)
         if key == "ideas":
             body += """
 <div class="notes-box">
