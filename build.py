@@ -156,6 +156,8 @@ def build():
                     tm = re.search(r'last_updated:\s*"?([^"\n]+)"?', fm)
                     if tm:
                         checkpoint_ts = tm.group(1).strip()
+                    # remove duplicate timestamp from **Status:** line (badge shows it)
+                    raw = re.sub(r'(\*\*Status:\*\*[^\n]*?)\s*—\s*อัปเดตล่าสุด[^\n]*', r'\1', raw)
                 raw = raw[m.end():]
         body = parse_md(raw)
         if key == "checkpoint" and checkpoint_ts:
