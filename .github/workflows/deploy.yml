@@ -5,7 +5,7 @@ on:
     branches: [main]
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"  # daily rebuild — pull latest checkpoint
+    - cron: "0 * * * *"  # hourly rebuild — pick up checkpoint updates
 
 permissions:
   contents: read

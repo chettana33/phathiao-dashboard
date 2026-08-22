@@ -131,8 +131,14 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <blockquote>- <strong>บอก AI</strong> → AI เขียนลงไฟล์นี้ (<code>content/ideas.md</code>) → push → เว็บอัปเดต</blockquote>
 <p>&gt;</p>
 <blockquote>โน้ตที่พิมพ์ในเว็บ อยู่ด้านล่างช่องนี้ (โหลดจาก Firestore)</blockquote>
-<h2>ไอเดีย (AI เขียน)</h2>
-<ul><li>[ ] <strong>2026-08-22 · ใช้ Ichino Tour เป็นหน้าฉากหาลูกค้า</strong> — ตกลง Kim (✅) → Master Data (กำลังทำ) → หาลูกค้า 3 ทาง → ปิดดีล → ส่งมอบ/ต่อยอด</li><li>[ ] <strong>2026-08-22 · กระดานนี้</strong> — dashboard ภาพรวม พี่เจกับ AI เห็นภาพเดียวกัน เปิดดูเมื่อไหร่ก็ได้ 0 token</li><li>[ ] <strong>Master Data เสร็จแล้วเอาไปทำอะไร</strong> — quotation ราคาจริง / เว็บ content จริง / JLOS module / ใบเสนอราคา 48 ชม. เป็นจุดขาย</li></ul>
+<h2>ไอเดียสคริปต์ฟรี — Google (Apps Script / Sheets / Drive)</h2>
+<ul><li>[ ] <strong>เรทเยน-บาท อัปเดตอัตโนมัติ</strong> — ดึง API เรท (ฟรี) ทุกวัน → เก็บประวัติ → quotation ใช้เรทล่าสุด (ตอนนี้ค่าเริ่มต้น 1 Yen = 0.21 บาท ตั้งมือ)</li><li>[ ] <strong>สร้าง PDF quotation จาก Google Sheets</strong> — ป้อนข้อมูล sheet → Apps Script สร้าง PDF ใบเสนอราคาอัตโนมัติ (เชื่อม ichinotour-quotation)</li><li>[ ] <strong>Google Forms รับข้อมูลลูกค้า B2B</strong> — ฟอร์ม → Sheets → แจ้ง LINE — ใช้แทนทักหามือ</li><li>[ ] <strong>Backup Vault อัตโนมัติ</strong> — zip โฟลเดอร์งาน → ย้าย/อัปโหลด (กันข้อมูลหาย)</li><li>[ ] <strong>แจ้งเตือน quotation ใหม่จากเว็บ</strong> — Firestore trigger → LINE/เมล (ลูกค้ากดส่งใบเสนอราคา → เรารู้ทันที)</li><li>[ ] <strong>Master Data lookup ใน Sheets</strong> — เอเจนซี่กรอกชื่อโรงแรม → ดึงราคา Master → ราคาเสนอทันที</li></ul>
+<h2>ไอเดียสคริปต์ฟรี — GitHub Actions</h2>
+<ul><li>[ ] <strong>Uptime check เว็บ ichinotour</strong> — ping ทุก 5 นาที → แจ้ง LINE ถ้าเว็บล่ม</li><li>[ ] <strong>Backup ข้อมูลขึ้น GitHub</strong> — commit Vault/งานสำคัญอัตโนมัติ (กันลืม + ประวัติ)</li><li>[ ] <strong>เตือนงานค้าง</strong> — อ่าน checkpoint → ถ้างานค้างไม่ขยับเกิน X วัน → แจ้งเตือน</li><li>[ ] <strong>GitHub Issues เป็น task board</strong> — งาน = issue → dashboard แสดงสถานะอัตโนมัติ</li><li>[ ] <strong>สแกนราคาคู่แข่งทัวร์ญี่ปุ่น</strong> — ขยายจาก daily-news-line-bot (6 เจ้า) → รายงานเรท/โปรแกรม</li></ul>
+<h2>ไอเดียอื่น</h2>
+<ul><li>[ ] <strong>LINE @ichinotour ใช้ประโยชน์</strong> — (โน้ตจากพี่เจ) — LINE OA มีอยู่แล้ว — ใช้แจ้งโปรโมชัน/รับคำถามลูกค้า/QR ในใบเสนอราคา?</li><li>[ ] <strong>LINE Notify/แจ้งเตือนกลาง</strong> — quotation ใหม่ / ใบขอรถ / งานค้าง → LINE เดียว</li></ul>
+<h2>ไอเดียที่ยังไม่กลั่น</h2>
+<ul><li>(ว่าง — เขียนเพิ่มได้เลย)</li></ul>
 <div class="notes-box">
   <h3>📝 พิมพ์ไอเดีย/โน้ต</h3>
   <input type="text" id="note-name" placeholder="ชื่อคุณ (ไม่บังคับ)" maxlength="100">

@@ -141,17 +141,25 @@ def build():
     )
 
     sections = []
+    checkpoint_ts = ""
     for key, label in NAV_ITEMS:
         src = CONTENT / f"{key}.md"
         if not src.exists():
             continue
         raw = src.read_text(encoding="utf-8")
-        # strip YAML frontmatter (--- ... --- at top) for cleaner display
+        # capture last_updated from YAML frontmatter, then strip it for clean display
         if raw.startswith("---"):
-            m = re.match(r'^---\n.*?\n---\n', raw, re.S)
+            m = re.match(r'^---\n(.*?)\n---\n', raw, re.S)
             if m:
+                fm = m.group(1)
+                if key == "checkpoint":
+                    tm = re.search(r'last_updated:\s*"?([^"\n]+)"?', fm)
+                    if tm:
+                        checkpoint_ts = tm.group(1).strip()
                 raw = raw[m.end():]
         body = parse_md(raw)
+        if key == "checkpoint" and checkpoint_ts:
+            body = f'<div class="tag tag-good">📅 อัปเดตล่าสุด: {checkpoint_ts}</div>\n' + body
         if key == "ideas":
             body += """
 <div class="notes-box">
