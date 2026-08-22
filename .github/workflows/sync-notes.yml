@@ -1,0 +1,35 @@
+name: Sync Notes from Dashboard
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Sync notes from Firestore
+        run: python sync_notes.py
+
+      - name: Commit if changed
+        run: |
+          if ! git diff --quiet content/notes.md; then
+            git config user.name "phathiao-dashboard-bot"
+            git config user.email "chettana33@users.noreply.github.com"
+            git add content/notes.md
+            git commit -m "sync: dashboard notes from Firestore"
+            git push
+            echo "committed"
+          else
+            echo "no change"
+          fi
