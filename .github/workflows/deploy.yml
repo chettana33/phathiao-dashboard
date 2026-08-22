@@ -32,7 +32,7 @@ jobs:
             --jq ".content" | base64 -d > content/checkpoint.md \
             || echo "# Checkpoint — ดึงไม่ได้ (เครือข่าย/ไฟล์เปลี่ยนที่)" > content/checkpoint.md
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.KNOWLEDGE_BRAIN_TOKEN }}
 
       - name: Build dashboard
         run: python build.py
