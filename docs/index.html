@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>พาเที่ยว Dashboard — ภาพรวมธุรกิจ Ichino Tour</title>
+<style>
+:root {
+  --bg:#0f172a; --card:#1e293b; --card2:#273449; --line:#334155;
+  --text:#e2e8f0; --muted:#94a3b8; --accent:#38bdf8; --good:#4ade80; --warn:#facc15; --bad:#f87171;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); color:var(--text); font-family:'Segoe UI','Noto Sans Thai',Tahoma,sans-serif; line-height:1.6; }
+header { position:sticky; top:0; background:rgba(15,23,42,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--line); padding:12px 20px; z-index:10; }
+.brand { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.brand h1 { font-size:18px; color:var(--accent); }
+.brand .sub { color:var(--muted); font-size:12px; }
+nav { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+.nav-link { color:var(--muted); text-decoration:none; font-size:13px; padding:5px 12px; border:1px solid var(--line); border-radius:20px; }
+.nav-link:hover, .nav-link.active { color:var(--bg); background:var(--accent); border-color:var(--accent); }
+main { max-width:1000px; margin:0 auto; padding:24px 16px 80px; }
+.section { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px; margin-bottom:24px; }
+h1 { font-size:22px; color:var(--accent); margin-bottom:12px; }
+h2 { font-size:18px; color:var(--accent); margin:20px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line); }
+h3 { font-size:15px; color:var(--text); margin:14px 0 6px; }
+p { margin:6px 0; color:var(--text); }
+p.num { margin:6px 0 6px 18px; }
+ul { margin:6px 0 6px 20px; }
+li { margin:3px 0; }
+strong { color:#fff; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+code { background:var(--card2); padding:1px 6px; border-radius:5px; font-size:13px; }
+pre { background:#0b1220; border:1px solid var(--line); border-radius:10px; padding:14px; overflow-x:auto; margin:10px 0; }
+pre code { background:none; padding:0; }
+blockquote { border-left:3px solid var(--warn); background:var(--card2); padding:8px 14px; border-radius:0 10px 10px 0; margin:10px 0; color:var(--muted); }
+hr { border:0; border-top:1px solid var(--line); margin:16px 0; }
+.table-wrap { overflow-x:auto; margin:10px 0; }
+table { border-collapse:collapse; width:100%; font-size:13.5px; }
+th { background:var(--card2); color:var(--accent); text-align:left; padding:8px 10px; border:1px solid var(--line); white-space:nowrap; }
+td { padding:7px 10px; border:1px solid var(--line); vertical-align:top; }
+tr:nth-child(even) td { background:rgba(255,255,255,.02); }
+.good { color:var(--good); font-weight:700; }
+.warn { color:var(--warn); font-weight:700; }
+.bad { color:var(--bad); font-weight:700; }
+.tag { display:inline-block; font-size:11px; padding:2px 9px; border-radius:12px; margin-right:4px; }
+.tag.good { background:rgba(74,222,128,.15); color:var(--good); }
+.tag.warn { background:rgba(250,204,21,.15); color:var(--warn); }
+.tag.bad { background:rgba(248,113,113,.15); color:var(--bad); }
+.tag.muted { background:var(--card2); color:var(--muted); }
+footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; border-top:1px solid var(--line); }
+@media (max-width:640px) {
+  .section { padding:16px; }
+  main { padding:16px 10px 60px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <h1>🗺️ พาเที่ยว Dashboard</h1>
+    <span class="sub">ภาพรวมธุรกิจ Ichino Tour — กระดานโน้ต พี่เจ &amp; พาเที่ยว</span>
+  </div>
+  <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
+</header>
+<main>
+<section id="overview" class="section"><h1>🗺️ ภาพรวมธุรกิจ Ichino Tour</h1>
+<p><strong>แบรนด์หน้าฉาก:</strong> Ichino Tour (Thailand) — ตัวแทน Land Operation ประเทศญี่ปุ่น (Thailand Representative)</p>
+<p><strong>หลังฉาก:</strong> พันธมิตรญี่ปุ่น 2 เจ้าให้ Net Rate + สิทธิใช้ชื่อบริษัท — ยังไม่เปิดบริษัทเอง</p>
+<h2>โครงสร้าง 4 ชั้น</h2>
+<pre><code>ชั้น 1  หน้าฉาก (ลูกค้าเห็น)   = Ichino Tour (Thailand)
+         เว็บ ichinotour-thailand.com · quotation v5.8 · LINE @ichinotour · 093-603-6203
+ชั้น 2  เครื่องมือทำงาน        = Master Data (ราคากลาง) · quotation v5.8 · JLOS · 台帳/King BUS ระบบ
+ชั้น 3  หลังฉาก (ซัพพลาย)     = Ichino JP (Kim) · HIC (Shu) · King BUS (SENEI) · CHI (โรงแรม)
+ชั้น 4  ลูกค้า                = HAI · ma-meow (ปัจจุบัน) · GS25 · Smile Travel (เคย) · B2B 50 เจ้า (ยังไม่ทัก)</code></pre>
+<h2>พันธมิตรหลัก 2 เจ้า</h2>
+<div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>ผู้ติดต่อ</th><th>บทบาท</th></tr></thead><tbody><tr><td><strong>Ichino Tour</strong> (ญี่ปุ่น)</td><td>Kim-san / Jong-yeon — <code>ichinotour@gmail.com</code></td><td>เจ้าที่ 1 — Net Rate + ใช้ชื่อได้</td></tr><tr><td><strong>HIC (株式会社エイチアイシー)</strong></td><td>Shu-san — <code>mirai358358@gmail.com</code></td><td>เจ้าที่ 2 — 第3種旅行業/手配業, JTAC</td></tr></tbody></table></div>
+<p><strong>โมเดล:</strong> Net Price / B2B Rate (ราคาทุน JPY) → บวก Margin เอง · เอกสารออกนาม &quot;Thailand Representative&quot;</p>
+<h2>ซัพพลายอื่น</h2>
+<div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>รายละเอียด</th></tr></thead><tbody><tr><td><strong>King BUS = SENEI KOTSU</strong></td><td>ใบขอรถ <code>rsv@cgman.jp</code> → SENEI Flow v13.4 — supplier รถบัส</td></tr><tr><td><strong>CHIグループ</strong></td><td>Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน)</td></tr><tr><td><strong>Supplier ฟูจิ/ยามานาชิ</strong></td><td>Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori</td></tr></tbody></table></div>
+<blockquote>⛔ <strong>ต้นสังกัด kimono</strong> — ห้ามปน / ห้ามให้รู้งานข้างเด็ดขาด (กฎ stealth)</blockquote>
+<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="status" class="section"><h1>📊 สถานะงาน</h1>
+<blockquote>สถานะอัปเดต: 22 ส.ค. 2569 · แก้ไขตารางนี้เมื่องานเปลี่ยน</blockquote>
+<h2>เครื่องมือ</h2>
+<div class="table-wrap"><table><thead><tr><th>เครื่องมือ</th><th>สถานะ</th><th>หมายเหตุ</th></tr></thead><tbody><tr><td>เว็บ ichinotour-thailand.com</td><td>&lt;span class=&quot;tag good&quot;&gt;LIVE&lt;/span&gt;</td><td>v0.1.0 เปิดสาธารณะ — เนื้อหาราคา/เบอร์/LINE ยังต้องตรวจกับเจ้าของ</td></tr><tr><td>quotation v5.8 (CI)</td><td>&lt;span class=&quot;tag good&quot;&gt;ใช้ได้&lt;/span&gt;</td><td>Yen→Baht, BUS dropdown 10 แบบ, ลูกค้า B2B, backup ใน browser</td></tr><tr><td>JLOS Restaurant</td><td>&lt;span class=&quot;tag good&quot;&gt;เสร็จ 100%&lt;/span&gt;</td><td>TASK-001..012 — เหลือ polish ตามที่พี่เจเลือก</td></tr><tr><td>JLOS Hotel / Bus / Attraction</td><td>&lt;span class=&quot;tag warn&quot;&gt;ยังไม่เริ่ม&lt;/span&gt;</td><td>รอ spec + อนุมัติ — หลัง Restaurant polish</td></tr><tr><td>台帳 / King BUS ระบบ</td><td>&lt;span class=&quot;tag good&quot;&gt;อัตโนมัติ&lt;/span&gt;</td><td>monitor_cgman + taicho_auto + taicho_gsheets</td></tr><tr><td>Master Data</td><td>&lt;span class=&quot;tag bad&quot;&gt;ค้างหนัก&lt;/span&gt;</td><td>2,178 entity — VERIFIED แค่ 40 (ดูด้านล่าง)</td></tr></tbody></table></div>
+<h2>Master Data (PC-001)</h2>
+<div class="table-wrap"><table><thead><tr><th>รายการ</th><th>จำนวน</th><th>สถานะ</th></tr></thead><tbody><tr><td>รวม entity</td><td>2,178</td><td>HOTEL 312 · RESTAURANT 1,247 · ATTRACTION 598 · BUS/PARKING 21</td></tr><tr><td>VERIFIED</td><td>40</td><td>เฉพาะ HOTEL ชุดแรก</td></tr><tr><td>RAW (ยังไม่ตรวจ)</td><td>2,138</td><td><strong>ติดหลักฐานนอกเครื่อง</strong> — ต้องอีเมล supplier / ชื่อ List เดิมจาก Google Takeout</td></tr><tr><td>Rate History</td><td>เริ่มแล้ว</td><td>Hotel_Rate_History + Bus_Quote_History — <strong>UNVERIFIED</strong> รอพี่เจตรวจ</td></tr></tbody></table></div>
+<h2>งานค้างเรียงตามลำดับ</h2>
+<p class="num"><strong>Master Data เสร็จก่อน</strong> (เปิดทางทุกอย่าง) — verify RAW 2,138 + ตรวจ rate + เติม supplier บัส</p>
+<p class="num">ตรวจเนื้อหาเว็บ (ราคา/เบอร์/LINE) กับพี่เจ</p>
+<p class="num">Restaurant polish (JLOS) → Hotel → Bus → Attraction</p>
+<p class="num">B2B outreach — Smile Travel (#40) คิวแรก</p></section><section id="roadmap" class="section"><h1>🗓️ ลำดับถัดไป (Roadmap)</h1>
+<blockquote>เส้นทางจากวันนี้ ไปหาลูกค้าใหม่ผ่าน Ichino Tour</blockquote>
+<h2>ลำดับหลัก (ตกลงกับพี่เจแล้ว)</h2>
+<p class="num"><strong>Master Data เสร็จ</strong> — ปลดล็อกทุกอย่าง (ราคาตอบไว = quotation ไว = ปิดดีลไว)</p>
+<p class="num"><strong>Master Data → ป้อนเข้า</strong> quotation (ราคาจริง) + เว็บ (content จริง) + JLOS (Hotel/Bus module)</p>
+<p class="num"><strong>B2B outreach</strong> — เริ่ม Smile Travel (#40, ลูกค้าเก่า ต่อยอดง่ายสุด) → 50 เจ้าใน Target List</p>
+<p class="num"><strong>ต่อยอดลูกค้าเก่า</strong> — HAI (26 ธ.ค. 69) · ma-meow (ม.ค. 70) — ใช้เป็น case study</p>
+<h2>Funnel ลูกค้า 3 ทาง</h2>
+<div class="table-wrap"><table><thead><tr><th>ทาง</th><th>ทำยังไง</th><th>สถานะ</th></tr></thead><tbody><tr><td>B2B direct</td><td>ทักหา 50 เจ้า ในนาม Ichino Tour (ไม่ใช่ freelancer) + แนบ Sales Kit</td><td>ยังไม่เริ่ม</td></tr><tr><td>เว็บ + content</td><td>ลงโปรแกรมทัวร์จริง (NRT09/KIX67/CTS01) → คนค้นหาเจอ → contact form</td><td>ยังไม่เริ่ม</td></tr><tr><td>ต่อยอดลูกค้าเก่า</td><td>HAI/ma-meow มีงานต่อเนื่อง — ขยายงาน + ขออ้างอิง</td><td>ดูแลอยู่</td></tr></tbody></table></div>
+<h2>ขั้นถัดไปทันที</h2>
+<ul><li>[ ] รอหลักฐาน verify RAW (อีเมล supplier / ชื่อ List เดิม)</li><li>[ ] พี่เจตรวจ rate 13 + เติม supplier บัส</li><li>[ ] ตรวจเนื้อหาเว็บ (ราคา/เบอร์/LINE)</li></ul></section><section id="ideas" class="section"><h1>💡 กระดานไอเดีย</h1>
+<blockquote>ตรงนี้พี่เจกับ AI เขียนไอเดียเพิ่มได้ตลอด — แต่ละบรรทัดลงวันที่</blockquote>
+<blockquote>แก้ไฟล์นี้ (content/ideas.md) แล้ว build ใหม่ หรือบอก AI ให้เพิ่มให้</blockquote>
+<h2>ไอเดีย</h2>
+<ul><li>[ ] <strong>2026-08-22 · ใช้ Ichino Tour เป็นหน้าฉากหาลูกค้า</strong> — วางแนวทาง 5 ขั้น: ตกลง Kim (✅ เสร็จ) → Master Data (กำลังทำ) → หาลูกค้า 3 ทาง → ปิดดีล → ส่งมอบ/ต่อยอด</li><li>[ ] <strong>2026-08-22 · กระดานนี้</strong> — dashboard ภาพรวม พี่เจกับ AI เห็นภาพเดียวกัน เปิดดูเมื่อไหร่ก็ได้ 0 token</li><li>[ ] <strong>Master Data เสร็จแล้วเอาไปทำอะไร</strong> — quotation ราคาจริง / เว็บ content จริง / JLOS module / ใบเสนอราคา 48 ชม. เป็นจุดขาย</li></ul>
+<h2>ไอเดียที่ยังไม่กลั่น</h2>
+<ul><li>(ว่าง — เขียนเพิ่มได้เลย)</li></ul></section>
+</main>
+<footer>อัปเดตล่าสุด:  · แก้ไฟล์ใน content/*.md แล้ว build ใหม่</footer>
+<script>
+document.querySelectorAll('.nav-link').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+    document.getElementById(a.dataset.target).style.display = 'block';
+    document.querySelectorAll('.nav-link').forEach(x => x.classList.remove('active'));
+    a.classList.add('active');
+  });
+});
+(function() {
+  const first = document.querySelector('.section');
+  if (first) first.style.display = 'block';
+})();
+</script>
+</body>
+</html>
