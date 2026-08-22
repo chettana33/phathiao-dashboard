@@ -28,9 +28,11 @@ jobs:
 
       - name: Pull latest checkpoint from knowledge-brain
         run: |
-          curl -fsSL -o content/checkpoint.md \
-            "https://raw.githubusercontent.com/chettana33/phathiao-knowledge-brain/main/03_AI_Checkpoints/CHECKPOINT_LATEST.md" \
+          gh api "repos/chettana33/phathiao-knowledge-brain/contents/03_AI_Checkpoints/CHECKPOINT_LATEST.md" \
+            --jq ".content" | base64 -d > content/checkpoint.md \
             || echo "# Checkpoint — ดึงไม่ได้ (เครือข่าย/ไฟล์เปลี่ยนที่)" > content/checkpoint.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build dashboard
         run: python build.py
