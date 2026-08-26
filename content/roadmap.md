@@ -1,7 +1,7 @@
 ---
 title: "ลำดับถัดไป (Roadmap)"
 type: "dashboard"
-last_updated: 2026-08-26T23:00:00+07:00
+last_updated: 2026-08-26T21:43:00+07:00
 ---
 
 # 🗓️ ลำดับถัดไป (Roadmap)
