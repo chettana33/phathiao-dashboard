@@ -9,7 +9,7 @@
 - **ภาพรวม** — โครงสร้าง 4 ชั้น + พันธมิตร + ซัพพลาย (ไฟล์ `content/overview.md`)
 - **สถานะงาน** — สถานะเครื่องมือ + Master Data (ไฟล์ `content/status.md`)
 - **Checkpoint** — ดึง `CHECKPOINT_LATEST.md` จาก knowledge-brain อัตโนมัติตอน build (ทุก push + ทุกวัน 00:00 UTC)
-- **MEMORY** — พี่เจ_MEMORY (ไฟล์ `content/memory.md` — copy จาก Vault, AI อัปเดตให้)
+- **MEMORY** — ดึง `พี่เจ_MEMORY.md` จาก knowledge-brain อัตโนมัติตอน build (ทุก push + ทุกชั่วโมง) — ห้ามแก้เอง
 - **ลำดับถัดไป** — roadmap (ไฟล์ `content/roadmap.md`)
 - **กระดานไอเดีย** — ช่องพิมพ์ในเว็บ → เก็บ Firestore (`phathiao-dashboard` project) — เห็นร่วมกันทุกเครื่อง
 
@@ -28,7 +28,7 @@
 ## โครงสร้าง
 
 ```text
-content/*.md   <- ต้นทาง (แก้ตรงนี้) — checkpoint.md ถูก workflow ดึงทับอัตโนมัติ, notes.md ถูก sync_notes.py สร้าง
+content/*.md   <- ต้นทาง (แก้ตรงนี้) — checkpoint.md + memory.md ถูก workflow ดึงทับอัตโนมัติ, notes.md ถูก sync_notes.py สร้าง
 build.py       <- แปลง .md -> HTML (ไม่ใช้ lib ภายนอก)
 sync_notes.py  <- ดึงโน้ตจาก Firestore -> content/notes.md (รันตอนเริ่มงาน)
 docs/          <- ผล build (deploy ขึ้น Pages)
@@ -40,4 +40,4 @@ firestore.rules + firebase.json <- rules กระดานไอเดีย (d
 
 - repo สาธารณะ — **ห้าม** password/token/ราคา margin ภายใน/ข้อมูลลับ
 - ทุกไฟล์ใน content ใช้ภาษาไทย, ตาราง + bullet ตาม format กลาง
-- `content/checkpoint.md` = ดึงทับอัตโนมัติ — ห้ามแก้เอง (จะโดนทับ)
+- `content/checkpoint.md` + `content/memory.md` = ดึงทับอัตโนมัติ — ห้ามแก้เอง (จะโดนทับ)

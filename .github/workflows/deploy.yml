@@ -34,6 +34,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.KNOWLEDGE_BRAIN_TOKEN }}
 
+      - name: Pull latest MEMORY from knowledge-brain
+        run: |
+          gh api "repos/chettana33/phathiao-knowledge-brain/contents/99_Inbox/$(python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "พี่เจ_MEMORY.md")" \
+            --jq ".content" | base64 -d > content/memory.md \
+            || echo "# พี่เจ_MEMORY — ดึงไม่ได้ (เครือข่าย/ไฟล์เปลี่ยนที่)" > content/memory.md
+        env:
+          GH_TOKEN: ${{ secrets.KNOWLEDGE_BRAIN_TOKEN }}
+
       - name: Build dashboard
         run: |
           export BUILD_TIME="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
