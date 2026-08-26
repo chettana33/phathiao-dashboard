@@ -1,3 +1,9 @@
+---
+title: "ลำดับถัดไป (Roadmap)"
+type: "dashboard"
+last_updated: 2026-08-26T23:00:00+07:00
+---
+
 # 🗓️ ลำดับถัดไป (Roadmap)
 
 > เส้นทางจากวันนี้ ไปหาลูกค้าใหม่ผ่าน Ichino Tour

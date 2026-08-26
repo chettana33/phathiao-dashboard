@@ -1,3 +1,9 @@
+---
+title: "ภาพรวมธุรกิจ Ichino Tour"
+type: "dashboard"
+last_updated: 2026-08-26T23:00:00+07:00
+---
+
 # 🗺️ ภาพรวมธุรกิจ Ichino Tour
 
 **แบรนด์หน้าฉาก:** Ichino Tour (Thailand) — ตัวแทน Land Operation ประเทศญี่ปุ่น (Thailand Representative)

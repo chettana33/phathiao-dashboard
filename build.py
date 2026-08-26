@@ -141,27 +141,27 @@ def build():
     )
 
     sections = []
-    checkpoint_ts = ""
+    ts_by_key = {}
     for key, label in NAV_ITEMS:
         src = CONTENT / f"{key}.md"
         if not src.exists():
             continue
         raw = src.read_text(encoding="utf-8")
-        # capture last_updated from YAML frontmatter, then strip it for clean display
+        # capture last_updated from YAML frontmatter of every section (26 ส.ค. 69), then strip it for clean display
         if raw.startswith("---"):
             m = re.match(r'^---\n(.*?)\n---\n', raw, re.S)
             if m:
                 fm = m.group(1)
+                tm = re.search(r'last_updated:\s*"?([^"\n]+)"?', fm)
+                if tm:
+                    ts_by_key[key] = tm.group(1).strip()
                 if key == "checkpoint":
-                    tm = re.search(r'last_updated:\s*"?([^"\n]+)"?', fm)
-                    if tm:
-                        checkpoint_ts = tm.group(1).strip()
                     # remove duplicate timestamp from **Status:** line (badge shows it)
                     raw = re.sub(r'(\*\*Status:\*\*[^\n]*?)\s*—\s*อัปเดตล่าสุด[^\n]*', r'\1', raw)
                 raw = raw[m.end():]
         body = parse_md(raw)
-        if key == "checkpoint" and checkpoint_ts:
-            body = f'<div class="tag tag-good">📅 อัปเดตล่าสุด: {checkpoint_ts}</div>\n' + body
+        if key in ts_by_key:
+            body = f'<div class="tag tag-good">📅 อัปเดตล่าสุด: {ts_by_key[key]}</div>\n' + body
         if key == "ideas":
             body += """
 <div class="notes-box">
