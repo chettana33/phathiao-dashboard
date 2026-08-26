@@ -4,8 +4,8 @@ type: "note"
 tags: ["memory", "recap", "พี่เจ", "okf"]
 status: "active"
 created: 2026-08-22T13:02:00+07:00
-last_updated: 2026-08-22T14:30:00+07:00
-version: "1.0"
+last_updated: 2026-08-26T22:00:00+07:00
+version: "1.1"
 owner: "พี่เจ & พาเที่ยว"
 source_of_truth: "Obsidian & GitHub"
 ---
@@ -36,6 +36,19 @@ source_of_truth: "Obsidian & GitHub"
 | Apps Script                          | งานอัตโนมัติบน Google Workspace (Docs/Sheets/Drive/Gmail) เมื่อพี่เจ้าขอ                                                                 | เก็บใน repo `KIMONO-Land-Operation-Workspace`                                                        |
 | Master data pipeline scripts         | verify RAW / extract rates / extract bus / apply ลง MASTER (ใช้กับ PC-001)                                                               | `C:\Users\chett\.Deepseek\` — `verify_round*.py`, `extract_rates.py`, `extract_bus.py`, `apply_*.py` |
 | `build_sales_kit.py`                 | สร้าง PDF Sales Kit (PyMuPDF, ฟอนต์ Tahoma รองรับไทย)                                                                                    | ดู `04_Sales_Marketing/Sales_Kit_Thailand_Rep.md`                                                    |
+
+## DSH Tooling — สายพาน AI ops จบในเครื่องเดียว (เพิ่ม 26 ส.ค. 2569)
+
+| ระบบ | ทำอะไร | ตำแหน่ง/หมายเหตุ |
+|---|---|---|
+| ModLens vision | อ่านภาพใน session DSH เอง (OCR + layout + semantics) — ใบขอรถ King BUS, สไลด์คอร์ส Meawbin, กราฟ MT5 ไม่ต้องส่ง Gemini Browser | plugin `@liustack/modlens@3.25.0` (profile web); engine gemini-api, model `gemini-3.6-flash`; config `~/.modlens/config.json`; tool `modlens_read_image`; ทดสอบภาพจริงผ่าน 3/3 (26 ส.ค. 69) |
+| Agent presets (6 ตัว) | บทบาท AI สำเร็จรูป: standard-zh / minimal-zh / researcher / writer / reviewer / architect — เลือกตอนเปิด session ใหม่ | `~/.dsh/.agent-presets/<ชื่อ>/` (source `~/.dsh/awesome-dsh-presets/presets/`); รายละเอียด: `00_SOP_Master/01_AI_Protocols/dsh-agent-presets.md` |
+| architect preset | ออกแบบ decision-complete ก่อนเขียนโค้ด — dev implement ได้ไม่ต้องเดา design | ทดสอบผ่าน 25 ส.ค. 69 (PC-007 P3 design) |
+| reviewer preset | รีวิวโค้ดก่อน commit/push — หลักฐานจริง + severity Critical/Major/Minor/Nit, ข้อไม่แน่ใจแยกชัด | ทดสอบผ่าน 26 ส.ค. 69 — รีวิว checkpoint_workflow.py (889 บรรทัด) เจอ 6 Major + 7 Minor + 7 Nit |
+| repeat-tool-reminder | กัน agent วนเรียก tool ซ้ำ (spin detection) — เตือน advisory thresholds [3,5,8], ไม่บล็อก | mount ครบ 6 presets 26 ส.ค. 69; DSH base มีอยู่แล้ว (`dsh-base/cordis.patch.yml`) |
+| lessons-learned #21-24 | กับดัก DSH: pnpm/npm-cache EPERM (sandbox), validator presets พังบน Windows, gemini model เปลี่ยน, งานค้างต้องมี marker ใน summary | `00_SOP_Master/01_AI_Protocols/lessons-learned.md` |
+
+**งานค้าง DSH tooling:** แก้สคริปต์กลาง 6 Major (M1-M6 ดู CHECKPOINT_LATEST) · portfolio-analyst preset (backlog) · backlog: dsh-voice-input-plugin (Edge TTS ฟรี), dsh-routed-subagent (Master Data verify)
 
 ## หลักการที่ตกลงกันแล้ว
 
