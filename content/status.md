@@ -1,52 +1,52 @@
 ---
 title: "สถานะงาน"
 type: "dashboard"
-last_updated: 2026-08-26T21:43:00+07:00
+last_updated: 2026-08-29T21:45:00+07:00
 ---
 
 # 📊 สถานะงาน
 
-> แก้ไขตารางนี้เมื่องานเปลี่ยน — timestamp อัตโนมัติจาก badge ด้านบน
+> อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน (จาก checkpoint) — timestamp ด้านบน
 
 ## เครื่องมือ
 
 | เครื่องมือ | สถานะ | หมายเหตุ |
 |---|---|---|
-| เว็บ ichinotour-thailand.com | <span class="tag good">LIVE</span> | v0.1.0 เปิดสาธารณะ — เนื้อหาราคา/เบอร์/LINE ยังต้องตรวจกับเจ้าของ |
-| quotation v5.8 (CI) | <span class="tag good">ใช้ได้</span> | Yen→Baht, BUS dropdown 10 แบบ, ลูกค้า B2B, backup ใน browser |
-| JLOS Restaurant | <span class="tag good">เสร็จ 100%</span> | TASK-001..012 — เหลือ polish ตามที่พี่เจเลือก |
-| JLOS Hotel / Bus / Attraction | <span class="tag warn">ยังไม่เริ่ม</span> | รอ spec + อนุมัติ — หลัง Restaurant polish |
-| 台帳 / King BUS ระบบ | <span class="tag good">อัตโนมัติ</span> | monitor_cgman + taicho_auto + taicho_gsheets |
-| Master Data | <span class="tag bad">ค้างหนัก</span> | 2,178 entity — VERIFIED แค่ 40 (ดูด้านล่าง) |
+| เว็บ ichinotour-thailand.com | <span class="tag good">LIVE</span> | Firestore rules แก้แล้ว (quotations create ผ่าน) — เนื้อหาตรวจกับพี่เจ |
+| quotation v6 builder | <span class="tag good">ใช้ได้</span> | เรทเยน-บาท **อัตโนมัติจาก gist** (0.2066) — rate UNVERIFIED รอพี่เจตรวจ |
+| Gochisou landing (งานนอก) | <span class="tag good">LIVE</span> | Pages — ฟอร์ม→Firestore→LINE ครบวงจร (ทดสอบผ่าน) — รอ domain Vercel |
+| 台帳 / King BUS ระบบ | <span class="tag good">อัตโนมัติ</span> | master ถูกไฟล์ + token ใหม่ + PDF→LINE (การบ้าน: PDF สวย + ส่งไฟล์จริง) |
+| daily-news LINE/เมล | <span class="tag good">อัตโนมัติ</span> | ย้าย Task Scheduler เครื่อง (07:00) — เช็ครอบแรก 30 ส.ค. |
+| Backup Vault | <span class="tag good">อัตโนมัติ</span> | zip→Drive ทุก 18:30 (เก็บ 14) |
+| Master Data | <span class="tag bad">ค้าง</span> | verify RAW 1,323 ค้าง — rate รอพี่เจ |
 
 ## Master Data (PC-001)
 
 | รายการ | จำนวน | สถานะ |
 |---|---|---|
 | รวม entity | 2,178 | HOTEL 312 · RESTAURANT 1,247 · ATTRACTION 598 · BUS/PARKING 21 |
-| VERIFIED | 40 | เฉพาะ HOTEL ชุดแรก |
-| RAW (ยังไม่ตรวจ) | 2,138 | **ติดหลักฐานนอกเครื่อง** — ต้องอีเมล supplier / ชื่อ List เดิมจาก Google Takeout |
-| Rate History | เริ่มแล้ว | Hotel_Rate_History + Bus_Quote_History — **UNVERIFIED** รอพี่เจตรวจ |
+| VERIFIED | 855 | master_data ใน Firestore (HOTEL/RES/ATTR/BUS) |
+| RAW (ยังไม่ตรวจ) | 1,323 | **ติดหลักฐานนอกเครื่อง** — อีเมล supplier / ชื่อ List เดิม |
+| Rate History | เริ่มแล้ว | **UNVERIFIED** รอพี่เจตรวจ |
 
-## ระบบครบวงจร (สายพาน AI ops — เพิ่ม 26 ส.ค. 2569)
+## ระบบครบวงจร (สายพาน AI ops)
 
 | ระบบ | บทบาท | สถานะ |
 |---|---|---|
-| DSH (DeepSeek) | execution หลัก — agents, presets, checkpoint, Discord, GitHub | ✅ ใช้งาน |
-| Gemini API (Harness) | analysis / context ใหญ่ — 26 models (3.6-flash, 2.5-pro, deep-research...) | ✅ test ผ่าน |
-| ModLens vision | อ่านภาพใน session — ใบขอรถ King BUS / สไลด์ / กราฟ | ✅ 3/3 |
-| Agent presets 6 | researcher · writer · reviewer · architect · standard · minimal | ✅ reviewer/architect ทดสอบแล้ว |
-| Playwright browser | ควบคุม browser จริง — navigate/click/screenshot/JS/login (24 tools) | ✅ |
-| MCP client | serena (index) + playwright — ขยายได้ | ✅ |
-| สคริปต์กลาง | checkpoint/commit/push/Discord/Google Doc — Major 6 + Minor 7 เคลียร์ | ✅ |
-| Cursor (ฟรี) | IDE/diff viewer — .cursorrules 13 repo + MCP เดียวกัน | ✅ |
-| Dashboard นี้ | checkpoint + MEMORY auto-sync ทุกชั่วโมง | ✅ |
+| DSH (DeepSeek) | execution หลัก — agents, checkpoint, Discord, GitHub | ✅ ใช้งาน |
+| ModLens vision | อ่านภาพใน session (Gemini bridge) | ✅ ใช้ได้ (quota ฟื้น) |
+| Playwright browser | ควบคุม browser จริง | ✅ |
+| MCP client | serena + playwright + vault + (firebase MCP config พร้อม — รอ restart) | ✅ |
+| สคริปต์กลาง | checkpoint/commit/push/Discord | ✅ |
+| Task Scheduler | daily-news 07:00 · taicho 16:00 · backup 18:30 · yen 08:00 · Gochisou LINE 15 นาที | ✅ 5 งาน |
+| Google Workspace MCP | **รอ official** — third-party ไม่ใช้ (supply chain) | ⏳ |
 
-> รายละเอียด: `00_SOP_Master/01_AI_Protocols/dsh-cursor-integration.md` + `dsh-browser-automation.md` + `dsh-agent-presets.md` ใน Vault
+> รายละเอียด: `00_SOP_Master/01_AI_Protocols/` ใน Vault
 
-## งานค้างเรียงตามลำดับ
+## งานค้างเรียงตามลำดับ (29 ส.ค. 2569)
 
-1. **Master Data เสร็จก่อน** (เปิดทางทุกอย่าง) — verify RAW 1,323 + ตรวจ rate + เติม supplier บัส
-2. ตรวจเนื้อหาเว็บ (ราคา/เบอร์/LINE) กับพี่เจ
-3. Restaurant polish (JLOS) → Hotel → Bus → Attraction
-4. B2B outreach — Smile Travel (#40) คิวแรก
+1. **PC-007 rate UNVERIFIED** — พี่เจตรวจ (Master Data ต่อยอด)
+2. **PC-008 ย้ายบัญชี Google** kimonoland→chettana33 — แผนพร้อม รอสั่งเริ่ม
+3. **taicho PDF การบ้าน** — PDF สวยเหมือนจริง + ส่งไฟล์ PDF จริงเข้า LINE (หาวิธีฟรี)
+4. **PC-003 B2B Smile Travel** (#40) — ทักหา
+5. Google Doc sync (client_secret หาย) · PC-001 verify RAW 1,323 · taicho→senei-kotsu-invoice · PC-006 Meawbin · portfolio-analyst · voice-input · Workspace MCP รอ official · Gochisou domain/ภาพ/TikTok

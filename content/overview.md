@@ -1,7 +1,7 @@
 ---
 title: "ภาพรวมธุรกิจ Ichino Tour"
 type: "dashboard"
-last_updated: 2026-08-26T21:43:00+07:00
+last_updated: 2026-08-29T21:45:00+07:00
 ---
 
 # 🗺️ ภาพรวมธุรกิจ Ichino Tour
@@ -12,9 +12,9 @@ last_updated: 2026-08-26T21:43:00+07:00
 ## โครงสร้าง 4 ชั้น
 
 ```text
-ชั้น 1  หน้าฉาก (ลูกค้าเห็น)   = Ichino Tour (Thailand)
-         เว็บ ichinotour-thailand.com · quotation v5.8 · LINE @ichinotour · 093-603-6203
-ชั้น 2  เครื่องมือทำงาน        = Master Data (ราคากลาง) · quotation v5.8 · JLOS · 台帳/King BUS ระบบ
+ชั้น 1  หน้าฉาก (ลูกค้าเห็น)   = Ichino Tour (Thailand) + Gochisou (จองร้าน งานนอก)
+         เว็บ ichinotour-thailand.com · Gochisou Pages · quotation v6 · LINE @ichinotour
+ชั้น 2  เครื่องมือทำงาน        = Master Data (Firestore 855) · quotation v6 · JLOS · 台帳/King BUS ระบบ
 ชั้น 3  หลังฉาก (ซัพพลาย)     = Ichino JP (Kim) · HIC (Shu) · King BUS (SENEI) · CHI (โรงแรม)
 ชั้น 4  ลูกค้า                = HAI · ma-meow (ปัจจุบัน) · GS25 · Smile Travel (เคย) · B2B 50 เจ้า (ยังไม่ทัก)
 ```
@@ -32,7 +32,7 @@ last_updated: 2026-08-26T21:43:00+07:00
 
 | เจ้า | รายละเอียด |
 |---|---|
-| **King BUS = SENEI KOTSU** | ใบขอรถ `rsv@cgman.jp` → SENEI Flow v13.4 — supplier รถบัส |
+| **King BUS = SENEI KOTSU** | ใบขอรถ `rsv@cgman.jp` → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ) |
 | **CHIグループ** | Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน) |
 | **Supplier ฟูจิ/ยามานาชิ** | Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori |
 
