@@ -6,6 +6,9 @@ import re
 import html
 from pathlib import Path
 
+# Bangkok time — runner (GitHub Actions) เป็น UTC, ใช้ +07 fixed (ไม่พึ่ง tzdata)
+BKK = datetime.timezone(datetime.timedelta(hours=7))
+
 ROOT = Path(__file__).parent
 CONTENT = ROOT / "content"
 OUT = ROOT / "docs"
@@ -154,7 +157,7 @@ def build():
             m = re.match(r'^---\n(.*?)\n---\n', raw, re.S)
             if m:
                 fm = m.group(1)
-                ts_by_key[key] = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S+07:00')
+                ts_by_key[key] = datetime.datetime.now(BKK).strftime('%Y-%m-%dT%H:%M:%S+07:00')
                 if key == "checkpoint":
                     # remove duplicate timestamp from **Status:** line (badge shows it)
                     raw = re.sub(r'(\*\*Status:\*\*[^\n]*?)\s*—\s*อัปเดตล่าสุด[^\n]*', r'\1', raw)
