@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Build phathiao-dashboard: content/*.md + checkpoint -> docs/index.html"""
+import datetime
 import os
 import re
 import html
@@ -148,13 +149,12 @@ def build():
             continue
         raw = src.read_text(encoding="utf-8")
         # capture last_updated from YAML frontmatter of every section (26 ส.ค. 69), then strip it for clean display
+        # 29 ส.ค. 69: badge ใช้เวลา build จริง (อัตโนมัติ) — ไม่ต้องแก้ last_updated ในไฟล์
         if raw.startswith("---"):
             m = re.match(r'^---\n(.*?)\n---\n', raw, re.S)
             if m:
                 fm = m.group(1)
-                tm = re.search(r'last_updated:\s*"?([^"\n]+)"?', fm)
-                if tm:
-                    ts_by_key[key] = tm.group(1).strip()
+                ts_by_key[key] = datetime.datetime.now().strftime('%Y-%m-%dT%H:%M:%S+07:00')
                 if key == "checkpoint":
                     # remove duplicate timestamp from **Status:** line (badge shows it)
                     raw = re.sub(r'(\*\*Status:\*\*[^\n]*?)\s*—\s*อัปเดตล่าสุด[^\n]*', r'\1', raw)

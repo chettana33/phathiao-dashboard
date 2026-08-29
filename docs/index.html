@@ -74,40 +74,41 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
   <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#checkpoint" class="nav-link" data-target="checkpoint">Checkpoint</a><a href="#memory" class="nav-link" data-target="memory">MEMORY</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
 </header>
 <main>
-<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-26T21:43:00+07:00</div>
+<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-30T01:16:08+07:00</div>
 <h1>🗺️ ภาพรวมธุรกิจ Ichino Tour</h1>
 <p><strong>แบรนด์หน้าฉาก:</strong> Ichino Tour (Thailand) — ตัวแทน Land Operation ประเทศญี่ปุ่น (Thailand Representative)</p>
 <p><strong>หลังฉาก:</strong> พันธมิตรญี่ปุ่น 2 เจ้าให้ Net Rate + สิทธิใช้ชื่อบริษัท — ยังไม่เปิดบริษัทเอง</p>
 <h2>โครงสร้าง 4 ชั้น</h2>
-<pre><code>ชั้น 1  หน้าฉาก (ลูกค้าเห็น)   = Ichino Tour (Thailand)
-         เว็บ ichinotour-thailand.com · quotation v5.8 · LINE @ichinotour · 093-603-6203
-ชั้น 2  เครื่องมือทำงาน        = Master Data (ราคากลาง) · quotation v5.8 · JLOS · 台帳/King BUS ระบบ
+<pre><code>ชั้น 1  หน้าฉาก (ลูกค้าเห็น)   = Ichino Tour (Thailand) + Gochisou (จองร้าน งานนอก)
+         เว็บ ichinotour-thailand.com · Gochisou Pages · quotation v6 · LINE @ichinotour
+ชั้น 2  เครื่องมือทำงาน        = Master Data (Firestore 855) · quotation v6 · JLOS · 台帳/King BUS ระบบ
 ชั้น 3  หลังฉาก (ซัพพลาย)     = Ichino JP (Kim) · HIC (Shu) · King BUS (SENEI) · CHI (โรงแรม)
 ชั้น 4  ลูกค้า                = HAI · ma-meow (ปัจจุบัน) · GS25 · Smile Travel (เคย) · B2B 50 เจ้า (ยังไม่ทัก)</code></pre>
 <h2>พันธมิตรหลัก 2 เจ้า</h2>
 <div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>ผู้ติดต่อ</th><th>บทบาท</th></tr></thead><tbody><tr><td><strong>Ichino Tour</strong> (ญี่ปุ่น)</td><td>Kim-san / Jong-yeon — <code>ichinotour@gmail.com</code></td><td>เจ้าที่ 1 — Net Rate + ใช้ชื่อได้</td></tr><tr><td><strong>HIC (株式会社エイチアイシー)</strong></td><td>Shu-san — <code>mirai358358@gmail.com</code></td><td>เจ้าที่ 2 — 第3種旅行業/手配業, JTAC</td></tr></tbody></table></div>
 <p><strong>โมเดล:</strong> Net Price / B2B Rate (ราคาทุน JPY) → บวก Margin เอง · เอกสารออกนาม &quot;Thailand Representative&quot;</p>
 <h2>ซัพพลายอื่น</h2>
-<div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>รายละเอียด</th></tr></thead><tbody><tr><td><strong>King BUS = SENEI KOTSU</strong></td><td>ใบขอรถ <code>rsv@cgman.jp</code> → SENEI Flow v13.4 — supplier รถบัส</td></tr><tr><td><strong>CHIグループ</strong></td><td>Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน)</td></tr><tr><td><strong>Supplier ฟูจิ/ยามานาชิ</strong></td><td>Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>รายละเอียด</th></tr></thead><tbody><tr><td><strong>King BUS = SENEI KOTSU</strong></td><td>ใบขอรถ <code>rsv@cgman.jp</code> → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ)</td></tr><tr><td><strong>CHIグループ</strong></td><td>Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน)</td></tr><tr><td><strong>Supplier ฟูจิ/ยามานาชิ</strong></td><td>Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori</td></tr></tbody></table></div>
 <blockquote>⛔ <strong>ต้นสังกัด kimono</strong> — ห้ามปน / ห้ามให้รู้งานข้างเด็ดขาด (กฎ stealth)</blockquote>
-<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-26T21:43:00+07:00</div>
+<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-30T01:16:08+07:00</div>
 <h1>📊 สถานะงาน</h1>
-<blockquote>แก้ไขตารางนี้เมื่องานเปลี่ยน — timestamp อัตโนมัติจาก badge ด้านบน</blockquote>
+<blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน (จาก checkpoint) — timestamp ด้านบน</blockquote>
 <h2>เครื่องมือ</h2>
-<div class="table-wrap"><table><thead><tr><th>เครื่องมือ</th><th>สถานะ</th><th>หมายเหตุ</th></tr></thead><tbody><tr><td>เว็บ ichinotour-thailand.com</td><td>&lt;span class=&quot;tag good&quot;&gt;LIVE&lt;/span&gt;</td><td>v0.1.0 เปิดสาธารณะ — เนื้อหาราคา/เบอร์/LINE ยังต้องตรวจกับเจ้าของ</td></tr><tr><td>quotation v5.8 (CI)</td><td>&lt;span class=&quot;tag good&quot;&gt;ใช้ได้&lt;/span&gt;</td><td>Yen→Baht, BUS dropdown 10 แบบ, ลูกค้า B2B, backup ใน browser</td></tr><tr><td>JLOS Restaurant</td><td>&lt;span class=&quot;tag good&quot;&gt;เสร็จ 100%&lt;/span&gt;</td><td>TASK-001..012 — เหลือ polish ตามที่พี่เจเลือก</td></tr><tr><td>JLOS Hotel / Bus / Attraction</td><td>&lt;span class=&quot;tag warn&quot;&gt;ยังไม่เริ่ม&lt;/span&gt;</td><td>รอ spec + อนุมัติ — หลัง Restaurant polish</td></tr><tr><td>台帳 / King BUS ระบบ</td><td>&lt;span class=&quot;tag good&quot;&gt;อัตโนมัติ&lt;/span&gt;</td><td>monitor_cgman + taicho_auto + taicho_gsheets</td></tr><tr><td>Master Data</td><td>&lt;span class=&quot;tag bad&quot;&gt;ค้างหนัก&lt;/span&gt;</td><td>2,178 entity — VERIFIED แค่ 40 (ดูด้านล่าง)</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>เครื่องมือ</th><th>สถานะ</th><th>หมายเหตุ</th></tr></thead><tbody><tr><td>เว็บ ichinotour-thailand.com</td><td>&lt;span class=&quot;tag good&quot;&gt;LIVE&lt;/span&gt;</td><td>Firestore rules แก้แล้ว (quotations create ผ่าน) — เนื้อหาตรวจกับพี่เจ</td></tr><tr><td>quotation v6 builder</td><td>&lt;span class=&quot;tag good&quot;&gt;ใช้ได้&lt;/span&gt;</td><td>เรทเยน-บาท <strong>อัตโนมัติจาก gist</strong> (0.2066) — rate UNVERIFIED รอพี่เจตรวจ</td></tr><tr><td>Gochisou landing (งานนอก)</td><td>&lt;span class=&quot;tag good&quot;&gt;LIVE&lt;/span&gt;</td><td>Pages — ฟอร์ม→Firestore→LINE ครบวงจร (ทดสอบผ่าน) — รอ domain Vercel</td></tr><tr><td>台帳 / King BUS ระบบ</td><td>&lt;span class=&quot;tag good&quot;&gt;อัตโนมัติ&lt;/span&gt;</td><td>master ถูกไฟล์ + token ใหม่ + PDF→LINE (การบ้าน: PDF สวย + ส่งไฟล์จริง)</td></tr><tr><td>daily-news LINE/เมล</td><td>&lt;span class=&quot;tag good&quot;&gt;อัตโนมัติ&lt;/span&gt;</td><td>ย้าย Task Scheduler เครื่อง (07:00) — เช็ครอบแรก 30 ส.ค.</td></tr><tr><td>Backup Vault</td><td>&lt;span class=&quot;tag good&quot;&gt;อัตโนมัติ&lt;/span&gt;</td><td>zip→Drive ทุก 18:30 (เก็บ 14)</td></tr><tr><td>Master Data</td><td>&lt;span class=&quot;tag bad&quot;&gt;ค้าง&lt;/span&gt;</td><td>verify RAW 1,323 ค้าง — rate รอพี่เจ</td></tr></tbody></table></div>
 <h2>Master Data (PC-001)</h2>
-<div class="table-wrap"><table><thead><tr><th>รายการ</th><th>จำนวน</th><th>สถานะ</th></tr></thead><tbody><tr><td>รวม entity</td><td>2,178</td><td>HOTEL 312 · RESTAURANT 1,247 · ATTRACTION 598 · BUS/PARKING 21</td></tr><tr><td>VERIFIED</td><td>40</td><td>เฉพาะ HOTEL ชุดแรก</td></tr><tr><td>RAW (ยังไม่ตรวจ)</td><td>2,138</td><td><strong>ติดหลักฐานนอกเครื่อง</strong> — ต้องอีเมล supplier / ชื่อ List เดิมจาก Google Takeout</td></tr><tr><td>Rate History</td><td>เริ่มแล้ว</td><td>Hotel_Rate_History + Bus_Quote_History — <strong>UNVERIFIED</strong> รอพี่เจตรวจ</td></tr></tbody></table></div>
-<h2>ระบบครบวงจร (สายพาน AI ops — เพิ่ม 26 ส.ค. 2569)</h2>
-<div class="table-wrap"><table><thead><tr><th>ระบบ</th><th>บทบาท</th><th>สถานะ</th></tr></thead><tbody><tr><td>DSH (DeepSeek)</td><td>execution หลัก — agents, presets, checkpoint, Discord, GitHub</td><td>✅ ใช้งาน</td></tr><tr><td>Gemini API (Harness)</td><td>analysis / context ใหญ่ — 26 models (3.6-flash, 2.5-pro, deep-research...)</td><td>✅ test ผ่าน</td></tr><tr><td>ModLens vision</td><td>อ่านภาพใน session — ใบขอรถ King BUS / สไลด์ / กราฟ</td><td>✅ 3/3</td></tr><tr><td>Agent presets 6</td><td>researcher · writer · reviewer · architect · standard · minimal</td><td>✅ reviewer/architect ทดสอบแล้ว</td></tr><tr><td>Playwright browser</td><td>ควบคุม browser จริง — navigate/click/screenshot/JS/login (24 tools)</td><td>✅</td></tr><tr><td>MCP client</td><td>serena (index) + playwright — ขยายได้</td><td>✅</td></tr><tr><td>สคริปต์กลาง</td><td>checkpoint/commit/push/Discord/Google Doc — Major 6 + Minor 7 เคลียร์</td><td>✅</td></tr><tr><td>Cursor (ฟรี)</td><td>IDE/diff viewer — .cursorrules 13 repo + MCP เดียวกัน</td><td>✅</td></tr><tr><td>Dashboard นี้</td><td>checkpoint + MEMORY auto-sync ทุกชั่วโมง</td><td>✅</td></tr></tbody></table></div>
-<blockquote>รายละเอียด: <code>00_SOP_Master/01_AI_Protocols/dsh-cursor-integration.md</code> + <code>dsh-browser-automation.md</code> + <code>dsh-agent-presets.md</code> ใน Vault</blockquote>
-<h2>งานค้างเรียงตามลำดับ</h2>
-<p class="num"><strong>Master Data เสร็จก่อน</strong> (เปิดทางทุกอย่าง) — verify RAW 1,323 + ตรวจ rate + เติม supplier บัส</p>
-<p class="num">ตรวจเนื้อหาเว็บ (ราคา/เบอร์/LINE) กับพี่เจ</p>
-<p class="num">Restaurant polish (JLOS) → Hotel → Bus → Attraction</p>
-<p class="num">B2B outreach — Smile Travel (#40) คิวแรก</p></section><section id="checkpoint" class="section"><h1>📌 Checkpoint ล่าสุด</h1>
+<div class="table-wrap"><table><thead><tr><th>รายการ</th><th>จำนวน</th><th>สถานะ</th></tr></thead><tbody><tr><td>รวม entity</td><td>2,178</td><td>HOTEL 312 · RESTAURANT 1,247 · ATTRACTION 598 · BUS/PARKING 21</td></tr><tr><td>VERIFIED</td><td>855</td><td>master_data ใน Firestore (HOTEL/RES/ATTR/BUS)</td></tr><tr><td>RAW (ยังไม่ตรวจ)</td><td>1,323</td><td><strong>ติดหลักฐานนอกเครื่อง</strong> — อีเมล supplier / ชื่อ List เดิม</td></tr><tr><td>Rate History</td><td>เริ่มแล้ว</td><td><strong>UNVERIFIED</strong> รอพี่เจตรวจ</td></tr></tbody></table></div>
+<h2>ระบบครบวงจร (สายพาน AI ops)</h2>
+<div class="table-wrap"><table><thead><tr><th>ระบบ</th><th>บทบาท</th><th>สถานะ</th></tr></thead><tbody><tr><td>DSH (DeepSeek)</td><td>execution หลัก — agents, checkpoint, Discord, GitHub</td><td>✅ ใช้งาน</td></tr><tr><td>ModLens vision</td><td>อ่านภาพใน session (Gemini bridge)</td><td>✅ ใช้ได้ (quota ฟื้น)</td></tr><tr><td>Playwright browser</td><td>ควบคุม browser จริง</td><td>✅</td></tr><tr><td>MCP client</td><td>serena + playwright + vault + (firebase MCP config พร้อม — รอ restart)</td><td>✅</td></tr><tr><td>สคริปต์กลาง</td><td>checkpoint/commit/push/Discord</td><td>✅</td></tr><tr><td>Task Scheduler</td><td>daily-news 07:00 · taicho 16:00 · backup 18:30 · yen 08:00 · Gochisou LINE 15 นาที</td><td>✅ 5 งาน</td></tr><tr><td>Google Workspace MCP</td><td><strong>รอ official</strong> — third-party ไม่ใช้ (supply chain)</td><td>⏳</td></tr></tbody></table></div>
+<blockquote>รายละเอียด: <code>00_SOP_Master/01_AI_Protocols/</code> ใน Vault</blockquote>
+<h2>งานค้างเรียงตามลำดับ (29 ส.ค. 2569)</h2>
+<p class="num"><strong>PC-007 rate UNVERIFIED</strong> — พี่เจตรวจ (Master Data ต่อยอด)</p>
+<p class="num"><strong>PC-008 ย้ายบัญชี Google</strong> kimonoland→chettana33 — แผนพร้อม รอสั่งเริ่ม</p>
+<p class="num"><strong>taicho PDF การบ้าน</strong> — PDF สวยเหมือนจริง + ส่งไฟล์ PDF จริงเข้า LINE (หาวิธีฟรี)</p>
+<p class="num"><strong>PC-003 B2B Smile Travel</strong> (#40) — ทักหา</p>
+<p class="num">Google Doc sync (client_secret หาย) · PC-001 verify RAW 1,323 · taicho→senei-kotsu-invoice · PC-006 Meawbin · portfolio-analyst · voice-input · Workspace MCP รอ official · Gochisou domain/ภาพ/TikTok</p></section><section id="checkpoint" class="section"><h1>📌 Checkpoint ล่าสุด</h1>
 <blockquote>ไฟล์นี้ถูก <strong>ดึงทับอัตโนมัติ</strong> จาก <code>phathiao-knowledge-brain</code> ตอน build (ทุก push + ทุกวัน 00:00 UTC)</blockquote>
 <blockquote>ห้ามแก้เอง — จะโดนทับ</blockquote>
-<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-26T22:00:00+07:00</div>
+<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-30T01:16:08+07:00</div>
 <h1>🧠 พี่เจ_MEMORY — ทบทวนว่าระบบเราทำอะไรไปแล้วบ้าง</h1>
 <p>โน้ตนี้เขียนไว้ให้พี่เจอ่านกันลืม — อัปเดตเมื่อระบบเปลี่ยน ไม่ใช่บันทึกรายวัน</p>
 <h2>ระบบของเรา</h2>
@@ -124,18 +125,18 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>งานใหญ่ที่ค้าง</h2>
 <ul><li>ปรับ .md ทั้ง vault+repo เป็น format ใหม่ (เริ่มโปรเอกสารหลัก)</li><li>Master data: verify RAW 1,323, เติม supplier บัส, rate 13</li><li>B2B Smile Travel, ทดลอง slim, ขยาย Thin MCP 14 repo</li></ul>
 <h2>กำหนดการ</h2>
-<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-26T21:43:00+07:00</div>
+<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-30T01:16:08+07:00</div>
 <h1>🗓️ ลำดับถัดไป (Roadmap)</h1>
-<blockquote>เส้นทางจากวันนี้ ไปหาลูกค้าใหม่ผ่าน Ichino Tour</blockquote>
+<blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน</blockquote>
 <h2>ลำดับหลัก (ตกลงกับพี่เจแล้ว)</h2>
-<p class="num"><strong>Master Data เสร็จ</strong> — ปลดล็อกทุกอย่าง (ราคาตอบไว = quotation ไว = ปิดดีลไว)</p>
-<p class="num"><strong>Master Data → ป้อนเข้า</strong> quotation (ราคาจริง) + เว็บ (content จริง) + JLOS (Hotel/Bus module)</p>
-<p class="num"><strong>B2B outreach</strong> — เริ่ม Smile Travel (#40, ลูกค้าเก่า ต่อยอดง่ายสุด) → 50 เจ้าใน Target List</p>
-<p class="num"><strong>ต่อยอดลูกค้าเก่า</strong> — HAI (26 ธ.ค. 69) · ma-meow (ม.ค. 70) — ใช้เป็น case study</p>
+<p class="num"><strong>PC-007 rate ตรวจ + Master Data verify</strong> — ปลดล็อกทุกอย่าง (ราคาตอบไว = quotation ไว = ปิดดีลไว)</p>
+<p class="num"><strong>Gochisou ต่อยอด</strong> — domain Vercel · เจ้นภาพ gallery · TikTok (คอนเทนต์ 5-10 คลิป) — จองร้าน = ตัวนำ → โรงแรม/บัส/B2B</p>
+<p class="num"><strong>B2B outreach</strong> — Smile Travel (#40 ลูกค้าเก่า) → 50 เจ้า Target List</p>
+<p class="num"><strong>PC-008 ย้ายบัญชี</strong> — เริ่มเมื่อพี่เจ้าสั่ง</p>
 <h2>Funnel ลูกค้า 3 ทาง</h2>
-<div class="table-wrap"><table><thead><tr><th>ทาง</th><th>ทำยังไง</th><th>สถานะ</th></tr></thead><tbody><tr><td>B2B direct</td><td>ทักหา 50 เจ้า ในนาม Ichino Tour (ไม่ใช่ freelancer) + แนบ Sales Kit</td><td>ยังไม่เริ่ม</td></tr><tr><td>เว็บ + content</td><td>ลงโปรแกรมทัวร์จริง (NRT09/KIX67/CTS01) → คนค้นหาเจอ → contact form</td><td>ยังไม่เริ่ม</td></tr><tr><td>ต่อยอดลูกค้าเก่า</td><td>HAI/ma-meow มีงานต่อเนื่อง — ขยายงาน + ขออ้างอิง</td><td>ดูแลอยู่</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>ทาง</th><th>ทำยังไง</th><th>สถานะ</th></tr></thead><tbody><tr><td>B2B direct</td><td>ทักหา 50 เจ้า ในนาม Ichino Tour + แนบ Sales Kit</td><td>ยังไม่เริ่ม (Smile #40 คิวแรก)</td></tr><tr><td>เว็บ + content</td><td>Gochisou (จองร้าน) LIVE → ลงโปรแกรมทัวร์จริง (NRT09/KIX67/CTS01) → contact form</td><td>Gochisou เริ่มแล้ว — ทัวร์ยังไม่เริ่ม</td></tr><tr><td>TikTok/Social (B2C)</td><td>1 ช่อง Gochisou — อาหาร/เคสจองจริง top-funnel → LINE/เว็บ</td><td>ตัดสินใจแล้ว — รอคอนเทนต์พร้อม</td></tr></tbody></table></div>
 <h2>ขั้นถัดไปทันที</h2>
-<ul><li>[ ] รอหลักฐาน verify RAW (อีเมล supplier / ชื่อ List เดิม)</li><li>[ ] พี่เจตรวจ rate 13 + เติม supplier บัส</li><li>[ ] ตรวจเนื้อหาเว็บ (ราคา/เบอร์/LINE)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-26T21:43:00+07:00</div>
+<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-08-30T01:16:08+07:00</div>
 <h1>💡 กระดานไอเดีย</h1>
 <blockquote><strong>2 ช่องทางเขียน:</strong></blockquote>
 <blockquote>- <strong>พิมพ์ในเว็บ</strong> (ช่องด้านล่าง) → เก็บ Firestore → เห็นทุกเครื่อง</blockquote>
