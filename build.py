@@ -16,11 +16,19 @@ OUT = ROOT / "docs"
 NAV_ITEMS = [
     ("overview", "ภาพรวม"),
     ("status", "สถานะงาน"),
+    ("systemmap", "System Map"),
     ("checkpoint", "Checkpoint"),
     ("memory", "MEMORY"),
     ("roadmap", "ลำดับถัดไป"),
     ("ideas", "กระดานไอเดีย"),
 ]
+
+STATUS_TAG = {
+    "done": ("tag good", "✅ done"),
+    "in_progress": ("tag info", "🔵 in_progress"),
+    "blocked": ("tag bad", "⛔ blocked"),
+    "pending": ("tag muted", "⏳ pending"),
+}
 
 def inline(text):
     text = html.escape(text)
@@ -137,6 +145,17 @@ def parse_md(text):
         blocks.append("<pre><code>" + "\n".join(code_buf) + "</code></pre>")
     return "\n".join(blocks)
 
+def status_chips(body):
+    """system-map section: แปลงสถานะในตารางเป็น chips สี (หลัง parse)"""
+    for status, (cls, label) in STATUS_TAG.items():
+        body = re.sub(
+            r"<td>" + status + r"</td>",
+            f'<td><span class="{cls}">{label}</span></td>',
+            body,
+        )
+    return body
+
+
 def build():
     OUT.mkdir(exist_ok=True)
     nav = "".join(
@@ -163,6 +182,8 @@ def build():
                     raw = re.sub(r'(\*\*Status:\*\*[^\n]*?)\s*—\s*อัปเดตล่าสุด[^\n]*', r'\1', raw)
                 raw = raw[m.end():]
         body = parse_md(raw)
+        if key == "systemmap":
+            body = status_chips(body)
         if key in ts_by_key:
             body = f'<div class="tag tag-good">📅 อัปเดตล่าสุด: {ts_by_key[key]}</div>\n' + body
         if key == "ideas":
@@ -231,6 +252,7 @@ tr:nth-child(even) td {{ background:rgba(255,255,255,.02); }}
 .tag.warn {{ background:rgba(250,204,21,.15); color:var(--warn); }}
 .tag.bad {{ background:rgba(248,113,113,.15); color:var(--bad); }}
 .tag.muted {{ background:var(--card2); color:var(--muted); }}
+.tag.info {{ background:rgba(56,189,248,.15); color:var(--accent); }}
 .btn {{ border:0; border-radius:9px; padding:9px 16px; font-weight:700; cursor:pointer; background:var(--accent); color:#0b1220; font-size:13px; }}
 .btn:hover {{ opacity:.9; }}
 .muted {{ color:var(--muted); font-size:13px; }}
