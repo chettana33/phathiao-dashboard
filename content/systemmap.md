@@ -6,32 +6,33 @@ type: "dashboard"
 # 🗺️ System Map
 
 > อัปเดตโดยพาเที่ยวทุกปิดงาน (manual + schema §9 การ์ด PC) — เห็นทั้งระบบ: **กี่ส่วน / เสร็จกี่ส่วน / สาขา-เวอร์ชัน**
-> สถานะ: done (เขียว) · in_progress (ฟ้า) · blocked (แดง) · pending (เทา)
+> สถานะ: done (เขียว) · in_progress (ฟ้า) · blocked (แดง) · pending (เทา) · %progress + เจ้าของ ต่อส่วน
+> **เป้าหมาย:** ขยายให้ทุกการ์ด PC / ทุกงาน ครอบคลุม vector DB (chroma content brain) — ค่อย ๆ ทำทีละระบบ (6 ก.ย. 69)
 
 ## Local Embedding (chroma content brain)
 
-**ภาพรวม:** vector search งานพาเที่ยว — corpus Gochisou/PC/checkpoint/lessons · store local `vec_test` · เสร็จ **5/8 ส่วน**
+**ภาพรวม:** vector search งานพาเที่ยว — corpus Gochisou/PC/checkpoint/lessons · store local `vec_test` · เสร็จ **6/8 ส่วน** · default = **local bge-m3** (6 ก.ย. 69 พี่เจเลือก)
 
 ### ส่วน
 
-| # | ส่วน | สถานะ | หมายเหตุ |
-|---|---|---|---|
-| 1 | corpus collect (`vec_collect.py`) | done | 27 แหล่ง 311 docs (Gochisou + PC + checkpoint + lessons + raw manifest) |
-| 2 | store + query API (`patheaw_work`) | done | gemini-embedding-001 dim 3072 — prod ปัจจุบัน |
-| 3 | meter (`embed_meter.py`) | done | log ทุก embed call รายวัน (6 ก.ย.) — 39 search/2 build ไร้ error |
-| 4 | pilot local MiniLM (`patheaw_local`) | done | dim 384 · 311 docs 39.3s · eval 20/28 (71%) |
-| 5 | pilot local bge-m3 (`patheaw_bge`) | done | dim 1024 · 312 docs 180s · eval 20/28 (71%) |
-| 6 | ตัดสินใจ default model | blocked | รอพี่เจ: API 75% vs local 71% (ห่าง 1 ข้อ, local ฟรี/ไร้ 429) |
-| 7 | ขยาย corpus ครอบทั้งระบบ | pending | AGENTS/3LAYER/locator/SOP — whitelist + secret gate ก่อน |
-| 8 | auto-load ใน `/work` | pending | hint layer: คืน src/section ไม่ใช่ snippet |
+| # | ส่วน | %progress | สถานะ | เจ้าของ | หมายเหตุ |
+|---|---|---|---|---|---|
+| 1 | corpus collect (`vec_collect.py`) | 100% | done | พาเที่ยว | 27 แหล่ง 314 docs (Gochisou + PC + checkpoint + lessons + raw manifest) |
+| 2 | store + query (`patheaw_work`) | 100% | done | พาเที่ยว | **local bge-m3 dim 1024** — สลับ default 6 ก.ย. (พี่เจเลือก) |
+| 3 | meter (`embed_meter.py`) | 100% | done | พาเที่ยว | log ทุก Gemini embed call — หลัง local = API call เหลือ 0 (build/search) |
+| 4 | pilot local MiniLM (`patheaw_local`) | 100% | done | พาเที่ยว | dim 384 · 311 docs 39.3s · eval 20/28 (71%) — ตัวสำรอง |
+| 5 | pilot local bge-m3 (`patheaw_bge`) | 100% | done | พาเที่ยว | dim 1024 · 312 docs 180s · eval 20/28 (71%) |
+| 6 | ตัดสินใจ default model | 100% | done | พี่เจ | **เลือก local bge-m3** (6 ก.ย.) — คุณภาพไทย/ญี่ปุ่นสูงสุด ฟรี/ไร้ 429 |
+| 7 | ขยาย corpus ครอบทั้งระบบ | 20% | in_progress | พาเที่ยว | AGENTS/3LAYER/locator/SOP — whitelist + secret gate ก่อน (เริ่มทีละกลุ่ม) |
+| 8 | auto-load ใน `/work` | 10% | in_progress | พาเที่ยว | hint layer: คืน src/section ไม่ใช่ snippet — design พร้อม |
 
 ### สาขา / เวอร์ชัน
 
 | ต้นทาง (ราก) | แตกเป็น / เวอร์ชัน | จำนวน | สถานะแต่ละตัว |
 |---|---|---|---|
-| embedding model | API gemini-embedding-001 · MiniLM multilingual · bge-m3 | 3 | prod (API) · pilot done · pilot done |
-| collection | patheaw_work · patheaw_local · patheaw_bge | 3 | ใช้งาน · ทดสอบ · ทดสอบ |
-| key modlens (Gemini) | yukikameda51 · kimonoland · chettana33 | 3 | index 0 ฟรี · ฟรี · billing (ท้าย) |
+| embedding engine | local bge-m3 (default) · API gemini (fallback) · MiniLM (สำรอง) | 3 | default · legacy `VEC_ENGINE=api` · collection แยก |
+| collection | patheaw_work · patheaw_local · patheaw_bge | 3 | prod (bge-m3) · ทดสอบ MiniLM · ทดสอบ bge-m3 (pilot) |
+| key modlens (Gemini) | yukikameda51 · kimonoland · chettana33 | 3 | index 0 ฟรี · ฟรี · billing (ท้าย) — เหลือใช้เฉพาะ fallback |
 
 ## Gochisou TikTok — Prompt / ระบบผลิต (PC-009)
 
@@ -39,16 +40,16 @@ type: "dashboard"
 
 ### ส่วน
 
-| # | ส่วน | สถานะ | หมายเหตุ |
-|---|---|---|---|
-| 1 | Idea prompt (`idea_engine.md`) | done | 1 แบบ ครอบ persona + ฤดูกาล — ใช้เช้า |
-| 2 | Script prompt Gemini (`gemini_ideas.py`) | done | BASE + extra ต่อวัน + chroma context กันซ้ำ (B17 6 ก.ย.) |
-| 3 | Script พาเที่ยว (P1-4 persona) | in_progress | draft `scripts_4persona.md` — รอคัดกับพี่เจ |
-| 4 | Style guide + QC checklist | done | ใช้ constrain ทุก prompt (ห้ามโม้/CTA 3 แบบใช้ได้ 6 ก.ย.) |
-| 5 | Omni/Flow ภาพ prompt | in_progress | ต่อคลิป — ภาพ "ดู AI" ยังต้องแก้ (ภาพจริง/stock ผสม) |
-| 6 | pilot คลิปใหม่ | in_progress | รอ Decision 1-2 (billing + บท VO) → ประกอบ → QC |
-| 7 | Batch approval + posting queue | pending | design พร้อม (PC-009 §4) — หลังคลิปแรก |
-| 8 | validation gate 2 สัปดาห์ | pending | ตั้งวัน review หลังคลิปแรก + 14 วัน |
+| # | ส่วน | %progress | สถานะ | เจ้าของ | หมายเหตุ |
+|---|---|---|---|---|---|
+| 1 | Idea prompt (`idea_engine.md`) | 100% | done | พาเที่ยว | 1 แบบ ครอบ persona + ฤดูกาล — ใช้เช้า |
+| 2 | Script prompt Gemini (`gemini_ideas.py`) | 100% | done | พาเที่ยว | BASE + extra ต่อวัน + chroma context กันซ้ำ (B17 6 ก.ย.) |
+| 3 | Script พาเที่ยว (P1-4 persona) | 60% | in_progress | พี่เจ | draft `scripts_4persona.md` — รอคัดกับพี่เจ |
+| 4 | Style guide + QC checklist | 100% | done | พาเที่ยว | ใช้ constrain ทุก prompt (ห้ามโม้/CTA 3 แบบใช้ได้ 6 ก.ย.) |
+| 5 | Omni/Flow ภาพ prompt | 40% | in_progress | พี่เจ | ต่อคลิป — ภาพ "ดู AI" ยังต้องแก้ (ภาพจริง/stock ผสม) |
+| 6 | pilot คลิปใหม่ | 10% | in_progress | พี่เจ | รอ Decision 1-2 (billing + บท VO) → ประกอบ → QC — decision pack 7 ก.ย. 16:00 |
+| 7 | Batch approval + posting queue | 10% | pending | พาเที่ยว | design พร้อม (PC-009 §4) — หลังคลิปแรก |
+| 8 | validation gate 2 สัปดาห์ | 0% | pending | พาเที่ยว | ตั้งวัน review หลังคลิปแรก + 14 วัน |
 
 ### สาขา / เวอร์ชัน
 
