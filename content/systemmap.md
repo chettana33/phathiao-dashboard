@@ -11,7 +11,7 @@ type: "dashboard"
 
 ## Local Embedding (chroma content brain)
 
-**ภาพรวม:** vector search งานพาเที่ยว — corpus Gochisou/PC/checkpoint/lessons · store local `vec_test` · เสร็จ **6/8 ส่วน** · default = **local bge-m3** (6 ก.ย. 69 พี่เจเลือก)
+**ภาพรวม:** vector search งานพาเที่ยว — corpus = Gochisou + PC + checkpoint + lessons + ความรูทั้งระบบ (AGENTS/SOP/locator/indexes/memories) · store local `vec_test` · เสร็จ **6/8 ส่วน** · default = **local bge-m3** (6 ก.ย. 69 พี่เจเลือก)
 
 ### ส่วน
 
@@ -23,7 +23,7 @@ type: "dashboard"
 | 4 | pilot local MiniLM (`patheaw_local`) | 100% | done | พาเที่ยว | dim 384 · 311 docs 39.3s · eval 20/28 (71%) — ตัวสำรอง |
 | 5 | pilot local bge-m3 (`patheaw_bge`) | 100% | done | พาเที่ยว | dim 1024 · 312 docs 180s · eval 20/28 (71%) |
 | 6 | ตัดสินใจ default model | 100% | done | พี่เจ | **เลือก local bge-m3** (6 ก.ย.) — คุณภาพไทย/ญี่ปุ่นสูงสุด ฟรี/ไร้ 429 |
-| 7 | ขยาย corpus ครอบทั้งระบบ | 20% | in_progress | พาเที่ยว | AGENTS/3LAYER/locator/SOP — whitelist + secret gate ก่อน (เริ่มทีละกลุ่ม) |
+| 7 | ขยาย corpus ครอบทั้งระบบ | 80% | in_progress | พาเที่ยว | รอบ 1 เสร็จ 6 ก.ย.: 314 → 506 docs — AGENTS/3LAYER/locator/indexes/memories/SOP/workflow_tree + secret gate (0 รั่ว) — eval ระบบผ่าน |
 | 8 | auto-load ใน `/work` | 10% | in_progress | พาเที่ยว | hint layer: คืน src/section ไม่ใช่ snippet — design พร้อม |
 
 ### สาขา / เวอร์ชัน
