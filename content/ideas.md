@@ -39,12 +39,13 @@ last_updated: 2026-08-26T21:43:00+07:00
 - (ว่าง — เขียนเพิ่มได้เลย)
 
 
-## Flow Playbook (3 เจ้า — สรุป 6 ก.ย. 69)
+## 🎬 Flow Playbook — 3 สูตรทำคลิป (ครูนิต้า · Bot Please · Triple Next — อัปเดต 7 ก.ย. 69)
 
 > สรุปเต็ม: `H:\My Drive\พาเที่ยว\Obsidian-Vault\04_Sales_Marketing\Google_Flow_Techniques.md` (Vault) + lessons #109
-> ที่มา: คลิป @nitaextra (ครูนิต้า) · @botplease.me · @triplenext639 — เทคนิค Google Flow ใช้ทำคลิป Gochisou/Ichinotour
+> ที่มา: คลิป @nitaextra (ครูนิต้า) · @botplease.me · @triplenext639 — ใช้ทำคลิป Gochisou/Ichinotour
 
-- **ครูนิต้า (3 เทคนิค Flow):** Agent สร้างภาพ 11 ฉากในคำสั่งเดียว · จุด 3 จุด > ดาวน์โหลดโปรเจกต์ (ได้ทั้งโฟลเดอร์) · Community/Template tools ฟรี (AI Subtitle ฯลฯ)
-- **Bot Please:** Character Persona Generator 22 มุม (Tools > Community Tools) — reference 1 รูป + Studio Batch = ภาพครบทุกมุม/ท่าทาง หน้า-ผม-ชุดตรงเป๊ะ
-- **Triple Next:** Storyboard Studio — ใส่ script ไทย → Autofill Character/Location/Prop (ล็อกตัวละคร) → Autofill Scene = ภาพทุกฉาก ~1 นาที
-- **งานชาบู (ไอเดีย 3):** พัก 2 วัน → กลับมาทำ Flow วิดีโอรายฉาก 5-6s/ช็อต (แทนภาพนิ่ง zoompan ที่สั่น) + พาเที่ยวต่อเสียง/ซับ
+- **สูตร 1 ครูนิต้า — สร้างภาพชุด:** Agent ใส่เนื้อหาทุกฉากคำสั่งเดียว → ภาพ 11 ฉาก/ตอน · จุด 3 จุด > ดาวน์โหลดโปรเจกต์ทั้งโฟลเดอร์ · Community/Template tools ฟรี (AI Subtitle ฯลฯ)
+- **สูตร 2 Bot Please — ตัวละคร 22 มุม:** Tools > Community Tools > Character Persona Generator — reference 1 รูป + Studio Batch = ครบทุกมุม/ท่าทาง หน้า-ผม-ชุดตรงเป๊ะ
+- **สูตร 3 Triple Next — Storyboard ทั้งเรื่อง:** Storyboard Studio — ใส่ script ไทย → Autofill Character/Location/Prop (ล็อกตัวละคร/ร้าน) → Autofill Scene = ภาพทุกฉาก ~1 นาที
+- **ไอเดีย 3 (FIT ชาบู Edu-tainment):** Flow วิดีโอรายฉาก 5-6s/ช็อต (แทนภาพนิ่ง zoompan ที่สั่น) — ใช้สูตร 3 + 1 → พาเที่ยวตรวจ storyboard → พี่เจ้าสั่ง Flow → ต่อเสียง/ซับ
+- **ภาพฟรี:** Omni Flash ใน Flow = 50 credits/วัน/แอคเค้า — ยังไม่ต้องเปิด billing (พี่เจ 7 ก.ย.)
