@@ -8,6 +8,22 @@ last_updated: 2026-08-29T21:45:00+07:00
 
 > อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน (จาก checkpoint) — timestamp ด้านบน
 
+## การ์ดงาน (Project Cards — PC_INDEX 7 ก.ย. 69)
+
+| การ์ด | งาน | สถานะ |
+|---|---|---|
+| PC-001 | Master Data (Hotel/Restaurant/Bus) | In Progress — master 855 ใช้จริง เหลือ verify RAW 1,323 |
+| PC-002 | Format Migration .md | Done |
+| PC-003 | B2B Smile Travel (ติดต่อ) | Pending |
+| PC-004 | ทดลอง serena-slim | Done |
+| PC-005 | ขยาย Thin MCP 14 repo | Done |
+| PC-006 | Meawbin Strategy 2026 (เรียนเทรด 56 คลิป) | In Progress — notes 13/56 |
+| PC-007 | Quotation Builder v6 | In Progress — rate UNVERIFIED รอพี่เจ |
+| PC-008 | ย้ายบัญชี Google | Pending (รอสั่งเริ่ม) |
+| PC-009 | Gochisou TikTok Launch | In Progress — pilot v3 reject รอคลิปใหม่ |
+| PC-010 | TikTok Liked Classify 2023-2025 (2,719) | Blocked (รอ data JSON) |
+| PC-011 | DSH Tooling & Knowledge Ops (B20/B21/corpus/cloud scheduler) | In Progress — ใหม่ 7 ก.ย. |
+
 ## เครื่องมือ
 
 | เครื่องมือ | สถานะ | หมายเหตุ |
@@ -43,10 +59,10 @@ last_updated: 2026-08-29T21:45:00+07:00
 
 > รายละเอียด: `00_SOP_Master/01_AI_Protocols/` ใน Vault
 
-## งานค้างเรียงตามลำดับ (29 ส.ค. 2569)
+## งานค้างเรียงตามลำดับ (7 ก.ย. 2569 — รายการเต็มดู section Checkpoint อัตโนมัติ)
 
-1. **PC-007 rate UNVERIFIED** — พี่เจตรวจ (Master Data ต่อยอด)
-2. **PC-008 ย้ายบัญชี Google** kimonoland→chettana33 — แผนพร้อม รอสั่งเริ่ม
-3. **taicho PDF การบ้าน** — PDF สวยเหมือนจริง + ส่งไฟล์ PDF จริงเข้า LINE (หาวิธีฟรี)
-4. **PC-003 B2B Smile Travel** (#40) — ทักหา
-5. Google Doc sync (client_secret หาย) · PC-001 verify RAW 1,323 · taicho→senei-kotsu-invoice · PC-006 Meawbin · portfolio-analyst · voice-input · Workspace MCP รอ official · Gochisou domain/ภาพ/TikTok
+1. **A1 Gochisou decision pack** — รอพี่เจ้าสั่ง (PC-009)
+2. **Meawbin คลิป 14 Day 03-06** — 13/56 (PC-006)
+3. **PC-007 rate UNVERIFIED** — พี่เจตรวจ (Master Data ต่อยอด)
+4. **PC-008 ย้ายบัญชี Google** — แผนพร้อม รอสั่งเริ่ม
+5. B22 voice-input รอพี่เจสั่ง (PC-011) · คลิปชาบูไอเดีย 3 + Flow Playbook · PC-003 B2B ทักหา
