@@ -1,8 +1,5 @@
 name: Firebase Deploy — firestore:rules (phathiao-dashboard)
 
-# ⏸ BLOCKED: ยังรันไม่ได้ — ต้อง grant roles/firebaserules.admin ให้
-# firebase-gha-deploy@phathiao-cloud-2026.iam.gserviceaccount.com ในโปรเจกต์ phathiao-dashboard
-# ผ่าน console ด้วย account เจ้าของโปรเจกต์ (token info@ ไม่มีสิทธิ์ — 8 ก.ย. 69)
 on:
   workflow_dispatch:
 
@@ -11,7 +8,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: firebase-rules-dashboard
+  group: firebase-rules-ai-studio
   cancel-in-progress: false
 
 env:
@@ -29,12 +26,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22.23.1'
-      - name: Authenticate (WIF -> SA, keyless)
+      - id: gcp_auth
+        name: Authenticate (WIF -> SA, keyless)
         uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: ${{ env.WIF_PROVIDER }}
           service_account: ${{ env.SA_EMAIL }}
-      - name: Deploy rules
+      # firebase.json ใช้ single-object "database" (named DB ai-studio-...) — v15.28.1 รองรับ
+      # firebase CLI ยังไม่ใช้ ADC ตรง -> ส่ง access token จาก SA impersonation (keyless, 9 ก.ย. 69)
+      - name: Export FIREBASE_TOKEN (SA impersonation)
+        run: echo "FIREBASE_TOKEN=${{ steps.gcp_auth.outputs.access_token }}" >> "$GITHUB_ENV"
+      - name: Deploy rules (dashboard)
         run: npx --yes firebase-tools@${{ env.FIREBASE_TOOLS }} deploy --only firestore:rules --project ${{ env.PROJECT }} --force
-      - name: ตรวจผล
-        run: echo "หลัง deploy: ตรวจ release ที่ console (กระดานไอเดีย DB)"
+      - name: ตรวจผล (release ของ named DB เปลี่ยนจริง — lesson #25 default-DB trap)
+        run: |
+          npx --yes firebase-tools@${{ env.FIREBASE_TOOLS }} firestore:indexes:list --project ${{ env.PROJECT }} >/dev/null 2>&1 || true
+          echo "หลัง deploy: ตรวจ release ที่ console (database (default) — ดู firebase.json)"
