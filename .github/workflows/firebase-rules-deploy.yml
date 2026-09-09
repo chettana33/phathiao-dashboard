@@ -1,0 +1,40 @@
+name: Firebase Deploy — firestore:rules (phathiao-dashboard)
+
+# ⏸ BLOCKED: ยังรันไม่ได้ — ต้อง grant roles/firebaserules.admin ให้
+# firebase-gha-deploy@phathiao-cloud-2026.iam.gserviceaccount.com ในโปรเจกต์ phathiao-dashboard
+# ผ่าน console ด้วย account เจ้าของโปรเจกต์ (token info@ ไม่มีสิทธิ์ — 8 ก.ย. 69)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: firebase-rules-dashboard
+  cancel-in-progress: false
+
+env:
+  PROJECT: phathiao-dashboard
+  FIREBASE_TOOLS: 15.28.1
+  WIF_PROVIDER: projects/146015452197/locations/global/workloadIdentityPools/github/providers/github-oidc
+  SA_EMAIL: firebase-gha-deploy@phathiao-cloud-2026.iam.gserviceaccount.com
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # Node 22.23.0/24.17.0 มีบั๊ก http.Agent ทำ WIF auth พัง — pin ≥22.23.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.23.1'
+      - name: Authenticate (WIF -> SA, keyless)
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.SA_EMAIL }}
+      - name: Deploy rules
+        run: npx --yes firebase-tools@${{ env.FIREBASE_TOOLS }} deploy --only firestore:rules --project ${{ env.PROJECT }} --force
+      - name: ตรวจผล
+        run: echo "หลัง deploy: ตรวจ release ที่ console (กระดานไอเดีย DB)"
