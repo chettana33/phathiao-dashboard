@@ -17,6 +17,7 @@ NAV_ITEMS = [
     ("overview", "ภาพรวม"),
     ("status", "สถานะงาน"),
     ("systemmap", "System Map"),
+    ("minimax", "MiniMax Studio"),
     ("checkpoint", "Checkpoint"),
     ("memory", "MEMORY"),
     ("roadmap", "ลำดับถัดไป"),
