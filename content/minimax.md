@@ -1,87 +1,65 @@
 ---
-title: "MiniMax Design — Skills / Plugins / Connectors (แผนใช้กับงานเรา)"
+title: "MiniMax Studio — เครื่องมือ + สถานะงาน (อัปเดต 12 ก.ย. 69)"
 type: "note"
-tags: ["dashboard", "minimax", "skills", "connector", "gochisou", "ichinotour", "okf"]
+tags: ["dashboard", "minimax", "skills", "clip-studio", "gochisou", "ichinotour", "okf"]
 status: "active"
 created: 2026-09-11T13:20:00+07:00
-last_updated: 2026-09-11T13:20:00+07:00
-version: "1.0"
+last_updated: 2026-09-12T22:40:00+07:00
+version: "2.0"
 owner: "พี่เจ & พาเที่ยว"
 source_of_truth: "Obsidian & GitHub"
 ---
-# MiniMax Design — Skills / Plugins / Connectors
+# MiniMax Studio — เครื่องมือ + สถานะงาน
 
-> ตรวจของจริง 11 ก.ย. 69 (ไม่เดา): `/api/skills` แอป · `/api/skills/market` · manifest ของ plugin ในตัวแอป · capability manifest · ทดสอบ REST connector 8 เส้นทาง
-> **สถานะ: พี่เจ approve 11 ก.ย. 69** — แผนช่องทาง 3 ตัด ✅ · แผนฝั่งพาเที่ยว (V4.1) ✅ · KOC-video + Video Editor = ทดสอบคืนนี้
+> อัปเดต 12 ก.ย. 69 22:40 (ตัวเลขจากของจริง: gateway `/api/v1/credit/wallet` · tool count จาก MCP ที่ต่อใน DSH · checkpoint ล่าสุด)
+> ตัวเลขทุกบรรทัดมาจากการรันจริง — ไม่มีข้อไหนเป็น "คาดว่า"
 
-## 1. บัญชี + เครดิต (จริง)
+## 1. ทำเสร็จแล้ว (12 ก.ย. 69)
+
+| งาน | ผลจริง | หลักฐาน |
+|---|---|---|
+| **MCP MiniMax เข้า DSH** | 58 tools ใช้ในแชตได้ (`mcp__minimax__*`: generate_video/image/audio · ffmpeg · merge_videos · subtitle_format · canvas · media_transcribe) | ยิง `list_capabilities` ได้ manifest จริง · `generate_audio_speech` ได้ไฟล์ mp3 3.64 วิ |
+| **MCP Google Workspace เข้า DSH** | 62 tools (`mcp__google-workspace__*`: Drive/Gmail/Calendar/Sheets) | authorize แล้ว · `list_drive_items` คืนไฟล์จริง 3 ไฟล์ |
+| **H3 native audio ภาษาไทย** | **ได้จริง** — i2v 4 วิ 768P + `generate_audio:true` + บทไทยใน prompt ≈ **280 เครดิต** → เสียงไทย 100% ตรงบท | `Raw\mm_talking_head\tabi-i2v-thai-audio-test-v1.mp4` + QC 4 ไฟล์ · ปากขยับสอดคล้อง 11/13 เฟรม (kling avatar เดิม ≈67-73%) |
+| **Video Editor (clip-studio) ขับอัตโนมัติได้ 100%** | สร้าง host harness แทน host ของแอป (แอปโหลด plugin ไม่มี host SDK → สั่งผ่านแอป timeout ทุกครั้ง) | import → `cut_silences` **1 ช่วง 0.7 วิ** (4.458→3.758) → `import_srt` **2 cue ไทย** (3.658) → diagnostics clean → snapshot + vision QC ผ่าน |
+| **CapCut** | ติดตั้ง `9.4.0.4015` + **export draft เข้า CapCut สำเร็จ** (สื่อคัดลอก 1 ไฟล์ · canvas 768×1344 · มี text ไทย 2 อัน) | `%LOCALAPPDATA%\CapCut\User Data\Projects\com.lveditor.draft\minimax design项目导入` (draft_info.json) |
+| **Skill `phathiao-ingest`** | สูตร QC คลิป (เฟรม → DeepSeek vision → transcribe → checklist → checkpoint) | เข้า skill catalog + mirror Vault/GitHub |
+| **ความปลอดภัย/เอกสาร** | แก้ `secret_guard.py` ให้จับ `GOOGLE_OAUTH_CLIENT_SECRET` (เดิมหลุด!) · SOP `clip-studio-harness-sop.md` · lessons #132-138 | commit brain `4d2c00e` |
+
+## 2. ตัวเลขจริง (12 ก.ย. 69)
 
 | รายการ | ค่า |
 |---|---|
-| บัญชีแอป | Chettana Suparatarpa · userID `553409288619683847` · group_id `2097222684311036351` |
-| แผน | Media Plan Starter (มีอยู่แล้ว) |
-| เครดิต | 36 (ก่อนเติม) · bucket หมดอายุ 2026-10-10 06:59 |
-| เติม | $10.5 (11 ก.ย. 69) — ยังไม่ใช้ |
+| เครดิต MiniMax | **≈9,006** (bucket 9,250 + 36 · หมดอายุ 2026-10-10) — บันทึกเก่า "36" = ล้าสมัย |
+| ต้นทุนต่อคลิปสั้น | H3 i2v 4 วิ ≈ 280 · 5 วิ ≈ 350 · kling avatar ≈ 650 · 30 วิ ≈ 2,100 |
+| Tools ที่ใช้ได้ในแชต | MiniMax 58 · Google Workspace 62 (รวมของเดิม 5 ตัว = ~125) |
+| Chroma content-brain | 952 chunks |
 
-## 2. Skills (ติดตั้ง 20 · ตลาด 20)
+## 3. เหลืออะไร
 
-**ตัวที่เลือกใช้กับงานเรา (พี่เจ approve แล้ว)**
-
-| Skill | ใช้ทำอะไร | สถานะ |
+### 3.1 งานผลิต (คิวถัดไป)
+| # | งาน | สถานะ |
 |---|---|---|
-| `koc-video` | talking head / POV / testimonial / product seeding | ทดสอบคืนนี้ |
-| `voice-clone` | เสียงประจำตัว (ชาย/หญิง) consent-based — แก้ปัญหาเสียงไม่ตรงตัวละคร | คิวถัดไป |
-| `education-studio` | คลิปยาว YouTube: ทัวร์ 1 เมือง / วิธีจอง / วัฒนธรรม | คิวถัดไป |
-| `paper-collage-explainer-generator` | คลิปอธิบาย (ค่าใช้จ่าย/ขั้นตอนจอง) ต้นทุนต่ำ | คิวถัดไป |
-| `brand-promo-video-generator` / `brand-ad` | Hero film 15-45 วิ ให้ ichinotour B2B | คิวถัดไป |
-| `character-scene-storyboard` (ตลาด) | design sheet ตัวละครคงที่ก่อนทำซีรีส์ | คิวถัดไป |
-| `music-3.0` + `lyrics_generation` | BGM ประจำช่อง (ธีมเดียวทุกคลิป = แบรนด์จำได้) | คิวถัดไป |
-| `clip-export` (ตลาด) | ส่งเข้า CapCut/剪映 draft | คิวถัดไป |
-| `fpv-tour-video-generator` (featured) | คลิปทัวร์ FPV — คู่แข่งไทยแทบไม่มี | เก็บไว้ |
-| `fashion-scene-video-planner` / `sitcom-story-video` (featured) | เอา "วินัยล็อกสเปก" + "bible ตัวละคร/ฉาก" มาใช้เป็นแม่แบบซีรีส์ | เก็บไว้ |
+| 1 | **คลิป 4 Gochisou "ภาษาไม่เก่ง จองร้านต้องโทรเท่านั้น"** (กิ่ง A) | บท approve แล้ว (Content Map 9 ก.ย.) · **ยังไม่เริ่มผลิต** — ต้องแก้ VO ให้ใช้คำมาตรฐาน "เรามีทีม Land Operation พร้อมช่วยคุณ" + ทำ SRT ไทยเอง (ASR แอปถอดไทยเป็นจีน ใช้ไม่ได้) |
+| 2 | character bible / continuity (Tabi + พาเที่ยว) | ยังไม่ทำ (แผน 11 ก.ย. §4.1-1 — ทำได้ฟรี) |
+| 3 | Skill "Phathiao Clip Pipeline" (สูตรประกอบคลิปเต็ม) | ยังไม่ทำ (ส่งมอบแล้วแค่ `phathiao-ingest` = QC) |
+| 4 | `voice-clone` → `koc-video` (ทดลองตามลำดับแผน) | ยังไม่แตะ · `koc-video` กินเครดิต |
+| 5 | Meawbin คลิป 19 (Day 04-05 Q&A) | ค้างจาก 11 ก.ย. |
 
-## 3. Plugins ในตัวแอป (bundled) — ที่ยังไม่เคยใช้
-
-| Plugin | ทำอะไร | แผน |
+### 3.2 งานระบบ
+| # | งาน | สถานะ |
 |---|---|---|
-| Video Editor (`clip-studio` v0.10.2) | ตัดอัตโนมัติ · ลบช่วงเงียบ · ซับอัตโนมัติ · timeline/transition/สี · export เข้า CapCut | ทดสอบคืนนี้ (ฟรี) |
-| Director Stage (3D v0.24.8) | หุ่น 3D + กล้อง + path → storyboard/blocking ก่อนเจน | เก็บไว้ |
-| ComfyUI (v0.2.4) | node editor ในแอป + backend จัดการให้ | ยังไม่ต้อง (ต้องโหลดโมเดลเอง) |
+| 6 | **rotate Google OAuth client secret** | เลื่อนเป็น **13 ก.ย.** (พี่เจสั่ง) — secret หลุดเข้า transcript 12 ก.ย. ต้องหมุน |
+| 7 | **linkdigest MCP** (transcript+OCR ลิงก์ TikTok/YT) | เลื่อนเป็น **13 ก.ย.** — ต้องเอา API key (ฟรี 3 digests) จาก linkdigest.dev/app/keys |
+| 8 | social-post MCP (YouTube/TikTok/FB) | ยังไม่มีในตลาด — ต้องสร้างเอง |
+| 9 | `redfox-community-dsh` · `last30days-skill-cn` | ยังไม่ประเมิน |
+| 10 | cold-boot test: ปิดแอป MiniMax แล้วเปิด DSH ใหม่ (reconnect ตั้งไว้ 2 ชม.) | ยังไม่ทดสอบ |
 
-## 4. Connectors — ตรวจแล้ว
+## 4. ข้อจำกัดที่ต้องรู้
 
-- ❌ แอปยังไม่มี Connector API เราเรียกได้ (`/api/connectors`, `/api/mcp`, `/api/integrations` = 404 ทั้งหมด) · config มีแค่ช่อง `customMcpVault`
-- ✅ Connector ที่ทำงานจริง = MCP ฝั่งเรา: DSH 5 ตัว (chroma · vault-search · playwright · google-workspace · firebase) + opencode 2 บัญชี Google Workspace (kimonoland + info@)
-- 🎯 ควรดึงเพิ่ม (พี่เจ approve)
-  1. MCP ต่อแอป MiniMax ตรง (เจนภาพ/วิดีโอ/เพลง/ตัดต่อจากในแชต)
-  2. `linkdigest-mcp` — ลิงก์ TikTok/YouTube → transcript + timecode + OCR (deconstruct คู่แข่ง + QC)
-  3. `redfox-community-dsh` — 100+ skill ข้อมูลโซเชียล + 40 MCP tool
-  4. `last30days-skill-cn` — สแกนเทรนด์ 8 แพลตฟอร์ม 30 วัน
-  5. `riffkit/skill` — riff คลิปที่ชนะเป็นสูตรของเรา
-  6. MCP โพสต์ YouTube/TikTok/FB — ยังไม่มีในตลาด ต้องสร้างเอง
-
-## 5. แผนช่องทาง ichinotour — โครงเดียว 3 ตัด (approve)
-
-| ช่อง | รูปแบบ | เครื่องมือ |
-|---|---|---|
-| TikTok | 20-35 วิ แนวตั้ง | H3 i2v + kling avatar + Video Editor (ซับ) |
-| YouTube Shorts | เหมือน TikTok + ซับ/ชื่อเรื่องค้นหาได้ | เพิ่ม `music-video-subtitle-generator` + `clip-export` |
-| YouTube ยาว | 60-180 วิ (1 เมือง / 1 ร้าน / วิธีจอง) | `education-studio` + `mg-voiceover-animation-generator` |
-| Facebook | 60-120 วิ + ข้อความยาว | asset ชุดเดียวกับ YouTube ตัดต่างกัน |
-| ichinotour B2B | Hero 15-45 วิ | `brand-promo-video-generator` |
-
-## 6. ฝั่งพาเที่ยว (V4.1) — ที่ควรมีเพิ่ม (approve)
-
-| เพิ่ม | ทำไม |
-|---|---|
-| MCP ต่อแอป MiniMax เข้า DSH | วันนี้เรียกผ่าน `mm_run.py` เท่านั้น — ต่อ MCP แล้วใช้ tool แอปในแชตได้เลย |
-| Google Workspace MCP เข้า DSH | binary มีแล้ว (`workspace-mcp.exe`) — Sheets/Drive ในแชต |
-| `linkdigest` MCP | QC/วิจัยคู่แข่งด้วย transcript + OCR |
-| Skill "Phathiao Ingest" (เขียนเองด้วย `skill-creator`) | รวมสูตร คลิป → ffmpeg → `read_image_deepseek` → QC → checkpoint |
-
-## 7. ข้อจำกัด (ต้องรู้ก่อนใช้)
-
-- ทุกอย่างในแอปกินเครดิต ยกเว้น ffmpeg/ตัดต่อในตัว · H3 30 วิ ≈ 2,100 เครดิต
-- Skill ของแอปบังคับหยุดยืนยันกับผู้ใช้หลายจุด (ไม่ใช่ auto 100%)
+- ทุกอย่างในแอป **กินเครดิต** ยกเว้น ffmpeg/ตัดต่อในตัว
+- **Video Editor ในแอปสั่งผ่าน API ของแอปไม่ได้** (แอปโหลด plugin แบบไม่มี host) → ใช้ host harness ที่เราสร้าง (SOP: `00_SOP_Master/02_Operations_SOP/clip-studio-harness-sop.md`) · harness ต้องรัน proxy + เบราว์เซอร์ค้างไว้
+- **ห้ามทำซับไทยจาก ASR ของแอป** (ถอดไทยออกเป็นตัวจีน) — ทำ SRT เองแล้ว `import_srt`
 - ผลจากแอปต้อง QC ต่อด้วย DeepSeek vision + transcribe (`system-rules/gochisou.md` §3)
-- ไฟล์เต็ม: `04_Sales_Marketing/MiniMax_Skills_Plan_2026-09-11.md` (Vault)
+- Google Workspace MCP = สิทธิ์ **เขียน** (ส่งเมล/แชร์ไฟล์/แก้ Sheet) — ห้ามใช้กับข้อมูลลูกค้า/การเงินโดยไม่สั่ง
+- ไฟล์เต็ม: `04_Sales_Marketing/MiniMax_Skills_Plan_2026-09-11.md` + `system-rules/gochisou.md` (Vault)
