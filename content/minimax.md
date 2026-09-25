@@ -4,8 +4,8 @@ type: "note"
 tags: ["dashboard", "minimax", "skills", "clip-studio", "gochisou", "ichinotour", "okf"]
 status: "active"
 created: 2026-09-11T13:20:00+07:00
-last_updated: 2026-09-17T22:35:00+07:00
-version: "3.0"
+last_updated: 2026-09-20T17:10:00+07:00
+version: "3.1"
 owner: "พี่เจ & พาเที่ยว"
 source_of_truth: "Obsidian & GitHub"
 ---
@@ -49,6 +49,8 @@ source_of_truth: "Obsidian & GitHub"
 `generate_video` 95 · `generate_audio_speech` 76 · `generate_image` 30 · `memory` 12 · `analyse_media` 8 · `list_capabilities` 8 · `image_search` 8 · `canvas_list_nodes` 7 · `plugin_agent_invoke` 6 · `canvas_get_node` 4 · `voice_prepare` 4 · `media_transcribe` 4 · `plugin_agent_describe` 3 · `plugin_agent_open_editor` 3 · `get_model_concurrency` 2 · `search_knowledge` 2
 
 ### 3.2 ไม่เคยแตะเลย 35
+
+> ⚠️ **ตัวเลขนี้เก่า (17 ก.ย. 69)** — 9 ตัวในรายการนี้ถูกทดสอบสดแล้วใน §4 ของไฟล์เดียวกัน (`audio_analyze_music` · `audio_meta` · `web_media` · `asset_center_search` · `image_remove_background` · `select_image_recipe` · `search_knowledge` · `list_comfyui_template` · `get_model_concurrency`) และอีก **10 ตัวผ่านการทดสอบจริง 20 ก.ย. 69** (ดู §8) ⇒ **ห้ามใช้รายการนี้ตัดสินว่า "ยังไม่เคยใช้"** ให้ดู §4 + §8 ก่อน
 
 **วิดีโอ/ภาพ:** `image_remove_background` · `batch_lip_sync` · `merge_videos` · `read`
 **เสียง:** `audio_analyze_music` · `audio_meta` · `audio_separate` · `generate_audio_music` · `lyrics_generation` · `music_cover`
@@ -100,3 +102,15 @@ source_of_truth: "Obsidian & GitHub"
 - `batch_lip_sync` + `voice_prepare clone` = `Internal server error` (ฝั่งเซิร์ฟเวอร์ 12 ก.ย. 69) — อย่าเสียเวลาลองซ้ำ
 - เสียงไทยใช้ได้กับ **H3 `generate_audio: true` (i2v) เท่านั้น** — Max/Turbo ไม่มีสวิตช์นี้
 - งานตัดต่อ/ซับ: ใช้ `ffmpeg` + `subtitle_format` + `merge_videos` (ฟรี ไม่กินเครดิตเจน)
+
+## 8. ผลทดสอบจริง 20 ก.ย. 69 — เฟส 0 (ฟรี ไม่กินเครดิตเจน)
+
+> รันจริงทุกตัว (แอปเปิด · gateway 8001) · หลักฐานไฟล์อยู่ที่ `output_files\test-*` · รายละเอียดเต็มอยู่ที่ Vault `04_Sales_Marketing/MiniMax_Skills_Plan_2026-09-11.md` §7.5
+
+**✅ ผ่าน 10:** `audio_analyze_music` (BGM คลิป 8 = **BPM 99.4** · 25 beats · `estimated_shot_count 8`) · `audio_meta` · `audio_separate` · `image_remove_background` (ไฟล์ต้องอยู่ในโฟลเดอร์แอป) · `merge_videos` (768×1344 ×2 = 23.625 วิ ตรงเป๊ะ) · `subtitle_format` (ASS ไทย + เบิร์นแล้วอ่านออกจริง) · `read` · `canvas_write_node`/`read_text`/`grep_text`/`apply_text_edits` (4/4) · `web_media` inspect + download_thumbnail · `asset_center_search` (คลังว่าง)
+
+**❌ ไม่ผ่าน 4:** `media_transcribe` (subtitle) `cue_count: 0` · `batch_lip_sync` `Internal server error` 2 ครั้ง (ยืนยันซ้ำจาก 12 ก.ย.) · `select_image_recipe` + `search_knowledge` (`Knowledge directory not found` — ไม่มี knowledge pack) · `web_media download_video` (`Requested format is not available` — ต้องใช้ `format_id` จาก inspect)
+
+**⏸ ยังทดสอบไม่ได้:** `asset_center_use_entity` (คลังว่าง + ไม่มี tool สร้าง entity ⇒ ต้องสร้างในแอป) · `canvas_group_nodes`/`ungroup_node` (ต้องมี ≥2 โหนด)
+
+**⚠️ กับดัก 3 ข้อ (lessons #308):** ① `subtitle_format` default font = `Microsoft YaHei` (จีน) ⇒ ต้องส่ง `font_name=Leelawadee UI` ② vision ยืนยัน "ซับแสดงผลถูกต้อง" ทั้งที่เฟรมไม่มีซับ — `vision_pixel_diff` = 0 ⇒ **diff ก่อนเชื่อ vision เสมอ** ③ `-ss` ก่อน `-i` reset timeline ⇒ เฟรมแรกอยู่นอกช่วง cue · ใช้ `-i … -ss 1.0`
