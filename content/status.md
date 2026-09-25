@@ -59,10 +59,8 @@ last_updated: 2026-08-29T21:45:00+07:00
 
 > รายละเอียด: `00_SOP_Master/01_AI_Protocols/` ใน Vault
 
-## งานค้างเรียงตามลำดับ (7 ก.ย. 2569 — รายการเต็มดู section Checkpoint อัตโนมัติ)
+## งานค้าง — ดูจาก section Checkpoint (อัตโนมัติ)
 
-1. **A1 Gochisou decision pack** — รอพี่เจ้าสั่ง (PC-009)
-2. **Meawbin คลิป 14 Day 03-06** — 13/56 (PC-006)
-3. **PC-007 rate UNVERIFIED** — พี่เจตรวจ (Master Data ต่อยอด)
-4. **PC-008 ย้ายบัญชี Google** — แผนพร้อม รอสั่งเริ่ม
-5. B22 voice-input รอพี่เจสั่ง (PC-011) · คลิปชาบูไอเดีย 3 + Flow Playbook · PC-003 B2B ทักหา
+> รายการงานค้างที่เขียนมือในหน้านี้ **ถูกลบออก 25 ก.ย. 69** เพราะค้างมาตั้งแต่ 7 ก.ย. และไม่ตรงกับของจริงแล้ว
+> ตั้งแต่นี้ให้อ่านจาก **section Checkpoint** ซึ่งดึง `CHECKPOINT_LATEST.md` จาก `phathiao-knowledge-brain` อัตโนมัติทุกชั่วโมง
+> งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)
