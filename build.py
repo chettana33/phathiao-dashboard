@@ -37,6 +37,8 @@ def inline(text):
     text = re.sub(r'\*\*(.+?)\*\*', r'<strong>\1</strong>', text)
     text = re.sub(r'\*(.+?)\*', r'<em>\1</em>', text)
     text = re.sub(r'`(.+?)`', r'<code>\1</code>', text)
+    # รูป: ต้องมาก่อนกฎลิงก์ ไม่งั้น ![alt](src) จะถูกตัดเหลือ <a> (เพิ่ม 7 ต.ค. 69)
+    text = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', r'<img src="\2" alt="\1" loading="lazy">', text)
     text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2" target="_blank" rel="noopener">\1</a>', text)
     return text
 
@@ -230,6 +232,7 @@ h1 {{ font-size:22px; color:var(--accent); margin-bottom:12px; }}
 h2 {{ font-size:18px; color:var(--accent); margin:20px 0 10px; padding-bottom:6px; border-bottom:1px solid var(--line); }}
 h3 {{ font-size:15px; color:var(--text); margin:14px 0 6px; }}
 p {{ margin:6px 0; color:var(--text); }}
+img {{ max-width:100%; height:auto; display:block; margin:10px 0; border:1px solid var(--line); border-radius:12px; background:#fff; }}
 p.num {{ margin:6px 0 6px 18px; }}
 ul {{ margin:6px 0 6px 20px; }}
 li {{ margin:3px 0; }}
