@@ -58,6 +58,31 @@ jobs:
           head -c 800 /tmp/authpatch.json; echo
           echo "PATCH_CODE=$code" >> "$GITHUB_ENV"
 
-      - name: 3) summary
+      - name: 3) probe IAM ของโปรเจกต์ (ดูว่าใครเป็นเจ้าของ — ปิดอีเมลบางส่วนเพราะ log ของ repo สาธารณะ)
+        run: |
+          set +e
+          code=$(curl -s -o /tmp/iam.json -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer ${{ steps.gcp_auth.outputs.access_token }}" \
+            -H "Content-Type: application/json" \
+            "https://cloudresourcemanager.googleapis.com/v1/projects/${PROJECT}:getIamPolicy" \
+            -d '{"options":{"requestedPolicyVersion":3}}')
+          echo "getIamPolicy -> http=$code"
+          if [ "$code" = "200" ]; then
+            python3 - <<'PY'
+import json, re
+d = json.load(open('/tmp/iam.json'))
+def mask(m):
+    if not m.startswith('user:'): return m
+    e = m[5:]; name, _, dom = e.partition('@')
+    return f"user:{name[:2]}***@{dom}"
+for b in d.get('bindings', []):
+    if b.get('role','').endswith(('owner','editor','firebaseauth.admin','firebase.projects.admin','firebaserules.admin')):
+        print(' ', b['role'], '->', ', '.join(mask(m) for m in b.get('members', [])[:5]))
+PY
+          else
+            head -c 300 /tmp/iam.json; echo
+          fi
+
+      - name: 4) summary
         run: |
           echo "probe=$PROBE_CODE patch=${PATCH_CODE:-skipped}"
