@@ -1,17 +1,191 @@
 ---
-title: "แผนที่งาน — ดูแล้วรู้ทันทีว่าทำอะไรอยู่ และทำยังไง"
+title: "แผนที่งาน — เลือกงานที่อยากดู แล้วเห็นขั้นตอนทันที"
 type: "dashboard"
 ---
 
 # 🧭 แผนที่งาน (Work Map)
 
-> เปิดดูเมื่อไหร่ก็รู้ทันที: งานนี้ทำอะไรอยู่ · ถึงขั้นไหน · ก้าวต่อไปคืออะไร · อะไรต้องรอพี่เจ
-> อัปเดตโดยพาเที่ยวทุกครั้งที่ปิดงานรอบ · แก้ที่ `content/workmap.md` แล้ว build ใหม่
+> เปิดมาเห็น **ทุกงานในจอเดียว** → กดช่องงานที่อยากดู → รายละเอียดเปิดในหน้านี้ ไม่ต้องเปลี่ยนหน้า
+> เรียง **งานที่กำลังทำอยู่ก่อน** แล้วต่อด้วยงานที่รอพี่เจ/รอของ · ตัวเลขงานค้างจาก checkpoint รอบล่าสุด · อัปเดตโดยพาเที่ยวทุกครั้งที่ปิดงาน
 
 ```html
-<article class="wm">
-  <span class="wm-glow" aria-hidden="true"></span>
+<div class="wm-toolbar">
+  <div class="wm-toolbar-title">งานทั้งหมด <b>10</b> การ์ด · เรียงงานที่กำลังทำอยู่ก่อน</div>
+  <button class="wm-back" id="wm-back" hidden>← กลับไปดูงานทั้งหมด</button>
+</div>
 
+<div class="wm-group-title">🔵 กำลังทำอยู่ (4)</div>
+<div class="wm-tiles" id="wm-tiles">
+
+  <button class="wm-tile" data-wm="pc009">
+    <span class="wm-tile-code">PC-009</span>
+    <span class="wm-tile-name">ช่อง Gochisou — ทำคลิปและวัดผล</span>
+    <span class="wm-tile-meta">🔵 กำลังทำ · งานค้าง 25</span>
+    <span class="wm-tile-next">ถัดไป: ปักหมุดคอมเมนต์ IG ใบ 2/3</span>
+  </button>
+
+  <button class="wm-tile" data-wm="pc017">
+    <span class="wm-tile-code">PC-017</span>
+    <span class="wm-tile-name">Affiliate Marketing — ทำ affiliate เอง</span>
+    <span class="wm-tile-meta">🔵 กำลังทำ · งานค้าง 11</span>
+    <span class="wm-tile-next">ถัดไป: แผนที่โปรแกรม affiliate</span>
+  </button>
+
+  <button class="wm-tile is-empty" disabled>
+    <span class="wm-tile-code">PC-011</span>
+    <span class="wm-tile-name">DSH Tooling / ระบบความรู้</span>
+    <span class="wm-tile-meta">🔵 กำลังทำ · งานค้าง 4</span>
+    <span class="wm-tile-next">ยังไม่มีหน้ารายละเอียด — กำลังทำ</span>
+  </button>
+
+  <button class="wm-tile is-empty" disabled>
+    <span class="wm-tile-code">PC-006</span>
+    <span class="wm-tile-name">เรียนเทรด Meawbin</span>
+    <span class="wm-tile-meta">🔵 กำลังเรียน · งานค้าง 3</span>
+    <span class="wm-tile-next">ยังไม่มีหน้ารายละเอียด — กำลังทำ</span>
+  </button>
+
+</div>
+
+<div class="wm-group-title">🟡 รอพี่เจ / รอของ (5)</div>
+<div class="wm-tiles">
+
+  <button class="wm-tile is-empty" disabled>
+    <span class="wm-tile-code">PC-012</span>
+    <span class="wm-tile-name">Owner Mail + งานอัตโนมัติในเครื่อง</span>
+    <span class="wm-tile-meta">🟡 รอพี่เจ · งานค้าง 5</span>
+    <span class="wm-tile-next">ต้องรันคำสั่งแบบ admin 1 ครั้ง</span>
+  </button>
+
+  <button class="wm-tile is-empty" disabled>
+    <span class="wm-tile-code">PC-015</span>
+    <span class="wm-tile-name">MT5 Trading</span>
+    <span class="wm-tile-meta">🟡 รอพี่เจตัดสิน · งานค้าง 5</span>
+    <span class="wm-tile-next">รอตัดสินกติกา "ศิลปะ" + ตั้ง SL จริง</span>
+  </button>
+
+  <button class="wm-tile is-empty" disabled>
+    <span class="wm-tile-code">PC-016</span>
+    <span class="wm-tile-name">ลงราคาค่าโดยสาร 千栄交通 (unbin)</span>
+    <span class="wm-tile-meta">🟡 รอต้นสังกัด · งานค้าง 4</span>
+    <span class="wm-tile-next">รอบ 便/เดือนถัดไปรอต้นสังกัด</span>
+  </button>
+
+  <button class="wm-tile is-empty" disabled>
+    <span class="wm-tile-code">PC-003</span>
+    <span class="wm-tile-name">B2B / Smile Travel + หาลูกค้าใหม่</span>
+    <span class="wm-tile-meta">🟡 รอพี่เจอนุมัติ · งานค้าง 2</span>
+    <span class="wm-tile-next">อนุมัติส่งซ้ำ Next Trip Holiday</span>
+  </button>
+
+  <button class="wm-tile is-empty" disabled>
+    <span class="wm-tile-code">PC-001</span>
+    <span class="wm-tile-name">Master Data (โรงแรม/ร้านอาหาร/รถ)</span>
+    <span class="wm-tile-meta">🟡 รอไฟล์จากพี่เจ · งานค้าง 1</span>
+    <span class="wm-tile-next">รอไฟล์ Google Takeout ชุดใหม่</span>
+  </button>
+
+</div>
+
+<div class="wm-group-title">⏳ รอคำสั่งเริ่ม (1)</div>
+<div class="wm-tiles">
+
+  <button class="wm-tile is-empty" disabled>
+    <span class="wm-tile-code">PC-008</span>
+    <span class="wm-tile-name">ย้ายบัญชี Google</span>
+    <span class="wm-tile-meta">⏳ รอคำสั่งเริ่ม · งานค้าง 1</span>
+    <span class="wm-tile-next">รอพี่เจสั่ง "เริ่มย้าย" (แผน 36 ขั้นพร้อม)</span>
+  </button>
+
+</div>
+
+<article class="wm wm-detail" id="pc009" hidden>
+  <span class="wm-glow" aria-hidden="true"></span>
+  <header class="wm-head">
+    <div class="wm-headtext">
+      <div class="wm-code">PC-009 · Gochisou Content</div>
+      <h2 class="wm-title">ช่อง Gochisou — ทำคลิปและวัดผล <span class="wm-sub">TikTok · Facebook Page · Instagram</span></h2>
+    </div>
+    <div class="wm-right">
+      <span class="tag info wm-status">🔵 กำลังทำ</span>
+      <div class="wm-progress" title="ความคืบหน้ารวม 8 ส่วน"><span class="wm-bar" style="--p:78%"></span><b>78%</b></div>
+    </div>
+  </header>
+
+  <div class="wm-goal">
+    <span class="wm-goal-label">🎯 เป้าหมาย</span>
+    ให้คนดูคลิปแล้ว <strong>ทัก LINE / จองร้าน</strong> ผ่านช่องของเรา — วัดด้วย KPI รายสัปดาห์ (วิว · ทัก LINE · ใบเสนอราคา)
+  </div>
+
+  <div class="wm-legend">
+    <span><i class="wm-dot d-done"></i>เสร็จแล้ว</span>
+    <span><i class="wm-dot d-doing"></i>กำลังทำ</span>
+    <span><i class="wm-dot d-wait"></i>รอพี่เจ</span>
+    <span><i class="wm-dot d-todo"></i>ยังไม่เริ่ม</span>
+  </div>
+
+  <div class="wm-phase">
+    <div class="wm-phase-title"><span class="wm-pnum">1</span>ฐานรากของช่อง (เสร็จครบแล้ว)</div>
+    <div class="wm-steps">
+      <div class="wm-step is-done"><span class="wm-n">ด่านตรวจ</span>QC ภาพ+เสียงอัตโนมัติ<em>บังคับก่อนโพสต์ทุกคลิป</em></div>
+      <span class="wm-flow" aria-hidden="true"></span>
+      <div class="wm-step is-done"><span class="wm-n">LINE</span>LINE OA @gochisou + ริชเมนู<em>เปิดใช้แล้ว 13 ก.ย. 69</em></div>
+      <span class="wm-flow" aria-hidden="true"></span>
+      <div class="wm-step is-done"><span class="wm-n">ของแจก</span>โพยร้านดัง + หน้า /phoy/<em>ใช้งานได้แล้ว</em></div>
+      <span class="wm-flow" aria-hidden="true"></span>
+      <div class="wm-step is-done"><span class="wm-n">ช่องทาง</span>Facebook Page + Instagram<em>โพสต์ Reels ได้แล้ว</em></div>
+    </div>
+  </div>
+
+  <div class="wm-phase">
+    <div class="wm-phase-title"><span class="wm-pnum">2</span>ผลิตคลิปและโพสต์</div>
+    <div class="wm-steps">
+      <div class="wm-step is-doing"><span class="wm-n">80%</span>ระบบผลิตคลิป (MiniMax H3 → ตัดต่อ → เสียง → CTA)<em>คลิป 1–6 ปิดครบ · ล็อกวิธีผลิตแล้ว</em></div>
+      <span class="wm-flow" aria-hidden="true"></span>
+      <div class="wm-step is-wait"><span class="wm-n">30%</span>คลิปว้าว 3 แนว (UGC / หนังสั้นหักมุม / one-take)<em>รอพี่เจเติมเครดิต — อนุมัติแนวแล้ว</em></div>
+    </div>
+  </div>
+
+  <div class="wm-phase">
+    <div class="wm-phase-title"><span class="wm-pnum">3</span>ปลายทางและวัดผล</div>
+    <div class="wm-steps">
+      <div class="wm-step is-doing"><span class="wm-n">50%</span>ปลายทาง «กดต่อ» (ลิงก์ไบโอ + GA4)<em>รอ Measurement ID (ยังว่าง = ยังไม่เก็บข้อมูล)</em></div>
+      <span class="wm-flow" aria-hidden="true"></span>
+      <div class="wm-step is-doing"><span class="wm-n">60%</span>แผน 3 เดือน + KPI รายสัปดาห์<em>เริ่มใช้แล้ว · ตัวเลขยังไม่ถึงเป้า ⇒ HOLD</em></div>
+    </div>
+  </div>
+
+  <div class="wm-now-title">ตอนนี้อยู่ตรงไหน</div>
+  <div class="wm-now">
+    <div class="wm-card is-done">
+      <h4>✅ ทำเสร็จแล้ว</h4>
+      <ul>
+        <li>ฐานรากช่องครบ 4 ส่วน (ด่าน QC · LINE OA · ของแจก · FB+IG)</li>
+        <li>คลิป Batch1 ชุดแรกผลิตและโพสต์ครบ 3 ช่อง</li>
+      </ul>
+    </div>
+    <div class="wm-card is-doing">
+      <h4>👉 ก้าวต่อไป</h4>
+      <ul>
+        <li>ปักหมุดคอมเมนต์ CTA บน IG ใบ 2/3 (หลังโพสต์ 15–16 ต.ค. 18:00) — ทำได้ในแอปมือถือ</li>
+        <li>เตรียมคลิปถัดไปตามแผน 3 เดือน (รอเครดิตเจน)</li>
+      </ul>
+    </div>
+    <div class="wm-card is-wait">
+      <h4>🙋 รอพี่เจ</h4>
+      <ul>
+        <li>ชื่อโปรไฟล์ IG (@gochisou_booking) — ยังว่าง</li>
+        <li>GA4 Measurement ID</li>
+        <li>งบเครดิตสำหรับคลิปว้าว 3 แนว</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wm-foot"><span>ที่มา: การ์ด PC-009</span><span>งานค้างทั้งหมดอยู่ใน «งานค้าง» ของการ์ด</span></div>
+</article>
+
+<article class="wm wm-detail" id="pc017" hidden>
+  <span class="wm-glow" aria-hidden="true"></span>
   <header class="wm-head">
     <div class="wm-headtext">
       <div class="wm-code">PC-017 · Affiliate Marketing</div>
@@ -95,98 +269,32 @@ type: "dashboard"
     </div>
   </div>
 
-  <div class="wm-foot">
-    <span>ที่มา: การ์ด PC-017</span>
-    <span>งานค้างทั้งหมดอยู่ใน «งานค้าง» ของการ์ด</span>
-  </div>
+  <div class="wm-foot"><span>ที่มา: การ์ด PC-017</span><span>งานค้างทั้งหมดอยู่ใน «งานค้าง» ของการ์ด</span></div>
 </article>
 
-<article class="wm">
-  <span class="wm-glow" aria-hidden="true"></span>
+<script>
+(function () {
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('#wm-tiles .wm-tile[data-wm]'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.wm-detail'));
+  var back = document.getElementById('wm-back');
 
-  <header class="wm-head">
-    <div class="wm-headtext">
-      <div class="wm-code">PC-009 · Gochisou Content</div>
-      <h2 class="wm-title">ช่อง Gochisou — ทำคลิปและวัดผล <span class="wm-sub">TikTok · Facebook Page · Instagram</span></h2>
-    </div>
-    <div class="wm-right">
-      <span class="tag info wm-status">🔵 กำลังทำ</span>
-      <div class="wm-progress" title="ความคืบหน้ารวม 8 ส่วน"><span class="wm-bar" style="--p:78%"></span><b>78%</b></div>
-    </div>
-  </header>
+  function show(id) {
+    panels.forEach(function (p) { p.hidden = (p.id !== id); });
+    tiles.forEach(function (t) { t.classList.toggle('is-active', t.dataset.wm === id); });
+    back.hidden = !id;
+    if (id) {
+      var el = document.getElementById(id);
+      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    } else {
+      var g = document.getElementById('wm-tiles');
+      if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    }
+  }
 
-  <div class="wm-goal">
-    <span class="wm-goal-label">🎯 เป้าหมาย</span>
-    ให้คนดูคลิปแล้ว <strong>ทัก LINE / จองร้าน</strong> ผ่านช่องของเรา — วัดด้วย KPI รายสัปดาห์ (วิว · ทัก LINE · ใบเสนอราคา)
-  </div>
-
-  <div class="wm-legend">
-    <span><i class="wm-dot d-done"></i>เสร็จแล้ว</span>
-    <span><i class="wm-dot d-doing"></i>กำลังทำ</span>
-    <span><i class="wm-dot d-wait"></i>รอพี่เจ</span>
-    <span><i class="wm-dot d-todo"></i>ยังไม่เริ่ม</span>
-  </div>
-
-  <div class="wm-phase">
-    <div class="wm-phase-title"><span class="wm-pnum">1</span>ฐานรากของช่อง (เสร็จครบแล้ว)</div>
-    <div class="wm-steps">
-      <div class="wm-step is-done"><span class="wm-n">ด่านตรวจ</span>QC ภาพ+เสียงอัตโนมัติ<em>บังคับก่อนโพสต์ทุกคลิป</em></div>
-      <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">LINE</span>LINE OA @gochisou + ริชเมนู<em>เปิดใช้แล้ว 13 ก.ย. 69</em></div>
-      <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">ของแจก</span>โพยร้านดัง + หน้า /phoy/<em>ใช้งานได้แล้ว</em></div>
-      <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">ช่องทาง</span>Facebook Page + Instagram<em>โพสต์ Reels ได้แล้ว</em></div>
-    </div>
-  </div>
-
-  <div class="wm-phase">
-    <div class="wm-phase-title"><span class="wm-pnum">2</span>ผลิตคลิปและโพสต์</div>
-    <div class="wm-steps">
-      <div class="wm-step is-doing"><span class="wm-n">80%</span>ระบบผลิตคลิป (MiniMax H3 → ตัดต่อ → เสียง → CTA)<em>คลิป 1–6 ปิดครบ · ล็อกวิธีผลิตแล้ว</em></div>
-      <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-wait"><span class="wm-n">30%</span>คลิปว้าว 3 แนว (UGC / หนังสั้นหักมุม / one-take)<em>รอพี่เจเติมเครดิต — อนุมัติแนวแล้ว</em></div>
-    </div>
-  </div>
-
-  <div class="wm-phase">
-    <div class="wm-phase-title"><span class="wm-pnum">3</span>ปลายทางและวัดผล</div>
-    <div class="wm-steps">
-      <div class="wm-step is-doing"><span class="wm-n">50%</span>ปลายทาง «กดต่อ» (ลิงก์ไบโอ + GA4)<em>รอ Measurement ID จากพี่เจ (ยังว่าง = ยังไม่เก็บข้อมูล)</em></div>
-      <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-doing"><span class="wm-n">60%</span>แผน 3 เดือน + KPI รายสัปดาห์<em>เริ่มใช้แล้ว · ตัวเลขยังไม่ถึงเป้า ⇒ HOLD</em></div>
-    </div>
-  </div>
-
-  <div class="wm-now-title">ตอนนี้อยู่ตรงไหน</div>
-  <div class="wm-now">
-    <div class="wm-card is-done">
-      <h4>✅ ทำเสร็จแล้ว</h4>
-      <ul>
-        <li>ฐานรากช่องครบ 4 ส่วน (ด่าน QC · LINE OA · ของแจก · FB+IG)</li>
-        <li>คลิป Batch1 ชุดแรกผลิตและโพสต์ครบ 3 ช่อง</li>
-      </ul>
-    </div>
-    <div class="wm-card is-doing">
-      <h4>👉 ก้าวต่อไป</h4>
-      <ul>
-        <li>ปักหมุดคอมเมนต์ CTA บน IG ใบ 2/3 (หลังโพสต์ 15–16 ต.ค. 18:00) — ทำได้ในแอปมือถือเท่านั้น</li>
-        <li>เตรียมคลิปถัดไปตามแผน 3 เดือน (รอเครดิตเจน)</li>
-      </ul>
-    </div>
-    <div class="wm-card is-wait">
-      <h4>🙋 รอพี่เจ</h4>
-      <ul>
-        <li>ชื่อโปรไฟล์ IG (@gochisou_booking) — ยังว่าง</li>
-        <li>GA4 Measurement ID (ส่งมาแล้วโค้ดเริ่มเก็บข้อมูลทันที)</li>
-        <li>งบเครดิตสำหรับคลิปว้าว 3 แนว</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="wm-foot">
-    <span>ที่มา: การ์ด PC-009</span>
-    <span>งานค้างทั้งหมดอยู่ใน «งานค้าง» ของการ์ด</span>
-  </div>
-</article>
+  tiles.forEach(function (t) {
+    t.addEventListener('click', function () { show(t.dataset.wm); });
+  });
+  if (back) { back.addEventListener('click', function () { show(null); }); }
+})();
+</script>
 ```

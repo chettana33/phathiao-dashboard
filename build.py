@@ -276,6 +276,32 @@ tr:nth-child(even) td {{ background:rgba(255,255,255,.02); }}
 .note-card {{ background:var(--card2); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:8px 0; }}
 .note-card .note-meta {{ color:var(--muted); font-size:11px; margin-top:6px; }}
 footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; border-top:1px solid var(--line); }}
+/* ---- แผนที่งาน: ช่องเลือกงาน (tiles) + รายละเอียดทีละงาน (14 ต.ค. 69) ---- */
+.wm-toolbar {{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin:6px 0 12px; }}
+.wm-toolbar-title {{ font-size:15px; color:var(--muted); }}
+.wm-toolbar-title b {{ color:var(--accent); }}
+.wm-back {{ border:1px solid var(--line); background:var(--card2); color:var(--accent); font-family:inherit;
+  font-size:13px; font-weight:700; padding:8px 14px; border-radius:10px; cursor:pointer; }}
+.wm-back:hover {{ background:var(--accent); color:#0b1220; }}
+.wm-group-title {{ font-size:13px; color:var(--muted); margin:14px 0 8px; letter-spacing:.4px; }}
+.wm-tiles {{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:12px; margin-bottom:8px; }}
+.wm-tile {{ display:flex; flex-direction:column; gap:5px; text-align:left; cursor:pointer; font-family:inherit;
+  background:linear-gradient(180deg, rgba(39,52,73,.9), rgba(30,41,59,.75)); color:var(--text);
+  border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:14px;
+  padding:13px 15px; transition:transform .18s, box-shadow .18s, border-color .18s; }}
+.wm-tile:hover {{ transform:translateY(-3px); box-shadow:0 12px 26px rgba(0,0,0,.32); border-left-color:var(--good); }}
+.wm-tile.is-active {{ border-left-color:var(--good); box-shadow:0 0 0 2px rgba(74,222,128,.35); }}
+.wm-tile-code {{ font-size:11.5px; letter-spacing:1.2px; color:var(--accent); }}
+.wm-tile-name {{ font-size:15.5px; font-weight:700; color:#fff; line-height:1.35; }}
+.wm-tile-meta {{ font-size:12.5px; color:var(--text); }}
+.wm-tile-next {{ font-size:12.5px; color:var(--muted); border-top:1px dashed var(--line); padding-top:6px; margin-top:2px; }}
+.wm-tile.is-empty {{ cursor:default; opacity:.5; border-left-color:#475569; }}
+.wm-tile.is-empty:hover {{ transform:none; box-shadow:none; border-left-color:#475569; }}
+.wm-detail[hidden] {{ display:none !important; }}
+.wm-detail {{ animation:wmIn .32s ease-out; }}
+@keyframes wmIn {{ from {{ opacity:0; transform:translateY(10px); }} to {{ opacity:1; transform:none; }} }}
+@media (prefers-reduced-motion: reduce) {{ .wm-detail {{ animation:none; }} }}
+
 /* ---- แผนที่งาน (workmap) v2 — การ์ดเรืองแสง + แถบความคืบหน้า + เส้นทางไหล (14 ต.ค. 69) ---- */
 .wm {{ position:relative; overflow:hidden; margin:0 0 26px; padding:20px 22px 18px;
   border:1px solid var(--line); border-radius:18px;
