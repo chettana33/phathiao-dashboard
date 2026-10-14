@@ -276,62 +276,92 @@ tr:nth-child(even) td {{ background:rgba(255,255,255,.02); }}
 .note-card {{ background:var(--card2); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:8px 0; }}
 .note-card .note-meta {{ color:var(--muted); font-size:11px; margin-top:6px; }}
 footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; border-top:1px solid var(--line); }}
-/* ---- แผนที่งาน (workmap) — กล่องสถานะ + ลูกศร + อนิเมชัน (14 ต.ค. 69) ---- */
-.wm {{ margin-top:6px; }}
-.wm-head {{ display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap;
-  border-bottom:2px solid var(--line); padding-bottom:12px; margin-bottom:14px; }}
-.wm-code {{ font-size:12px; letter-spacing:1px; color:var(--muted); }}
-.wm-title {{ font-size:22px; }}
-.wm-sub {{ display:block; font-size:13.5px; color:var(--muted); margin-top:3px; }}
-.wm-status {{ font-size:12px; padding:5px 12px; }}
-.wm-goal {{ background:var(--card2); border:1px solid var(--line); border-left:5px solid var(--accent);
-  border-radius:12px; padding:13px 16px; font-size:16px; }}
+/* ---- แผนที่งาน (workmap) v2 — การ์ดเรืองแสง + แถบความคืบหน้า + เส้นทางไหล (14 ต.ค. 69) ---- */
+.wm {{ position:relative; overflow:hidden; margin:0 0 26px; padding:20px 22px 18px;
+  border:1px solid var(--line); border-radius:18px;
+  background:linear-gradient(180deg, rgba(39,52,73,.85), rgba(30,41,59,.65)); }}
+.wm::before {{ content:""; position:absolute; top:0; left:0; right:0; height:3px;
+  background:linear-gradient(90deg,#38bdf8,#818cf8,#4ade80,#38bdf8); background-size:300% 100%;
+  animation:wmSlideBg 7s linear infinite; }}
+.wm-glow {{ position:absolute; top:-160px; right:-80px; width:360px; height:360px; pointer-events:none;
+  background:radial-gradient(circle, rgba(56,189,248,.18), rgba(129,140,248,.10) 45%, transparent 70%);
+  animation:wmFloat 9s ease-in-out infinite; }}
+.wm-head {{ position:relative; display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
+  flex-wrap:wrap; border-bottom:1px solid var(--line); padding-bottom:14px; margin-bottom:16px; }}
+.wm-code {{ font-size:12px; letter-spacing:1.2px; color:var(--muted); text-transform:uppercase; }}
+.wm-title {{ font-size:23px; margin-top:4px; }}
+.wm-sub {{ display:block; font-size:14px; color:var(--muted); margin-top:4px; }}
+.wm-right {{ display:flex; flex-direction:column; align-items:flex-end; gap:9px; }}
+.wm-status {{ font-size:12.5px; padding:6px 13px; }}
+.wm-progress {{ display:flex; align-items:center; gap:9px; }}
+.wm-progress .wm-bar {{ display:block; width:170px; height:9px; border-radius:999px; border:1px solid var(--line);
+  background:#0b1220; position:relative; overflow:hidden; }}
+.wm-progress .wm-bar::after {{ content:""; position:absolute; inset:0; width:var(--p);
+  background:linear-gradient(90deg,#38bdf8,#818cf8,#4ade80); background-size:220% 100%;
+  border-radius:999px; animation:wmShimmer 3.2s linear infinite; }}
+.wm-progress b {{ font-size:13px; color:var(--accent); }}
+.wm-goal {{ position:relative; background:var(--card2); border:1px solid var(--line); border-left:5px solid var(--accent);
+  border-radius:12px; padding:14px 17px; font-size:16.5px; }}
 .wm-goal-label {{ color:var(--accent); font-weight:700; margin-right:6px; }}
-.wm-legend {{ display:flex; gap:16px; flex-wrap:wrap; color:var(--muted); font-size:12.5px; margin:14px 0 6px; }}
+.wm-legend {{ display:flex; gap:16px; flex-wrap:wrap; color:var(--muted); font-size:12.5px; margin:15px 0 8px; }}
 .wm-legend span {{ display:inline-flex; align-items:center; gap:6px; }}
 .wm-dot {{ width:12px; height:12px; border-radius:4px; display:inline-block; }}
 .d-done {{ background:var(--good); }}
 .d-doing {{ background:var(--accent); }}
 .d-wait {{ background:var(--warn); }}
 .d-todo {{ background:#475569; }}
-.wm-phase {{ background:var(--card2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:12px 0; }}
-.wm-phase-title {{ font-size:15px; color:var(--accent); font-weight:700; margin-bottom:10px; }}
-.wm-steps {{ display:flex; align-items:stretch; flex-wrap:wrap; gap:8px; }}
-.wm-step {{ flex:1 1 200px; min-width:175px; border:1px solid var(--line); border-left-width:4px; border-radius:10px;
-  padding:11px 13px; font-size:15px; line-height:1.5; background:var(--card); }}
-.wm-step .wm-n {{ display:block; font-size:12.5px; color:var(--muted); margin-bottom:2px; }}
-.wm-step em {{ display:block; font-size:13px; color:var(--muted); font-style:normal; margin-top:4px; }}
-.wm-step.is-done {{ border-left-color:var(--good); background:rgba(74,222,128,.08); }}
-.wm-step.is-doing {{ border-left-color:var(--accent); background:rgba(56,189,248,.10); animation:wmPulse 2s ease-in-out infinite; }}
-.wm-step.is-wait {{ border-left-color:var(--warn); background:rgba(250,204,21,.08); }}
+.wm-phase {{ position:relative; background:rgba(15,23,42,.55); border:1px solid var(--line); border-radius:14px;
+  padding:14px 16px; margin:14px 0; }}
+.wm-phase-title {{ display:flex; align-items:center; gap:9px; font-size:15.5px; color:var(--accent);
+  font-weight:700; margin-bottom:12px; }}
+.wm-pnum {{ display:inline-flex; width:24px; height:24px; align-items:center; justify-content:center; border-radius:50%;
+  font-size:13px; color:#0b1220; background:linear-gradient(135deg,#38bdf8,#818cf8); }}
+.wm-steps {{ display:flex; align-items:stretch; flex-wrap:wrap; gap:9px; }}
+.wm-step {{ flex:1 1 205px; min-width:180px; border:1px solid var(--line); border-left-width:4px; border-radius:12px;
+  padding:12px 14px; font-size:15.5px; line-height:1.5; background:var(--card); transition:transform .18s, box-shadow .18s; }}
+.wm-step:hover {{ transform:translateY(-3px); box-shadow:0 10px 24px rgba(0,0,0,.28); }}
+.wm-step .wm-n {{ display:block; font-size:12.5px; color:var(--muted); margin-bottom:3px; letter-spacing:.5px; }}
+.wm-step em {{ display:block; font-size:13px; color:var(--muted); font-style:normal; margin-top:5px; }}
+.wm-step.is-done {{ border-left-color:var(--good); background:rgba(74,222,128,.09); }}
+.wm-step.is-doing {{ border-left-color:var(--accent); background:rgba(56,189,248,.11); animation:wmPulse 2.4s ease-in-out infinite; }}
+.wm-step.is-wait {{ border-left-color:var(--warn); background:rgba(250,204,21,.09); }}
 .wm-step.is-todo {{ border-left-color:#475569; }}
-.wm-arrow {{ align-self:center; color:var(--accent); font-size:17px; animation:wmSlide 1.6s ease-in-out infinite; }}
+.wm-flow {{ flex:0 0 30px; align-self:center; height:2px; border-radius:2px; position:relative;
+  background:linear-gradient(90deg, rgba(56,189,248,.15), rgba(56,189,248,.55), rgba(56,189,248,.15)); }}
+.wm-flow::after {{ content:""; position:absolute; top:-2px; left:0; width:6px; height:6px; border-radius:50%;
+  background:var(--accent); box-shadow:0 0 8px rgba(56,189,248,.9); animation:wmDot 2.6s linear infinite; }}
 @keyframes wmPulse {{
   0%,100% {{ box-shadow:0 0 0 0 rgba(56,189,248,0); }}
-  50% {{ box-shadow:0 0 0 5px rgba(56,189,248,.20); }}
+  50% {{ box-shadow:0 0 0 6px rgba(56,189,248,.18); }}
 }}
-@keyframes wmSlide {{
-  0%,100% {{ transform:translateX(0); opacity:.6; }}
-  50% {{ transform:translateX(5px); opacity:1; }}
-}}
-.wm-now-title {{ font-size:15px; color:var(--accent); font-weight:700; margin:18px 0 8px; }}
+@keyframes wmSlideBg {{ 0% {{ background-position:0% 50%; }} 100% {{ background-position:300% 50%; }} }}
+@keyframes wmShimmer {{ 0% {{ background-position:0% 50%; }} 100% {{ background-position:220% 50%; }} }}
+@keyframes wmFloat {{ 0%,100% {{ transform:translate(0,0) scale(1); }} 50% {{ transform:translate(-24px,18px) scale(1.08); }} }}
+@keyframes wmDot {{ 0% {{ left:0; opacity:0; }} 12% {{ opacity:1; }} 88% {{ opacity:1; }} 100% {{ left:calc(100% - 6px); opacity:0; }} }}
+.wm-now-title {{ font-size:15.5px; color:var(--accent); font-weight:700; margin:18px 0 9px; }}
 .wm-now {{ display:flex; gap:12px; flex-wrap:wrap; }}
-.wm-card {{ flex:1 1 240px; border:1px solid var(--line); border-top-width:4px; border-radius:12px; padding:12px 14px; background:var(--card); }}
+.wm-card {{ flex:1 1 240px; border:1px solid var(--line); border-top-width:4px; border-radius:14px;
+  padding:13px 15px; background:var(--card); transition:transform .18s; }}
+.wm-card:hover {{ transform:translateY(-3px); }}
 .wm-card h4 {{ font-size:15px; margin-bottom:6px; }}
-.wm-card ul {{ margin:0 0 0 18px; font-size:14px; }}
+.wm-card ul {{ margin:0 0 0 18px; font-size:14.5px; }}
 .wm-card.is-done {{ border-top-color:var(--good); }}
 .wm-card.is-doing {{ border-top-color:var(--accent); }}
 .wm-card.is-wait {{ border-top-color:var(--warn); }}
-.wm-foot {{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; color:var(--muted); font-size:12px; margin-top:14px; }}
+.wm-foot {{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; color:var(--muted);
+  font-size:12px; margin-top:15px; padding-top:10px; border-top:1px dashed var(--line); }}
 @media (prefers-reduced-motion: reduce) {{
-  .wm-step.is-doing, .wm-arrow {{ animation:none; }}
+  .wm-wm-glow, .wm-glow, .wm-step.is-doing, .wm-flow::after, .wm::before, .wm-progress .wm-bar::after {{ animation:none; }}
 }}
 @media (max-width:640px) {{
   .section {{ padding:16px; }}
   main {{ padding:16px 10px 60px; }}
-  .wm-arrow {{ display:none; }}
+  .wm {{ padding:16px 14px; }}
+  .wm-flow {{ display:none; }}
   .wm-step {{ flex:1 1 100%; }}
   .wm-title {{ font-size:19px; }}
+  .wm-right {{ align-items:flex-start; }}
+  .wm-progress .wm-bar {{ width:130px; }}
 }}
 </style>
 </head>
