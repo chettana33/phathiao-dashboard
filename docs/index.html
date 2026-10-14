@@ -148,6 +148,30 @@ html.light .wm-notes { background:#f4f7fb; }
 html.light .wm-note { background:#fff; }
 html.light .wm-notes-input textarea { background:#fff; }
 .wm-group-title { font-size:13px; color:var(--muted); margin:14px 0 8px; letter-spacing:.4px; }
+/* ---- หน้าล็อกอิน / พื้นที่ส่วนตัว (เฟส 2 · 14 ต.ค. 69) ---- */
+.pv-wrap { display:flex; flex-direction:column; gap:16px; }
+.pv-card { background:linear-gradient(180deg, rgba(39,52,73,.9), rgba(30,41,59,.75)); border:1px solid var(--line);
+  border-radius:16px; padding:26px 24px; text-align:center; }
+.pv-card.pv-ok { border-top:4px solid var(--good); text-align:left; }
+.pv-icon { font-size:46px; line-height:1; }
+.pv-title { font-size:21px; margin:10px 0 6px; color:var(--accent); }
+.pv-sub { font-size:14.5px; color:var(--muted); margin-bottom:14px; }
+.pv-btn { border:0; border-radius:11px; padding:12px 22px; font-family:inherit; font-size:15px; font-weight:700;
+  cursor:pointer; background:var(--accent); color:#0b1220; }
+.pv-btn:hover { opacity:.92; }
+.pv-btn-ghost { background:transparent; color:var(--muted); border:1px solid var(--line); margin-top:14px; }
+.pv-msg { margin-top:12px; font-size:14px; color:var(--warn); min-height:20px; }
+.pv-help { margin-top:14px; text-align:left; background:rgba(15,23,42,.6); border:1px dashed var(--line);
+  border-radius:12px; padding:14px 16px; font-size:14px; }
+.pv-help ol { margin:8px 0 6px 20px; }
+.pv-help li { margin:4px 0; }
+.pv-grid { display:flex; gap:14px; flex-wrap:wrap; margin-top:6px; }
+.pv-box { flex:1 1 260px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:13px 15px; }
+.pv-box h4 { font-size:15px; margin-bottom:6px; }
+.pv-box ul { margin:0 0 0 18px; font-size:14px; }
+html.light .pv-card { background:linear-gradient(180deg,#fff,#f6f9fc); }
+html.light .pv-help { background:#f4f7fb; }
+html.light .pv-box { background:#fff; }
 .wm-tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:12px; margin-bottom:8px; }
 .wm-tile { display:flex; flex-direction:column; gap:5px; text-align:left; cursor:pointer; font-family:inherit;
   background:linear-gradient(180deg, rgba(39,52,73,.9), rgba(30,41,59,.75)); color:var(--text);
@@ -272,11 +296,11 @@ html.light .wm-notes-input textarea { background:#fff; }
       </div>
     </div>
   </div>
-  <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#workmap" class="nav-link" data-target="workmap">แผนที่งาน</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#systemmap" class="nav-link" data-target="systemmap">System Map</a><a href="#minimax" class="nav-link" data-target="minimax">MiniMax Studio</a><a href="#characters" class="nav-link" data-target="characters">ตัวละคร</a><a href="#checkpoint" class="nav-link" data-target="checkpoint">Checkpoint</a><a href="#memory" class="nav-link" data-target="memory">MEMORY</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
+  <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#workmap" class="nav-link" data-target="workmap">แผนที่งาน</a><a href="#private" class="nav-link" data-target="private">ส่วนตัว 🔒</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#systemmap" class="nav-link" data-target="systemmap">System Map</a><a href="#minimax" class="nav-link" data-target="minimax">MiniMax Studio</a><a href="#characters" class="nav-link" data-target="characters">ตัวละคร</a><a href="#checkpoint" class="nav-link" data-target="checkpoint">Checkpoint</a><a href="#memory" class="nav-link" data-target="memory">MEMORY</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
 </header>
 <button id="to-top" aria-label="กลับขึ้นบนสุด" title="กลับขึ้นบนสุด">↑</button>
 <main>
-<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:05:21+07:00</div>
+<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:16:49+07:00</div>
 <h1>🗺️ ภาพรวมธุรกิจ Ichino Tour</h1>
 <p><strong>แบรนด์หน้าฉาก:</strong> Ichino Tour (Thailand) — ตัวแทน Land Operation ประเทศญี่ปุ่น (Thailand Representative)</p>
 <p><strong>หลังฉาก:</strong> พันธมิตรญี่ปุ่น 2 เจ้าให้ Net Rate + สิทธิใช้ชื่อบริษัท — ยังไม่เปิดบริษัทเอง</p>
@@ -292,7 +316,7 @@ html.light .wm-notes-input textarea { background:#fff; }
 <h2>ซัพพลายอื่น</h2>
 <div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>รายละเอียด</th></tr></thead><tbody><tr><td><strong>King BUS = SENEI KOTSU</strong></td><td>ใบขอรถ <code>rsv@cgman.jp</code> → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ)</td></tr><tr><td><strong>CHIグループ</strong></td><td>Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน)</td></tr><tr><td><strong>Supplier ฟูจิ/ยามานาชิ</strong></td><td>Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori</td></tr></tbody></table></div>
 <blockquote>⛔ <strong>ต้นสังกัด kimono</strong> — ห้ามปน / ห้ามให้รู้งานข้างเด็ดขาด (กฎ stealth)</blockquote>
-<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="workmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:05:21+07:00</div>
+<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="workmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:16:49+07:00</div>
 <h1>🧭 แผนที่งาน (Work Map)</h1>
 <blockquote>เปิดมาเห็น <strong>ทุกงานในจอเดียว</strong> → กดช่องงานที่อยากดู → รายละเอียดเปิดในหน้านี้ ไม่ต้องเปลี่ยนหน้า</blockquote>
 <blockquote>เรียง <strong>งานที่กำลังทำอยู่ก่อน</strong> แล้วต่อด้วยงานที่รอพี่เจ/รอของ · ตัวเลขงานค้างจาก checkpoint รอบล่าสุด · อัปเดตโดยพาเที่ยวทุกครั้งที่ปิดงาน</blockquote>
@@ -788,7 +812,108 @@ html.light .wm-notes-input textarea { background:#fff; }
   if (initial) { openCard(initial, false); } else { renderLast(); }
   whenDb(loadLive);
 })();
-</script></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:05:21+07:00</div>
+</script></section><section id="private" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:16:49+07:00</div>
+<h1>🔒 พื้นที่ส่วนตัว (ต้องล็อกอิน)</h1>
+<blockquote>หน้านี้มีไว้เก็บเรื่องที่ <strong>ไม่ควรอยู่ในเว็บสาธารณะ</strong> (การเงิน · ข้อมูลลูกค้า · ราคาทุน/กำไร)</blockquote>
+<blockquote>กติกา: เนื้อหาจริงจะไม่ถูกฝังในไฟล์เว็บ — ดึงจากฐานข้อมูลเฉพาะเมื่อ <strong>ล็อกอินด้วยบัญชีพี่เจ</strong> เท่านั้น</blockquote>
+<div class="pv-wrap">
+
+  <div class="pv-card" id="pv-locked">
+    <div class="pv-icon">🔐</div>
+    <h2 class="pv-title">ยังไม่ได้เข้าสู่ระบบ</h2>
+    <p class="pv-sub">เข้าใช้ด้วยบัญชี Google ของพี่เจ เพื่อเปิดพื้นที่ส่วนตัว</p>
+    <button class="pv-btn" id="pv-login">เข้าสู่ระบบด้วย Google</button>
+    <div class="pv-msg" id="pv-msg"></div>
+    <div class="pv-help" id="pv-help" hidden>
+      <b>ยังเปิดระบบล็อกอินไม่ได้ — ต้องทำที่คอนโซล 2 คลิก (พี่เจเท่านั้น):</b>
+      <ol>
+        <li>เปิด <a href="https://console.firebase.google.com/project/phathiao-dashboard/authentication" target="_blank" rel="noopener">Firebase → Authentication</a> แล้วกด <b>Get started</b></li>
+        <li>แท็บ <b>Sign-in method</b> → กด <b>Google</b> → Enable → Save<br>
+            และเช็ค <b>Settings → Authorized domains</b> ว่ามี <code>chettana33.github.io</code></li>
+      </ol>
+      <p class="pv-sub">เสร็จแล้วกลับมากดปุ่มนี้อีกครั้ง — ระบบจะเข้าได้ทันที (ไม่ต้องแก้โค้ดอะไรเพิ่ม)</p>
+    </div>
+  </div>
+
+  <div class="pv-card pv-ok" id="pv-in" hidden>
+    <div class="pv-icon">✅</div>
+    <h2 class="pv-title">เข้าสู่ระบบแล้ว</h2>
+    <p class="pv-sub" id="pv-who">-</p>
+    <div class="pv-grid">
+      <div class="pv-box">
+        <h4>จะมีอะไรในนี้ (กำลังทำต่อ)</h4>
+        <ul>
+          <li>สรุปการเงิน/รายรับรายจ่ายที่ไม่ขึ้นหน้าสาธารณะ</li>
+          <li>รายชื่อ/โน้ตลูกค้าและซัพพลายเออร์</li>
+          <li>ราคาทุน–กำไร และใบเสนอราคาฉบับจริง</li>
+        </ul>
+      </div>
+      <div class="pv-box">
+        <h4>สถานะระบบ</h4>
+        <ul>
+          <li>อ่านข้อมูลส่วนตัวจากฐานข้อมูลได้เฉพาะบัญชีที่อนุญาต</li>
+          <li>เนื้อหาไม่ฝังในไฟล์เว็บ ⇒ ค้นหา/แชร์ลิงก์แล้วไม่เห็นข้อมูล</li>
+        </ul>
+      </div>
+    </div>
+    <button class="pv-btn pv-btn-ghost" id="pv-logout">ออกจากระบบ</button>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  function whenReady(fn) {
+    if (window.__pdReady) { fn(); return; }
+    window.addEventListener('pd:ready', function () { fn(); }, { once: true });
+  }
+
+  whenReady(function () {
+    var btnIn = document.getElementById('pv-login');
+    var btnOut = document.getElementById('pv-logout');
+    var msg = document.getElementById('pv-msg');
+    var help = document.getElementById('pv-help');
+    var locked = document.getElementById('pv-locked');
+    var inside = document.getElementById('pv-in');
+    var who = document.getElementById('pv-who');
+
+    function friendly(code, raw) {
+      if (code === 'auth/configuration-not-found') {
+        help.hidden = false;
+        return 'ระบบล็อกอินของโปรเจกต์ยังไม่ถูกเปิดใช้งาน';
+      }
+      if (code === 'auth/unauthorized-domain') {
+        help.hidden = false;
+        return 'โดเมนนี้ยังไม่ได้รับอนุญาต — ต้องเพิ่ม chettana33.github.io ใน Authorized domains';
+      }
+      if (code === 'auth/popup-blocked') { return 'เบราว์เซอร์บล็อกหน้าต่างล็อกอิน — ลองกดอีกครั้ง หรืออนุญาตป๊อปอัป'; }
+      if (code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request') { return 'ปิดหน้าต่างล็อกอินก่อนเสร็จ — ลองอีกครั้ง'; }
+      return 'เข้าใช้ไม่สำเร็จ: ' + (code || raw || 'ไม่ทราบสาเหตุ');
+    }
+
+    firebase.auth().onAuthStateChanged(function (user) {
+      var ok = !!user;
+      locked.hidden = ok;
+      inside.hidden = !ok;
+      if (ok) { who.textContent = 'บัญชี: ' + (user.email || '') + ' · ' + (user.displayName || ''); }
+    });
+
+    btnIn.addEventListener('click', function () {
+      msg.textContent = 'กำลังเปิดหน้าต่างล็อกอิน…';
+      var provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
+      firebase.auth().signInWithPopup(provider)
+        .then(function () { msg.textContent = ''; })
+        .catch(function (e) {
+          var code = (e && e.code) || '';
+          msg.textContent = friendly(code, e && e.message);
+        });
+    });
+
+    btnOut.addEventListener('click', function () { firebase.auth().signOut(); });
+  });
+})();
+</script></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:16:49+07:00</div>
 <h1>📊 สถานะงาน</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน (จาก checkpoint) — timestamp ด้านบน</blockquote>
 <h2>การ์ดงาน (Project Cards — PC_INDEX 7 ก.ย. 69)</h2>
@@ -803,7 +928,7 @@ html.light .wm-notes-input textarea { background:#fff; }
 <h2>งานค้าง — ดูจาก section Checkpoint (อัตโนมัติ)</h2>
 <blockquote>รายการงานค้างที่เขียนมือในหน้านี้ <strong>ถูกลบออก 25 ก.ย. 69</strong> เพราะค้างมาตั้งแต่ 7 ก.ย. และไม่ตรงกับของจริงแล้ว</blockquote>
 <blockquote>ตั้งแต่นี้ให้อ่านจาก <strong>section Checkpoint</strong> ซึ่งดึง <code>CHECKPOINT_LATEST.md</code> จาก <code>phathiao-knowledge-brain</code> อัตโนมัติทุกชั่วโมง</blockquote>
-<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:05:21+07:00</div>
+<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:16:49+07:00</div>
 <h1>🗺️ System Map</h1>
 <blockquote>อัปเดตล่าสุด <strong>26 ก.ย. 69 (รอบ 45)</strong> — เขียนจาก §9 System Map ของการ์ดจริง 14 ใบ (ครบทุกใบแล้ว)</blockquote>
 <blockquote>สถานะ: done (เขียว) · in_progress (ฟ้า) · blocked (แดง) · pending (เทา)</blockquote>
@@ -817,7 +942,7 @@ html.light .wm-notes-input textarea { background:#fff; }
 <p><strong>สาขา / เวอร์ชัน</strong></p>
 <div class="table-wrap"><table><thead><tr><th>ต้นทาง (ราก)</th><th>แตกเป็น / เวอร์ชัน</th><th>จำนวน</th><th>สถานะแต่ละตัว</th></tr></thead><tbody><tr><td>embedding engine</td><td>local bge-m3 (default) · API gemini (fallback) · MiniLM (สำรอง)</td><td>3</td><td>default · legacy <code>VEC_ENGINE=api</code> · collection แยก</td></tr><tr><td>collection</td><td><code>patheaw_work</code> · <code>patheaw_local</code> · <code>patheaw_bge</code></td><td>3</td><td>prod · ทดสอบ · ทดสอบ</td></tr><tr><td>วิธีเก็บเข้าคลัง</td><td>whitelist ชื่อไฟล์ (เดิม) · glob ต่อโฟลเดอร์ (26 ก.ย. 69)</td><td>2</td><td>เลิกใช้ · ใช้จริง</td></tr></tbody></table></div>
 <h2>หมายเหตุการดูแลหน้านี้</h2>
-<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:05:21+07:00</div>
+<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:16:49+07:00</div>
 <h1>MiniMax Studio — เครื่องมือ + สถานะงาน</h1>
 <blockquote>อัปเดต 17 ก.ย. 69 (ตัวเลขจากของจริง: gateway <code>/api/v1/credit/wallet</code> · <code>list_capabilities</code> · <code>get_model_concurrency</code> · นับการใช้ tool จาก session log DSH 163 ไฟล์)</blockquote>
 <blockquote>ตัวเลขทุกบรรทัดมาจากการรันจริง — ไม่มีข้อไหนเป็น &quot;คาดว่า&quot;</blockquote>
@@ -886,7 +1011,7 @@ html.light .wm-notes-input textarea { background:#fff; }
 <ul><li>โฟลเดอร์ <strong><code>พาเที่ยว_ลิงก์</code></strong> บน Desktop — shortcut เปิดแผ่นตัวละคร/โฟลเดอร์/ผลทดลอง + หน้า <code>index.html</code> รวมลิงก์</li><li>พาธฐานของแผ่น: <code>H:\My Drive\พาเที่ยว\Gochisou\TikTok\Raw\Characters &lt;ชื่อ&gt;\</code></li></ul></section><section id="checkpoint" class="section"><h1>📌 Checkpoint ล่าสุด</h1>
 <blockquote>ไฟล์นี้ถูก <strong>ดึงทับอัตโนมัติ</strong> จาก <code>phathiao-knowledge-brain</code> ตอน build (ทุก push + ทุกวัน 00:00 UTC)</blockquote>
 <blockquote>ห้ามแก้เอง — จะโดนทับ</blockquote>
-<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:05:21+07:00</div>
+<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:16:49+07:00</div>
 <h1>🧠 พี่เจ_MEMORY — ทบทวนว่าระบบเราทำอะไรไปแล้วบ้าง</h1>
 <p>โน้ตนี้เขียนไว้ให้พี่เจอ่านกันลืม — อัปเดตเมื่อระบบเปลี่ยน ไม่ใช่บันทึกรายวัน</p>
 <h2>ระบบของเรา</h2>
@@ -903,7 +1028,7 @@ html.light .wm-notes-input textarea { background:#fff; }
 <h2>งานใหญ่ที่ค้าง</h2>
 <ul><li>ปรับ .md ทั้ง vault+repo เป็น format ใหม่ (เริ่มโปรเอกสารหลัก)</li><li>Master data: verify RAW 1,323, เติม supplier บัส, rate 13</li><li>B2B Smile Travel, ทดลอง slim, ขยาย Thin MCP 14 repo</li></ul>
 <h2>กำหนดการ</h2>
-<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:05:21+07:00</div>
+<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:16:49+07:00</div>
 <h1>🗓️ ลำดับถัดไป (Roadmap)</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน</blockquote>
 <h2>ลำดับหลัก (ตกลงกับพี่เจแล้ว)</h2>
@@ -914,7 +1039,7 @@ html.light .wm-notes-input textarea { background:#fff; }
 <h2>Funnel ลูกค้า 3 ทาง</h2>
 <div class="table-wrap"><table><thead><tr><th>ทาง</th><th>ทำยังไง</th><th>สถานะ</th></tr></thead><tbody><tr><td>B2B direct</td><td>ทักหา 50 เจ้า ในนาม Ichino Tour + แนบ Sales Kit</td><td>ยังไม่เริ่ม (Smile #40 คิวแรก)</td></tr><tr><td>เว็บ + content</td><td>Gochisou (จองร้าน) LIVE → ลงโปรแกรมทัวร์จริง (NRT09/KIX67/CTS01) → contact form</td><td>Gochisou เริ่มแล้ว — ทัวร์ยังไม่เริ่ม</td></tr><tr><td>TikTok/Social (B2C)</td><td>1 ช่อง Gochisou — อาหาร/เคสจองจริง top-funnel → LINE/เว็บ</td><td>ตัดสินใจแล้ว — รอคอนเทนต์พร้อม</td></tr></tbody></table></div>
 <h2>ขั้นถัดไปทันที</h2>
-<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:05:21+07:00</div>
+<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-15T00:16:49+07:00</div>
 <h1>💡 กระดานไอเดีย</h1>
 <blockquote><strong>2 ช่องทางเขียน:</strong></blockquote>
 <blockquote>- <strong>พิมพ์ในเว็บ</strong> (ช่องด้านล่าง) → เก็บ Firestore → เห็นทุกเครื่อง</blockquote>
@@ -948,6 +1073,7 @@ html.light .wm-notes-input textarea { background:#fff; }
 <footer>อัปเดตล่าสุด:  · แก้ไฟล์ใน content/*.md แล้ว build ใหม่</footer>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyDznvjBOYJviSVPwj9TESkuZrDANKHxqxA",

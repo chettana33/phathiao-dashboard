@@ -16,6 +16,7 @@ OUT = ROOT / "docs"
 NAV_ITEMS = [
     ("overview", "ภาพรวม"),
     ("workmap", "แผนที่งาน"),
+    ("private", "ส่วนตัว 🔒"),
     ("status", "สถานะงาน"),
     ("systemmap", "System Map"),
     ("minimax", "MiniMax Studio"),
@@ -363,6 +364,30 @@ html.light .wm-notes {{ background:#f4f7fb; }}
 html.light .wm-note {{ background:#fff; }}
 html.light .wm-notes-input textarea {{ background:#fff; }}
 .wm-group-title {{ font-size:13px; color:var(--muted); margin:14px 0 8px; letter-spacing:.4px; }}
+/* ---- หน้าล็อกอิน / พื้นที่ส่วนตัว (เฟส 2 · 14 ต.ค. 69) ---- */
+.pv-wrap {{ display:flex; flex-direction:column; gap:16px; }}
+.pv-card {{ background:linear-gradient(180deg, rgba(39,52,73,.9), rgba(30,41,59,.75)); border:1px solid var(--line);
+  border-radius:16px; padding:26px 24px; text-align:center; }}
+.pv-card.pv-ok {{ border-top:4px solid var(--good); text-align:left; }}
+.pv-icon {{ font-size:46px; line-height:1; }}
+.pv-title {{ font-size:21px; margin:10px 0 6px; color:var(--accent); }}
+.pv-sub {{ font-size:14.5px; color:var(--muted); margin-bottom:14px; }}
+.pv-btn {{ border:0; border-radius:11px; padding:12px 22px; font-family:inherit; font-size:15px; font-weight:700;
+  cursor:pointer; background:var(--accent); color:#0b1220; }}
+.pv-btn:hover {{ opacity:.92; }}
+.pv-btn-ghost {{ background:transparent; color:var(--muted); border:1px solid var(--line); margin-top:14px; }}
+.pv-msg {{ margin-top:12px; font-size:14px; color:var(--warn); min-height:20px; }}
+.pv-help {{ margin-top:14px; text-align:left; background:rgba(15,23,42,.6); border:1px dashed var(--line);
+  border-radius:12px; padding:14px 16px; font-size:14px; }}
+.pv-help ol {{ margin:8px 0 6px 20px; }}
+.pv-help li {{ margin:4px 0; }}
+.pv-grid {{ display:flex; gap:14px; flex-wrap:wrap; margin-top:6px; }}
+.pv-box {{ flex:1 1 260px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:13px 15px; }}
+.pv-box h4 {{ font-size:15px; margin-bottom:6px; }}
+.pv-box ul {{ margin:0 0 0 18px; font-size:14px; }}
+html.light .pv-card {{ background:linear-gradient(180deg,#fff,#f6f9fc); }}
+html.light .pv-help {{ background:#f4f7fb; }}
+html.light .pv-box {{ background:#fff; }}
 .wm-tiles {{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:12px; margin-bottom:8px; }}
 .wm-tile {{ display:flex; flex-direction:column; gap:5px; text-align:left; cursor:pointer; font-family:inherit;
   background:linear-gradient(180deg, rgba(39,52,73,.9), rgba(30,41,59,.75)); color:var(--text);
@@ -496,6 +521,7 @@ html.light .wm-notes-input textarea {{ background:#fff; }}
 <footer>อัปเดตล่าสุด: {os.environ.get('BUILD_TIME', '')} · แก้ไฟล์ใน content/*.md แล้ว build ใหม่</footer>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script>
 const firebaseConfig = {{
   apiKey: "AIzaSyDznvjBOYJviSVPwj9TESkuZrDANKHxqxA",
