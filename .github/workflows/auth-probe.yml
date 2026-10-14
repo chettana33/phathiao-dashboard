@@ -1,0 +1,61 @@
+name: Auth config — probe / enable Google sign-in (phathiao-dashboard)
+
+# ใช้เฉพาะกิจ: ตรวจว่า service account ที่ deploy ได้ (firebase-gha-deploy) มีสิทธิ์อ่าน/แก้
+# config ของ Firebase Auth ไหม · ถ้ามี = เปิด Google sign-in ให้ได้โดยไม่ต้องเข้า console
+# ผลลัพธ์จะพิมพ์ออก log (ไม่มีความลับ)
+
+on:
+  workflow_dispatch:
+    inputs:
+      enable_google:
+        description: "ตั้งเป็น yes เพื่อ 'เปิด' Google sign-in (ทำหลัง probe ผ่านเท่านั้น)"
+        required: false
+        default: "no"
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  PROJECT: phathiao-dashboard
+  WIF_PROVIDER: projects/146015452197/locations/global/workloadIdentityPools/github/providers/github-oidc
+  SA_EMAIL: firebase-gha-deploy@phathiao-cloud-2026.iam.gserviceaccount.com
+
+jobs:
+  auth:
+    runs-on: ubuntu-latest
+    steps:
+      - id: gcp_auth
+        name: Authenticate (WIF -> SA, keyless)
+        uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.SA_EMAIL }}
+
+      - name: 1) probe — อ่าน config ของ Firebase Auth
+        run: |
+          set +e
+          URL="https://identitytoolkit.googleapis.com/admin/v2/projects/${PROJECT}/config"
+          code=$(curl -s -o /tmp/authcfg.json -w '%{http_code}' -H "Authorization: Bearer ${{ steps.gcp_auth.outputs.access_token }}" "$URL")
+          echo "GET config -> http=$code"
+          head -c 800 /tmp/authcfg.json; echo
+          echo "PROBE_CODE=$code" >> "$GITHUB_ENV"
+
+      - name: 2) enable Google sign-in (เมื่อสั่ง yes และ probe ผ่าน)
+        if: ${{ github.event.inputs.enable_google == 'yes' }}
+        run: |
+          set +e
+          URL="https://identitytoolkit.googleapis.com/admin/v2/projects/${PROJECT}/config?updateMask=signIn"
+          cat > /tmp/patch.json <<'JSON'
+          {"signIn":{"email":{"enabled":true,"passwordRequired":false},"google":{"enabled":true,"clientId":"","clientSecret":""}}}
+          JSON
+          code=$(curl -s -o /tmp/authpatch.json -w '%{http_code}' -X PATCH \
+            -H "Authorization: Bearer ${{ steps.gcp_auth.outputs.access_token }}" \
+            -H "Content-Type: application/json" --data @/tmp/patch.json "$URL")
+          echo "PATCH config -> http=$code"
+          head -c 800 /tmp/authpatch.json; echo
+          echo "PATCH_CODE=$code" >> "$GITHUB_ENV"
+
+      - name: 3) summary
+        run: |
+          echo "probe=$PROBE_CODE patch=${PATCH_CODE:-skipped}"
