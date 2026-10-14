@@ -15,6 +15,7 @@ OUT = ROOT / "docs"
 
 NAV_ITEMS = [
     ("overview", "ภาพรวม"),
+    ("workmap", "แผนที่งาน"),
     ("status", "สถานะงาน"),
     ("systemmap", "System Map"),
     ("minimax", "MiniMax Studio"),
@@ -47,6 +48,7 @@ def parse_md(text):
     lines = text.split("\n")
     i = 0
     in_code = False
+    code_raw = False  # ```html = HTML ดิบ (ใช้ทำหน้า visual เช่น แผนที่งาน) — 14 ต.ค. 69
     code_buf = []
     in_list = False
     list_buf = []
@@ -81,17 +83,23 @@ def parse_md(text):
 
         if stripped.startswith("```"):
             if in_code:
-                blocks.append("<pre><code>" + "\n".join(code_buf) + "</code></pre>")
+                if code_raw:
+                    # fenced ```html = ปล่อย HTML ดิบ (ไม่ escape) — สำหรับหน้าที่ต้องมีกล่อง/ลูกศร/อนิเมชัน
+                    blocks.append("\n".join(code_buf))
+                else:
+                    blocks.append("<pre><code>" + "\n".join(code_buf) + "</code></pre>")
                 code_buf = []
                 in_code = False
+                code_raw = False
             else:
                 flush_list(); flush_table()
                 in_code = True
+                code_raw = stripped[3:].strip().lower() == "html"
             i += 1
             continue
 
         if in_code:
-            code_buf.append(html.escape(line))
+            code_buf.append(line if code_raw else html.escape(line))
             i += 1
             continue
 
@@ -268,9 +276,62 @@ tr:nth-child(even) td {{ background:rgba(255,255,255,.02); }}
 .note-card {{ background:var(--card2); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:8px 0; }}
 .note-card .note-meta {{ color:var(--muted); font-size:11px; margin-top:6px; }}
 footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; border-top:1px solid var(--line); }}
+/* ---- แผนที่งาน (workmap) — กล่องสถานะ + ลูกศร + อนิเมชัน (14 ต.ค. 69) ---- */
+.wm {{ margin-top:6px; }}
+.wm-head {{ display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap;
+  border-bottom:2px solid var(--line); padding-bottom:12px; margin-bottom:14px; }}
+.wm-code {{ font-size:12px; letter-spacing:1px; color:var(--muted); }}
+.wm-title {{ font-size:22px; }}
+.wm-sub {{ display:block; font-size:13.5px; color:var(--muted); margin-top:3px; }}
+.wm-status {{ font-size:12px; padding:5px 12px; }}
+.wm-goal {{ background:var(--card2); border:1px solid var(--line); border-left:5px solid var(--accent);
+  border-radius:12px; padding:13px 16px; font-size:16px; }}
+.wm-goal-label {{ color:var(--accent); font-weight:700; margin-right:6px; }}
+.wm-legend {{ display:flex; gap:16px; flex-wrap:wrap; color:var(--muted); font-size:12.5px; margin:14px 0 6px; }}
+.wm-legend span {{ display:inline-flex; align-items:center; gap:6px; }}
+.wm-dot {{ width:12px; height:12px; border-radius:4px; display:inline-block; }}
+.d-done {{ background:var(--good); }}
+.d-doing {{ background:var(--accent); }}
+.d-wait {{ background:var(--warn); }}
+.d-todo {{ background:#475569; }}
+.wm-phase {{ background:var(--card2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:12px 0; }}
+.wm-phase-title {{ font-size:15px; color:var(--accent); font-weight:700; margin-bottom:10px; }}
+.wm-steps {{ display:flex; align-items:stretch; flex-wrap:wrap; gap:8px; }}
+.wm-step {{ flex:1 1 200px; min-width:175px; border:1px solid var(--line); border-left-width:4px; border-radius:10px;
+  padding:11px 13px; font-size:15px; line-height:1.5; background:var(--card); }}
+.wm-step .wm-n {{ display:block; font-size:12.5px; color:var(--muted); margin-bottom:2px; }}
+.wm-step em {{ display:block; font-size:13px; color:var(--muted); font-style:normal; margin-top:4px; }}
+.wm-step.is-done {{ border-left-color:var(--good); background:rgba(74,222,128,.08); }}
+.wm-step.is-doing {{ border-left-color:var(--accent); background:rgba(56,189,248,.10); animation:wmPulse 2s ease-in-out infinite; }}
+.wm-step.is-wait {{ border-left-color:var(--warn); background:rgba(250,204,21,.08); }}
+.wm-step.is-todo {{ border-left-color:#475569; }}
+.wm-arrow {{ align-self:center; color:var(--accent); font-size:17px; animation:wmSlide 1.6s ease-in-out infinite; }}
+@keyframes wmPulse {{
+  0%,100% {{ box-shadow:0 0 0 0 rgba(56,189,248,0); }}
+  50% {{ box-shadow:0 0 0 5px rgba(56,189,248,.20); }}
+}}
+@keyframes wmSlide {{
+  0%,100% {{ transform:translateX(0); opacity:.6; }}
+  50% {{ transform:translateX(5px); opacity:1; }}
+}}
+.wm-now-title {{ font-size:15px; color:var(--accent); font-weight:700; margin:18px 0 8px; }}
+.wm-now {{ display:flex; gap:12px; flex-wrap:wrap; }}
+.wm-card {{ flex:1 1 240px; border:1px solid var(--line); border-top-width:4px; border-radius:12px; padding:12px 14px; background:var(--card); }}
+.wm-card h4 {{ font-size:15px; margin-bottom:6px; }}
+.wm-card ul {{ margin:0 0 0 18px; font-size:14px; }}
+.wm-card.is-done {{ border-top-color:var(--good); }}
+.wm-card.is-doing {{ border-top-color:var(--accent); }}
+.wm-card.is-wait {{ border-top-color:var(--warn); }}
+.wm-foot {{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; color:var(--muted); font-size:12px; margin-top:14px; }}
+@media (prefers-reduced-motion: reduce) {{
+  .wm-step.is-doing, .wm-arrow {{ animation:none; }}
+}}
 @media (max-width:640px) {{
   .section {{ padding:16px; }}
   main {{ padding:16px 10px 60px; }}
+  .wm-arrow {{ display:none; }}
+  .wm-step {{ flex:1 1 100%; }}
+  .wm-title {{ font-size:19px; }}
 }}
 </style>
 </head>

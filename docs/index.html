@@ -61,9 +61,62 @@ tr:nth-child(even) td { background:rgba(255,255,255,.02); }
 .note-card { background:var(--card2); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin:8px 0; }
 .note-card .note-meta { color:var(--muted); font-size:11px; margin-top:6px; }
 footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; border-top:1px solid var(--line); }
+/* ---- แผนที่งาน (workmap) — กล่องสถานะ + ลูกศร + อนิเมชัน (14 ต.ค. 69) ---- */
+.wm { margin-top:6px; }
+.wm-head { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap;
+  border-bottom:2px solid var(--line); padding-bottom:12px; margin-bottom:14px; }
+.wm-code { font-size:12px; letter-spacing:1px; color:var(--muted); }
+.wm-title { font-size:22px; }
+.wm-sub { display:block; font-size:13.5px; color:var(--muted); margin-top:3px; }
+.wm-status { font-size:12px; padding:5px 12px; }
+.wm-goal { background:var(--card2); border:1px solid var(--line); border-left:5px solid var(--accent);
+  border-radius:12px; padding:13px 16px; font-size:16px; }
+.wm-goal-label { color:var(--accent); font-weight:700; margin-right:6px; }
+.wm-legend { display:flex; gap:16px; flex-wrap:wrap; color:var(--muted); font-size:12.5px; margin:14px 0 6px; }
+.wm-legend span { display:inline-flex; align-items:center; gap:6px; }
+.wm-dot { width:12px; height:12px; border-radius:4px; display:inline-block; }
+.d-done { background:var(--good); }
+.d-doing { background:var(--accent); }
+.d-wait { background:var(--warn); }
+.d-todo { background:#475569; }
+.wm-phase { background:var(--card2); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin:12px 0; }
+.wm-phase-title { font-size:15px; color:var(--accent); font-weight:700; margin-bottom:10px; }
+.wm-steps { display:flex; align-items:stretch; flex-wrap:wrap; gap:8px; }
+.wm-step { flex:1 1 200px; min-width:175px; border:1px solid var(--line); border-left-width:4px; border-radius:10px;
+  padding:11px 13px; font-size:15px; line-height:1.5; background:var(--card); }
+.wm-step .wm-n { display:block; font-size:12.5px; color:var(--muted); margin-bottom:2px; }
+.wm-step em { display:block; font-size:13px; color:var(--muted); font-style:normal; margin-top:4px; }
+.wm-step.is-done { border-left-color:var(--good); background:rgba(74,222,128,.08); }
+.wm-step.is-doing { border-left-color:var(--accent); background:rgba(56,189,248,.10); animation:wmPulse 2s ease-in-out infinite; }
+.wm-step.is-wait { border-left-color:var(--warn); background:rgba(250,204,21,.08); }
+.wm-step.is-todo { border-left-color:#475569; }
+.wm-arrow { align-self:center; color:var(--accent); font-size:17px; animation:wmSlide 1.6s ease-in-out infinite; }
+@keyframes wmPulse {
+  0%,100% { box-shadow:0 0 0 0 rgba(56,189,248,0); }
+  50% { box-shadow:0 0 0 5px rgba(56,189,248,.20); }
+}
+@keyframes wmSlide {
+  0%,100% { transform:translateX(0); opacity:.6; }
+  50% { transform:translateX(5px); opacity:1; }
+}
+.wm-now-title { font-size:15px; color:var(--accent); font-weight:700; margin:18px 0 8px; }
+.wm-now { display:flex; gap:12px; flex-wrap:wrap; }
+.wm-card { flex:1 1 240px; border:1px solid var(--line); border-top-width:4px; border-radius:12px; padding:12px 14px; background:var(--card); }
+.wm-card h4 { font-size:15px; margin-bottom:6px; }
+.wm-card ul { margin:0 0 0 18px; font-size:14px; }
+.wm-card.is-done { border-top-color:var(--good); }
+.wm-card.is-doing { border-top-color:var(--accent); }
+.wm-card.is-wait { border-top-color:var(--warn); }
+.wm-foot { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; color:var(--muted); font-size:12px; margin-top:14px; }
+@media (prefers-reduced-motion: reduce) {
+  .wm-step.is-doing, .wm-arrow { animation:none; }
+}
 @media (max-width:640px) {
   .section { padding:16px; }
   main { padding:16px 10px 60px; }
+  .wm-arrow { display:none; }
+  .wm-step { flex:1 1 100%; }
+  .wm-title { font-size:19px; }
 }
 </style>
 </head>
@@ -73,10 +126,10 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
     <h1>🗺️ พาเที่ยว Dashboard</h1>
     <span class="sub">ภาพรวมธุรกิจ Ichino Tour — กระดานโน้ต พี่เจ &amp; พาเที่ยว</span>
   </div>
-  <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#systemmap" class="nav-link" data-target="systemmap">System Map</a><a href="#minimax" class="nav-link" data-target="minimax">MiniMax Studio</a><a href="#characters" class="nav-link" data-target="characters">ตัวละคร</a><a href="#checkpoint" class="nav-link" data-target="checkpoint">Checkpoint</a><a href="#memory" class="nav-link" data-target="memory">MEMORY</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
+  <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#workmap" class="nav-link" data-target="workmap">แผนที่งาน</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#systemmap" class="nav-link" data-target="systemmap">System Map</a><a href="#minimax" class="nav-link" data-target="minimax">MiniMax Studio</a><a href="#characters" class="nav-link" data-target="characters">ตัวละคร</a><a href="#checkpoint" class="nav-link" data-target="checkpoint">Checkpoint</a><a href="#memory" class="nav-link" data-target="memory">MEMORY</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
 </header>
 <main>
-<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-07T00:30:26+07:00</div>
+<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T22:49:23+07:00</div>
 <h1>🗺️ ภาพรวมธุรกิจ Ichino Tour</h1>
 <p><strong>แบรนด์หน้าฉาก:</strong> Ichino Tour (Thailand) — ตัวแทน Land Operation ประเทศญี่ปุ่น (Thailand Representative)</p>
 <p><strong>หลังฉาก:</strong> พันธมิตรญี่ปุ่น 2 เจ้าให้ Net Rate + สิทธิใช้ชื่อบริษัท — ยังไม่เปิดบริษัทเอง</p>
@@ -92,7 +145,98 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>ซัพพลายอื่น</h2>
 <div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>รายละเอียด</th></tr></thead><tbody><tr><td><strong>King BUS = SENEI KOTSU</strong></td><td>ใบขอรถ <code>rsv@cgman.jp</code> → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ)</td></tr><tr><td><strong>CHIグループ</strong></td><td>Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน)</td></tr><tr><td><strong>Supplier ฟูจิ/ยามานาชิ</strong></td><td>Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori</td></tr></tbody></table></div>
 <blockquote>⛔ <strong>ต้นสังกัด kimono</strong> — ห้ามปน / ห้ามให้รู้งานข้างเด็ดขาด (กฎ stealth)</blockquote>
-<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-07T00:30:26+07:00</div>
+<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="workmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T22:49:23+07:00</div>
+<h1>🧭 แผนที่งาน (Work Map)</h1>
+<blockquote>หน้านี้ทำไว้ให้พี่เจ <strong>เปิดดูเมื่อไหร่ก็รู้ทันที</strong> ว่างานนั้นทำอะไรอยู่ ถึงขั้นไหน และก้าวต่อไปคืออะไร</blockquote>
+<blockquote>อัปเดตโดยพาเที่ยวทุกครั้งที่ปิดงานรอบ · แก้ที่ <code>content/workmap.md</code> แล้ว build ใหม่</blockquote>
+<div class="wm">
+
+  <div class="wm-head">
+    <div>
+      <div class="wm-code">PC-017</div>
+      <h2 class="wm-title">Affiliate Marketing <span class="wm-sub">การตลาดแบบพันธมิตร — เราทำ affiliate เอง (รับค่าคอมจากแบรนด์)</span></h2>
+    </div>
+    <span class="tag info wm-status">🔵 กำลังทำ · ช่วงศึกษา</span>
+  </div>
+
+  <div class="wm-goal">
+    <span class="wm-goal-label">🎯 เป้าหมาย</span>
+    หา <strong>สินค้าที่มีเทรนด์/ขายดี</strong> → ทำ <strong>คลิป</strong> → โพสต์ผ่านช่องทางของเรา → รับ <strong>ค่าคอมมิชชัน</strong>
+  </div>
+
+  <div class="wm-legend">
+    <span><i class="wm-dot d-done"></i>เสร็จแล้ว</span>
+    <span><i class="wm-dot d-doing"></i>กำลังทำ / ทำต่อ</span>
+    <span><i class="wm-dot d-wait"></i>รอพี่เจ</span>
+    <span><i class="wm-dot d-todo"></i>ยังไม่เริ่ม</span>
+  </div>
+
+  <div class="wm-phase">
+    <div class="wm-phase-title">ระยะ 1 · หาคำตอบให้ครบก่อนลงมือ</div>
+    <div class="wm-steps">
+      <div class="wm-step is-done"><span class="wm-n">①</span>ล็อกโจทย์: เราทำ affiliate เอง</div>
+      <span class="wm-arrow">➜</span>
+      <div class="wm-step is-doing"><span class="wm-n">②</span>แผนที่โปรแกรม affiliate (ญี่ปุ่น + ไทย)<em>ชื่อโปรแกรม · เกณฑ์สมัคร · ค่าคอม</em></div>
+      <span class="wm-arrow">➜</span>
+      <div class="wm-step is-todo"><span class="wm-n">③</span>เลือกสายสินค้าที่เข้ากับเรา 3 อันดับ</div>
+      <span class="wm-arrow">➜</span>
+      <div class="wm-step is-todo"><span class="wm-n">④</span>โมเดลรายได้ + เงื่อนไขจ่ายจริง</div>
+      <span class="wm-arrow">➜</span>
+      <div class="wm-step is-todo"><span class="wm-n">⑤</span>ด่านกฎหมาย/ภาษี + เปิดเผยว่าเป็นลิงก์โฆษณา</div>
+      <span class="wm-arrow">➜</span>
+      <div class="wm-step is-todo"><span class="wm-n">⑥</span>ประเมินความเสี่ยง (บัญชีถูกระงับ · เงินค้าง)</div>
+      <span class="wm-arrow">➜</span>
+      <div class="wm-step is-todo"><span class="wm-n">⑧</span>ใบตัดสิน: ทำ/ไม่ทำ + เริ่มที่ไหน</div>
+    </div>
+  </div>
+
+  <div class="wm-phase">
+    <div class="wm-phase-title">ระยะ 2 · หาสินค้า (งานของพาเที่ยว)</div>
+    <div class="wm-steps">
+      <div class="wm-step is-todo"><span class="wm-n">⑨</span>หาสินค้าที่มีเทรนด์/ขายดี<em>ส่งลิสต์สั้น 3–5 ชิ้น</em></div>
+      <span class="wm-arrow">➜</span>
+      <div class="wm-step is-wait"><span class="wm-n">⑩</span>พี่เจเลือกสินค้า<em>ด่านก่อนผลิตทุกครั้ง</em></div>
+    </div>
+  </div>
+
+  <div class="wm-phase">
+    <div class="wm-phase-title">ระยะ 3 · ทำคลิปและวัดผล</div>
+    <div class="wm-steps">
+      <div class="wm-step is-todo"><span class="wm-n">⑦</span>ทดลองเล็ก 1 ช่องทาง<em>1 สินค้า × 1 คลิป × 2–4 สัปดาห์</em></div>
+      <span class="wm-arrow">➜</span>
+      <div class="wm-step is-todo"><span class="wm-n">⑪</span>ผลิตคลิป → โพสต์ → เก็บลิงก์ติดตาม → วัดค่าคอมจริง</div>
+    </div>
+  </div>
+
+  <div class="wm-now-title">ตอนนี้อยู่ตรงไหน</div>
+  <div class="wm-now">
+    <div class="wm-card is-done">
+      <h4>✅ ทำเสร็จแล้ว</h4>
+      <ul>
+        <li>เปิดการ์ดงาน + ตั้งกติกากันพลาด (ห้าม AI สมัคร/ผูกบัญชีเอง)</li>
+        <li>พี่เจตัดสินแล้ว: ทำ affiliate เอง</li>
+      </ul>
+    </div>
+    <div class="wm-card is-doing">
+      <h4>👉 ก้าวต่อไป</h4>
+      <ul>
+        <li>ทำ «แผนที่โปรแกรม affiliate» ให้เสร็จ — พาเที่ยวทำเอง ไม่ต้องรอพี่เจ</li>
+      </ul>
+    </div>
+    <div class="wm-card is-wait">
+      <h4>🙋 รอพี่เจ</h4>
+      <ul>
+        <li>ยังไม่มีอะไรต้องรอตอนนี้ — จะรอตอน ⑩ เลือกสินค้า</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wm-foot">
+    <span>ที่มา: การ์ด PC-017 · อัปเดต 14 ต.ค. 69</span>
+    <span>งานค้างทั้งหมดอยู่ใน «งานค้าง» ของการ์ด · หน้านี้อัปเดตทุกครั้งที่ปิดงานรอบ</span>
+  </div>
+
+</div></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T22:49:23+07:00</div>
 <h1>📊 สถานะงาน</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน (จาก checkpoint) — timestamp ด้านบน</blockquote>
 <h2>การ์ดงาน (Project Cards — PC_INDEX 7 ก.ย. 69)</h2>
@@ -107,7 +251,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>งานค้าง — ดูจาก section Checkpoint (อัตโนมัติ)</h2>
 <blockquote>รายการงานค้างที่เขียนมือในหน้านี้ <strong>ถูกลบออก 25 ก.ย. 69</strong> เพราะค้างมาตั้งแต่ 7 ก.ย. และไม่ตรงกับของจริงแล้ว</blockquote>
 <blockquote>ตั้งแต่นี้ให้อ่านจาก <strong>section Checkpoint</strong> ซึ่งดึง <code>CHECKPOINT_LATEST.md</code> จาก <code>phathiao-knowledge-brain</code> อัตโนมัติทุกชั่วโมง</blockquote>
-<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-07T00:30:26+07:00</div>
+<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T22:49:23+07:00</div>
 <h1>🗺️ System Map</h1>
 <blockquote>อัปเดตล่าสุด <strong>26 ก.ย. 69 (รอบ 45)</strong> — เขียนจาก §9 System Map ของการ์ดจริง 14 ใบ (ครบทุกใบแล้ว)</blockquote>
 <blockquote>สถานะ: done (เขียว) · in_progress (ฟ้า) · blocked (แดง) · pending (เทา)</blockquote>
@@ -121,7 +265,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <p><strong>สาขา / เวอร์ชัน</strong></p>
 <div class="table-wrap"><table><thead><tr><th>ต้นทาง (ราก)</th><th>แตกเป็น / เวอร์ชัน</th><th>จำนวน</th><th>สถานะแต่ละตัว</th></tr></thead><tbody><tr><td>embedding engine</td><td>local bge-m3 (default) · API gemini (fallback) · MiniLM (สำรอง)</td><td>3</td><td>default · legacy <code>VEC_ENGINE=api</code> · collection แยก</td></tr><tr><td>collection</td><td><code>patheaw_work</code> · <code>patheaw_local</code> · <code>patheaw_bge</code></td><td>3</td><td>prod · ทดสอบ · ทดสอบ</td></tr><tr><td>วิธีเก็บเข้าคลัง</td><td>whitelist ชื่อไฟล์ (เดิม) · glob ต่อโฟลเดอร์ (26 ก.ย. 69)</td><td>2</td><td>เลิกใช้ · ใช้จริง</td></tr></tbody></table></div>
 <h2>หมายเหตุการดูแลหน้านี้</h2>
-<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-07T00:30:26+07:00</div>
+<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T22:49:23+07:00</div>
 <h1>MiniMax Studio — เครื่องมือ + สถานะงาน</h1>
 <blockquote>อัปเดต 17 ก.ย. 69 (ตัวเลขจากของจริง: gateway <code>/api/v1/credit/wallet</code> · <code>list_capabilities</code> · <code>get_model_concurrency</code> · นับการใช้ tool จาก session log DSH 163 ไฟล์)</blockquote>
 <blockquote>ตัวเลขทุกบรรทัดมาจากการรันจริง — ไม่มีข้อไหนเป็น &quot;คาดว่า&quot;</blockquote>
@@ -190,7 +334,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <ul><li>โฟลเดอร์ <strong><code>พาเที่ยว_ลิงก์</code></strong> บน Desktop — shortcut เปิดแผ่นตัวละคร/โฟลเดอร์/ผลทดลอง + หน้า <code>index.html</code> รวมลิงก์</li><li>พาธฐานของแผ่น: <code>H:\My Drive\พาเที่ยว\Gochisou\TikTok\Raw\Characters &lt;ชื่อ&gt;\</code></li></ul></section><section id="checkpoint" class="section"><h1>📌 Checkpoint ล่าสุด</h1>
 <blockquote>ไฟล์นี้ถูก <strong>ดึงทับอัตโนมัติ</strong> จาก <code>phathiao-knowledge-brain</code> ตอน build (ทุก push + ทุกวัน 00:00 UTC)</blockquote>
 <blockquote>ห้ามแก้เอง — จะโดนทับ</blockquote>
-<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-07T00:30:26+07:00</div>
+<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T22:49:23+07:00</div>
 <h1>🧠 พี่เจ_MEMORY — ทบทวนว่าระบบเราทำอะไรไปแล้วบ้าง</h1>
 <p>โน้ตนี้เขียนไว้ให้พี่เจอ่านกันลืม — อัปเดตเมื่อระบบเปลี่ยน ไม่ใช่บันทึกรายวัน</p>
 <h2>ระบบของเรา</h2>
@@ -207,7 +351,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>งานใหญ่ที่ค้าง</h2>
 <ul><li>ปรับ .md ทั้ง vault+repo เป็น format ใหม่ (เริ่มโปรเอกสารหลัก)</li><li>Master data: verify RAW 1,323, เติม supplier บัส, rate 13</li><li>B2B Smile Travel, ทดลอง slim, ขยาย Thin MCP 14 repo</li></ul>
 <h2>กำหนดการ</h2>
-<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-07T00:30:26+07:00</div>
+<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T22:49:23+07:00</div>
 <h1>🗓️ ลำดับถัดไป (Roadmap)</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน</blockquote>
 <h2>ลำดับหลัก (ตกลงกับพี่เจแล้ว)</h2>
@@ -218,7 +362,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>Funnel ลูกค้า 3 ทาง</h2>
 <div class="table-wrap"><table><thead><tr><th>ทาง</th><th>ทำยังไง</th><th>สถานะ</th></tr></thead><tbody><tr><td>B2B direct</td><td>ทักหา 50 เจ้า ในนาม Ichino Tour + แนบ Sales Kit</td><td>ยังไม่เริ่ม (Smile #40 คิวแรก)</td></tr><tr><td>เว็บ + content</td><td>Gochisou (จองร้าน) LIVE → ลงโปรแกรมทัวร์จริง (NRT09/KIX67/CTS01) → contact form</td><td>Gochisou เริ่มแล้ว — ทัวร์ยังไม่เริ่ม</td></tr><tr><td>TikTok/Social (B2C)</td><td>1 ช่อง Gochisou — อาหาร/เคสจองจริง top-funnel → LINE/เว็บ</td><td>ตัดสินใจแล้ว — รอคอนเทนต์พร้อม</td></tr></tbody></table></div>
 <h2>ขั้นถัดไปทันที</h2>
-<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-07T00:30:26+07:00</div>
+<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T22:49:23+07:00</div>
 <h1>💡 กระดานไอเดีย</h1>
 <blockquote><strong>2 ช่องทางเขียน:</strong></blockquote>
 <blockquote>- <strong>พิมพ์ในเว็บ</strong> (ช่องด้านล่าง) → เก็บ Firestore → เห็นทุกเครื่อง</blockquote>
