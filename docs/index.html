@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>พาเที่ยว Dashboard — ภาพรวมธุรกิจ Ichino Tour</title>
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="กระดานงาน พี่เจ &amp; พาเที่ยว — แผนที่งาน สถานะ และความคืบหน้า">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="พาเที่ยว">
+<script>
+  // โหมดสว่าง/มืด + ขนาดตัวอักษร: อ่านค่าที่จำไว้ก่อนวาดหน้า (กันหน้าสว่างวาบ) — เฟส 1, 14 ต.ค. 69
+  (function () {
+    try {
+      var t = localStorage.getItem('pd_theme');
+      if (t === 'light') document.documentElement.classList.add('light');
+      var f = localStorage.getItem('pd_font');
+      if (f) document.documentElement.style.fontSize = f + 'px';
+    } catch (e) {}
+  })();
+</script>
 <style>
 :root {
   --bg:#0f172a; --card:#1e293b; --card2:#273449; --line:#334155;
@@ -19,6 +36,35 @@ header { position:sticky; top:0; background:rgba(15,23,42,.92); backdrop-filter:
 nav { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
 .nav-link { color:var(--muted); text-decoration:none; font-size:13px; padding:5px 12px; border:1px solid var(--line); border-radius:20px; }
 .nav-link:hover, .nav-link.active { color:var(--bg); background:var(--accent); border-color:var(--accent); }
+.brand-row { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+.tools { display:flex; gap:6px; align-items:center; }
+.tool-btn { border:1px solid var(--line); background:var(--card2); color:var(--text); font-family:inherit;
+  font-size:13px; padding:5px 10px; border-radius:9px; cursor:pointer; line-height:1.2; }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.section { animation:secIn .22s ease-out; }
+@keyframes secIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+#to-top { position:fixed; right:16px; bottom:18px; z-index:20; display:none; width:46px; height:46px;
+  border-radius:50%; border:1px solid var(--line); background:var(--card2); color:var(--accent);
+  font-size:19px; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.35); }
+#to-top.show { display:block; animation:secIn .2s ease-out; }
+@media (prefers-reduced-motion: reduce) { .section, #to-top.show { animation:none; } }
+/* โหมดสว่าง */
+html.light { --bg:#f6f7fb; --card:#ffffff; --card2:#eef2f7; --line:#d7dee8;
+  --text:#16202f; --muted:#5b6b80; --accent:#0b74c4; --good:#128a4b; --warn:#a9760a; --bad:#c0392b; --accent2:#4f46e5; }
+html.light body { background:var(--bg); color:var(--text); }
+html.light header { background:rgba(246,247,251,.92); }
+html.light strong { color:#0b1220; }
+html.light .tag.good { background:rgba(18,138,75,.12); }
+html.light .tag.info { background:rgba(11,116,196,.12); }
+html.light .tag.warn { background:rgba(169,118,10,.14); }
+html.light .wm { background:linear-gradient(180deg,#ffffff,#f8fafc); }
+html.light .wm-phase { background:#f4f7fb; }
+html.light .wm-goal, html.light .wm-card, html.light .wm-step, html.light .wm-tile { background:#fff; }
+html.light .wm-tile-name { color:#16202f; }
+html.light .wm-progress .wm-bar { background:#e6ebf3; }
+html.light .wm-pnum { color:#fff; }
+html.light pre { background:#eef2f7; }
+html.light .wm-glow { opacity:.5; }
 main { max-width:1000px; margin:0 auto; padding:24px 16px 80px; }
 .section { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px; margin-bottom:24px; }
 h1 { font-size:22px; color:var(--accent); margin-bottom:12px; }
@@ -68,6 +114,14 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 .wm-back { border:1px solid var(--line); background:var(--card2); color:var(--accent); font-family:inherit;
   font-size:13px; font-weight:700; padding:8px 14px; border-radius:10px; cursor:pointer; }
 .wm-back:hover { background:var(--accent); color:#0b1220; }
+.wm-tools { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.wm-search { font-family:inherit; font-size:14px; color:var(--text); background:var(--card2);
+  border:1px solid var(--line); border-radius:10px; padding:8px 12px; min-width:240px; }
+.wm-search:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,189,248,.15); }
+.wm-last { font-size:13.5px; color:var(--muted); margin:2px 0 12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.wm-last-btn { font-family:inherit; font-size:13.5px; cursor:pointer; border:1px dashed var(--line);
+  background:transparent; color:var(--accent); border-radius:999px; padding:4px 12px; }
+.wm-last-btn:hover { border-style:solid; border-color:var(--accent); }
 .wm-group-title { font-size:13px; color:var(--muted); margin:14px 0 8px; letter-spacing:.4px; }
 .wm-tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:12px; margin-bottom:8px; }
 .wm-tile { display:flex; flex-direction:column; gap:5px; text-align:left; cursor:pointer; font-family:inherit;
@@ -84,7 +138,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 .wm-tile.is-empty:hover { transform:none; box-shadow:none; border-left-color:#475569; }
 .wm-detail[hidden] { display:none !important; }
 /* สำคัญ: element ที่มี display:grid/flex จาก CSS จะไม่สนใจ attribute hidden ⇒ ต้องสั่ง display:none เอง (14 ต.ค. 69) */
-.wm-list[hidden], .wm-group-title[hidden], .wm-tiles[hidden] { display:none !important; }
+.wm-list[hidden], .wm-group-title[hidden], .wm-tiles[hidden], .wm-tile[hidden] { display:none !important; }
 .wm-detail { animation:wmIn .32s ease-out; }
 @keyframes wmIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce) { .wm-detail { animation:none; } }
@@ -181,13 +235,23 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <body>
 <header>
   <div class="brand">
-    <h1>🗺️ พาเที่ยว Dashboard</h1>
-    <span class="sub">ภาพรวมธุรกิจ Ichino Tour — กระดานโน้ต พี่เจ &amp; พาเที่ยว</span>
+    <div class="brand-row">
+      <div>
+        <h1>🗺️ พาเที่ยว Dashboard</h1>
+        <span class="sub">ภาพรวมธุรกิจ Ichino Tour — กระดานโน้ต พี่เจ &amp; พาเที่ยว</span>
+      </div>
+      <div class="tools">
+        <button class="tool-btn" id="btn-font-minus" title="ตัวอักษรเล็กลง">A−</button>
+        <button class="tool-btn" id="btn-font-plus" title="ตัวอักษรใหญ่ขึ้น">A+</button>
+        <button class="tool-btn" id="btn-theme" title="สลับโหมดสว่าง/มืด">☀️ สว่าง</button>
+      </div>
+    </div>
   </div>
   <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#workmap" class="nav-link" data-target="workmap">แผนที่งาน</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#systemmap" class="nav-link" data-target="systemmap">System Map</a><a href="#minimax" class="nav-link" data-target="minimax">MiniMax Studio</a><a href="#characters" class="nav-link" data-target="characters">ตัวละคร</a><a href="#checkpoint" class="nav-link" data-target="checkpoint">Checkpoint</a><a href="#memory" class="nav-link" data-target="memory">MEMORY</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
 </header>
+<button id="to-top" aria-label="กลับขึ้นบนสุด" title="กลับขึ้นบนสุด">↑</button>
 <main>
-<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
+<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
 <h1>🗺️ ภาพรวมธุรกิจ Ichino Tour</h1>
 <p><strong>แบรนด์หน้าฉาก:</strong> Ichino Tour (Thailand) — ตัวแทน Land Operation ประเทศญี่ปุ่น (Thailand Representative)</p>
 <p><strong>หลังฉาก:</strong> พันธมิตรญี่ปุ่น 2 เจ้าให้ Net Rate + สิทธิใช้ชื่อบริษัท — ยังไม่เปิดบริษัทเอง</p>
@@ -203,14 +267,18 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>ซัพพลายอื่น</h2>
 <div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>รายละเอียด</th></tr></thead><tbody><tr><td><strong>King BUS = SENEI KOTSU</strong></td><td>ใบขอรถ <code>rsv@cgman.jp</code> → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ)</td></tr><tr><td><strong>CHIグループ</strong></td><td>Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน)</td></tr><tr><td><strong>Supplier ฟูจิ/ยามานาชิ</strong></td><td>Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori</td></tr></tbody></table></div>
 <blockquote>⛔ <strong>ต้นสังกัด kimono</strong> — ห้ามปน / ห้ามให้รู้งานข้างเด็ดขาด (กฎ stealth)</blockquote>
-<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="workmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
+<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="workmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
 <h1>🧭 แผนที่งาน (Work Map)</h1>
 <blockquote>เปิดมาเห็น <strong>ทุกงานในจอเดียว</strong> → กดช่องงานที่อยากดู → รายละเอียดเปิดในหน้านี้ ไม่ต้องเปลี่ยนหน้า</blockquote>
 <blockquote>เรียง <strong>งานที่กำลังทำอยู่ก่อน</strong> แล้วต่อด้วยงานที่รอพี่เจ/รอของ · ตัวเลขงานค้างจาก checkpoint รอบล่าสุด · อัปเดตโดยพาเที่ยวทุกครั้งที่ปิดงาน</blockquote>
 <div class="wm-toolbar">
   <div class="wm-toolbar-title">งานทั้งหมด <b>10</b> การ์ด · เรียงงานที่กำลังทำอยู่ก่อน</div>
-  <button class="wm-back" id="wm-back" hidden>← กลับไปดูงานทั้งหมด</button>
+  <div class="wm-tools">
+    <input class="wm-search" id="wm-search" type="search" placeholder="ค้นหางาน… (เช่น affiliate · รอพี่เจ)" aria-label="ค้นหางาน">
+    <button class="wm-back" id="wm-back" hidden>← กลับไปดูงานทั้งหมด</button>
+  </div>
 </div>
+<div class="wm-last" id="wm-last" hidden></div>
 
 <div class="wm-group-title">🔵 กำลังทำอยู่ (4)</div>
 <div class="wm-tiles wm-list" id="wm-list">
@@ -472,33 +540,97 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 
 <script>
 (function () {
-  var tiles = Array.prototype.slice.call(document.querySelectorAll('.wm-tiles .wm-tile[data-wm]'));
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.wm-tiles .wm-tile'));
+  var clickable = tiles.filter(function (t) { return t.dataset.wm; });
   var panels = Array.prototype.slice.call(document.querySelectorAll('.wm-detail'));
   var back = document.getElementById('wm-back');
+  var search = document.getElementById('wm-search');
+  var lastChip = document.getElementById('wm-last');
 
-  function show(id) {
-    // ซ่อน "รายการงาน" ทั้งบล็อกเมื่อเปิดรายละเอียด (และกลับมาเมื่อกดกลับ)
-    document.querySelectorAll('.wm-list, .wm-group-title').forEach(function (el) {
-      el.hidden = !!id;
-    });
+  function setChrome(id) {
+    document.querySelectorAll('.wm-list, .wm-group-title').forEach(function (el) { el.hidden = !!id; });
     panels.forEach(function (p) { p.hidden = (p.id !== id); });
     tiles.forEach(function (t) { t.classList.toggle('is-active', t.dataset.wm === id); });
     back.hidden = !id;
+    if (lastChip) lastChip.hidden = !!id;
+    if (id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+
+  function remember(id) {
+    try { localStorage.setItem('pd_last_card', id); } catch (e) {}
+  }
+
+  function openCard(id, pushHash) {
+    setChrome(id);
+    renderLast();
     if (id) {
-      var el = document.getElementById(id);
-      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    } else {
-      var g = document.getElementById('wm-list');
-      if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      remember(id);
+      if (pushHash && location.hash !== '#workmap/' + id) { location.hash = 'workmap/' + id; }
+    } else if (pushHash && location.hash !== '#workmap') {
+      location.hash = 'workmap';
     }
   }
 
-  tiles.forEach(function (t) {
-    t.addEventListener('click', function () { show(t.dataset.wm); });
+  function hashCard() {
+    var parts = (location.hash || '').replace(/^#/, '').split('/');
+    return parts[0] === 'workmap' ? (parts[1] || '') : null;
+  }
+
+  clickable.forEach(function (t) {
+    t.addEventListener('click', function () { openCard(t.dataset.wm, true); });
   });
-  if (back) { back.addEventListener('click', function () { show(null); }); }
+  if (back) { back.addEventListener('click', function () { openCard(null, true); }); }
+
+  // เปิด/ปิดตาม URL (กด refresh แล้วอยู่หน้าเดิม · ปุ่มย้อนกลับของมือถือใช้ได้)
+  window.addEventListener('hashchange', function () {
+    var id = hashCard();
+    if (id === null) { return; }
+    setChrome(id || null);
+  });
+  window.addEventListener('pd:route', function (e) {
+    var h = (e.detail && e.detail.hash) || location.hash.replace(/^#/, '');
+    if (h.indexOf('workmap') !== 0) { return; }
+    setChrome(h.split('/')[1] || null);
+  });
+
+  // ค้นหางาน
+  if (search) {
+    search.addEventListener('input', function () {
+      var q = (search.value || '').trim().toLowerCase();
+      document.querySelectorAll('.wm-tiles').forEach(function (grid) {
+        var visible = 0;
+        grid.querySelectorAll('.wm-tile').forEach(function (t) {
+          var ok = !q || (t.textContent || '').toLowerCase().indexOf(q) >= 0;
+          t.hidden = !ok;
+          if (ok) visible++;
+        });
+        var title = grid.previousElementSibling;
+        if (title && title.classList.contains('wm-group-title')) { title.hidden = (visible === 0); }
+      });
+    });
+  }
+
+  // ป้าย "ดูล่าสุด"
+  function renderLast() {
+    if (!lastChip) return;
+    var id = '';
+    try { id = localStorage.getItem('pd_last_card') || ''; } catch (e) {}
+    var tile = id ? document.querySelector('.wm-tile[data-wm="' + id + '"]') : null;
+    if (!tile) { lastChip.hidden = true; return; }
+    var name = tile.querySelector('.wm-tile-name');
+    lastChip.hidden = false;
+    lastChip.innerHTML = '🕘 ดูครั้งล่าสุด: ';
+    var b = document.createElement('button');
+    b.className = 'wm-last-btn';
+    b.textContent = name ? name.textContent : id;
+    b.addEventListener('click', function () { openCard(id, true); });
+    lastChip.appendChild(b);
+  }
+
+  var initial = hashCard();
+  if (initial) { openCard(initial, false); } else { renderLast(); }
 })();
-</script></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
+</script></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
 <h1>📊 สถานะงาน</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน (จาก checkpoint) — timestamp ด้านบน</blockquote>
 <h2>การ์ดงาน (Project Cards — PC_INDEX 7 ก.ย. 69)</h2>
@@ -513,7 +645,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>งานค้าง — ดูจาก section Checkpoint (อัตโนมัติ)</h2>
 <blockquote>รายการงานค้างที่เขียนมือในหน้านี้ <strong>ถูกลบออก 25 ก.ย. 69</strong> เพราะค้างมาตั้งแต่ 7 ก.ย. และไม่ตรงกับของจริงแล้ว</blockquote>
 <blockquote>ตั้งแต่นี้ให้อ่านจาก <strong>section Checkpoint</strong> ซึ่งดึง <code>CHECKPOINT_LATEST.md</code> จาก <code>phathiao-knowledge-brain</code> อัตโนมัติทุกชั่วโมง</blockquote>
-<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
+<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
 <h1>🗺️ System Map</h1>
 <blockquote>อัปเดตล่าสุด <strong>26 ก.ย. 69 (รอบ 45)</strong> — เขียนจาก §9 System Map ของการ์ดจริง 14 ใบ (ครบทุกใบแล้ว)</blockquote>
 <blockquote>สถานะ: done (เขียว) · in_progress (ฟ้า) · blocked (แดง) · pending (เทา)</blockquote>
@@ -527,7 +659,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <p><strong>สาขา / เวอร์ชัน</strong></p>
 <div class="table-wrap"><table><thead><tr><th>ต้นทาง (ราก)</th><th>แตกเป็น / เวอร์ชัน</th><th>จำนวน</th><th>สถานะแต่ละตัว</th></tr></thead><tbody><tr><td>embedding engine</td><td>local bge-m3 (default) · API gemini (fallback) · MiniLM (สำรอง)</td><td>3</td><td>default · legacy <code>VEC_ENGINE=api</code> · collection แยก</td></tr><tr><td>collection</td><td><code>patheaw_work</code> · <code>patheaw_local</code> · <code>patheaw_bge</code></td><td>3</td><td>prod · ทดสอบ · ทดสอบ</td></tr><tr><td>วิธีเก็บเข้าคลัง</td><td>whitelist ชื่อไฟล์ (เดิม) · glob ต่อโฟลเดอร์ (26 ก.ย. 69)</td><td>2</td><td>เลิกใช้ · ใช้จริง</td></tr></tbody></table></div>
 <h2>หมายเหตุการดูแลหน้านี้</h2>
-<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
+<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
 <h1>MiniMax Studio — เครื่องมือ + สถานะงาน</h1>
 <blockquote>อัปเดต 17 ก.ย. 69 (ตัวเลขจากของจริง: gateway <code>/api/v1/credit/wallet</code> · <code>list_capabilities</code> · <code>get_model_concurrency</code> · นับการใช้ tool จาก session log DSH 163 ไฟล์)</blockquote>
 <blockquote>ตัวเลขทุกบรรทัดมาจากการรันจริง — ไม่มีข้อไหนเป็น &quot;คาดว่า&quot;</blockquote>
@@ -596,7 +728,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <ul><li>โฟลเดอร์ <strong><code>พาเที่ยว_ลิงก์</code></strong> บน Desktop — shortcut เปิดแผ่นตัวละคร/โฟลเดอร์/ผลทดลอง + หน้า <code>index.html</code> รวมลิงก์</li><li>พาธฐานของแผ่น: <code>H:\My Drive\พาเที่ยว\Gochisou\TikTok\Raw\Characters &lt;ชื่อ&gt;\</code></li></ul></section><section id="checkpoint" class="section"><h1>📌 Checkpoint ล่าสุด</h1>
 <blockquote>ไฟล์นี้ถูก <strong>ดึงทับอัตโนมัติ</strong> จาก <code>phathiao-knowledge-brain</code> ตอน build (ทุก push + ทุกวัน 00:00 UTC)</blockquote>
 <blockquote>ห้ามแก้เอง — จะโดนทับ</blockquote>
-<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
+<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
 <h1>🧠 พี่เจ_MEMORY — ทบทวนว่าระบบเราทำอะไรไปแล้วบ้าง</h1>
 <p>โน้ตนี้เขียนไว้ให้พี่เจอ่านกันลืม — อัปเดตเมื่อระบบเปลี่ยน ไม่ใช่บันทึกรายวัน</p>
 <h2>ระบบของเรา</h2>
@@ -613,7 +745,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>งานใหญ่ที่ค้าง</h2>
 <ul><li>ปรับ .md ทั้ง vault+repo เป็น format ใหม่ (เริ่มโปรเอกสารหลัก)</li><li>Master data: verify RAW 1,323, เติม supplier บัส, rate 13</li><li>B2B Smile Travel, ทดลอง slim, ขยาย Thin MCP 14 repo</li></ul>
 <h2>กำหนดการ</h2>
-<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
+<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
 <h1>🗓️ ลำดับถัดไป (Roadmap)</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน</blockquote>
 <h2>ลำดับหลัก (ตกลงกับพี่เจแล้ว)</h2>
@@ -624,7 +756,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>Funnel ลูกค้า 3 ทาง</h2>
 <div class="table-wrap"><table><thead><tr><th>ทาง</th><th>ทำยังไง</th><th>สถานะ</th></tr></thead><tbody><tr><td>B2B direct</td><td>ทักหา 50 เจ้า ในนาม Ichino Tour + แนบ Sales Kit</td><td>ยังไม่เริ่ม (Smile #40 คิวแรก)</td></tr><tr><td>เว็บ + content</td><td>Gochisou (จองร้าน) LIVE → ลงโปรแกรมทัวร์จริง (NRT09/KIX67/CTS01) → contact form</td><td>Gochisou เริ่มแล้ว — ทัวร์ยังไม่เริ่ม</td></tr><tr><td>TikTok/Social (B2C)</td><td>1 ช่อง Gochisou — อาหาร/เคสจองจริง top-funnel → LINE/เว็บ</td><td>ตัดสินใจแล้ว — รอคอนเทนต์พร้อม</td></tr></tbody></table></div>
 <h2>ขั้นถัดไปทันที</h2>
-<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
+<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
 <h1>💡 กระดานไอเดีย</h1>
 <blockquote><strong>2 ช่องทางเขียน:</strong></blockquote>
 <blockquote>- <strong>พิมพ์ในเว็บ</strong> (ช่องด้านล่าง) → เก็บ Firestore → เห็นทุกเครื่อง</blockquote>
@@ -713,18 +845,81 @@ document.getElementById('note-submit').addEventListener('click', async () => {
   }
 });
 
+/* ---------- เฟส 1: นำทางด้วย URL (#งาน) · โหมดสว่าง-มืด · ขนาดตัวอักษร · ปุ่มขึ้นบนสุด · PWA ---------- */
+const FONT_STEPS = [15, 16, 17, 18, 20];
+
+function showSection(key, scrollTop) {
+  var el = document.getElementById(key);
+  if (!el) { key = 'overview'; el = document.getElementById(key); }
+  document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+  if (el) el.style.display = 'block';
+  document.querySelectorAll('.nav-link').forEach(x => x.classList.toggle('active', x.dataset.target === key));
+  if (scrollTop !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function routeFromHash() {
+  var h = (location.hash || '').replace(/^#/, '');
+  var key = h.split('/')[0] || 'overview';
+  showSection(key, false);
+  // แจ้งให้ส่วนอื่น (เช่น แผนที่งาน) รู้ว่ามีการเปลี่ยนเส้นทาง
+  window.dispatchEvent(new CustomEvent('pd:route', { detail: { hash: h } }));
+}
+
 document.querySelectorAll('.nav-link').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
-    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    document.getElementById(a.dataset.target).style.display = 'block';
-    document.querySelectorAll('.nav-link').forEach(x => x.classList.remove('active'));
-    a.classList.add('active');
+    if (location.hash === '#' + a.dataset.target) { routeFromHash(); return; }
+    location.hash = a.dataset.target;   // hashchange จะเรียก routeFromHash เอง
   });
 });
+window.addEventListener('hashchange', routeFromHash);
+
+/* ปุ่มขนาดตัวอักษร + โหมดสว่าง/มืด */
+function currentFont() {
+  var v = parseInt(localStorage.getItem('pd_font') || '16', 10);
+  return FONT_STEPS.indexOf(v) >= 0 ? v : 16;
+}
+function applyFont(px) {
+  document.documentElement.style.fontSize = px + 'px';
+  try { localStorage.setItem('pd_font', String(px)); } catch (e) {}
+}
+document.getElementById('btn-font-plus').addEventListener('click', () => {
+  const i = FONT_STEPS.indexOf(currentFont());
+  applyFont(FONT_STEPS[Math.min(i + 1, FONT_STEPS.length - 1)]);
+});
+document.getElementById('btn-font-minus').addEventListener('click', () => {
+  const i = FONT_STEPS.indexOf(currentFont());
+  applyFont(FONT_STEPS[Math.max(i - 1, 0)]);
+});
+const themeBtn = document.getElementById('btn-theme');
+function syncThemeBtn() {
+  const light = document.documentElement.classList.contains('light');
+  themeBtn.textContent = light ? '🌙 มืด' : '☀️ สว่าง';
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', light ? '#f6f7fb' : '#0f172a');
+}
+themeBtn.addEventListener('click', () => {
+  const light = document.documentElement.classList.toggle('light');
+  try { localStorage.setItem('pd_theme', light ? 'light' : 'dark'); } catch (e) {}
+  syncThemeBtn();
+});
+syncThemeBtn();
+
+/* ปุ่มกลับขึ้นบนสุด */
+const toTop = document.getElementById('to-top');
+window.addEventListener('scroll', () => {
+  toTop.classList.toggle('show', window.scrollY > 480);
+}, { passive: true });
+toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+/* PWA: ติดตั้งเป็นแอปบนมือถือ + เปิดอ่านได้ตอนเน็ตหลุด */
+if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+
 (function() {
-  const first = document.querySelector('.section');
-  if (first) first.style.display = 'block';
+  if (!location.hash) { location.replace('#overview'); }
+  routeFromHash();
   loadNotes();
 })();
 </script>

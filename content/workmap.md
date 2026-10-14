@@ -11,8 +11,12 @@ type: "dashboard"
 ```html
 <div class="wm-toolbar">
   <div class="wm-toolbar-title">งานทั้งหมด <b>10</b> การ์ด · เรียงงานที่กำลังทำอยู่ก่อน</div>
-  <button class="wm-back" id="wm-back" hidden>← กลับไปดูงานทั้งหมด</button>
+  <div class="wm-tools">
+    <input class="wm-search" id="wm-search" type="search" placeholder="ค้นหางาน… (เช่น affiliate · รอพี่เจ)" aria-label="ค้นหางาน">
+    <button class="wm-back" id="wm-back" hidden>← กลับไปดูงานทั้งหมด</button>
+  </div>
 </div>
+<div class="wm-last" id="wm-last" hidden></div>
 
 <div class="wm-group-title">🔵 กำลังทำอยู่ (4)</div>
 <div class="wm-tiles wm-list" id="wm-list">
@@ -274,31 +278,95 @@ type: "dashboard"
 
 <script>
 (function () {
-  var tiles = Array.prototype.slice.call(document.querySelectorAll('.wm-tiles .wm-tile[data-wm]'));
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.wm-tiles .wm-tile'));
+  var clickable = tiles.filter(function (t) { return t.dataset.wm; });
   var panels = Array.prototype.slice.call(document.querySelectorAll('.wm-detail'));
   var back = document.getElementById('wm-back');
+  var search = document.getElementById('wm-search');
+  var lastChip = document.getElementById('wm-last');
 
-  function show(id) {
-    // ซ่อน "รายการงาน" ทั้งบล็อกเมื่อเปิดรายละเอียด (และกลับมาเมื่อกดกลับ)
-    document.querySelectorAll('.wm-list, .wm-group-title').forEach(function (el) {
-      el.hidden = !!id;
-    });
+  function setChrome(id) {
+    document.querySelectorAll('.wm-list, .wm-group-title').forEach(function (el) { el.hidden = !!id; });
     panels.forEach(function (p) { p.hidden = (p.id !== id); });
     tiles.forEach(function (t) { t.classList.toggle('is-active', t.dataset.wm === id); });
     back.hidden = !id;
+    if (lastChip) lastChip.hidden = !!id;
+    if (id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+
+  function remember(id) {
+    try { localStorage.setItem('pd_last_card', id); } catch (e) {}
+  }
+
+  function openCard(id, pushHash) {
+    setChrome(id);
+    renderLast();
     if (id) {
-      var el = document.getElementById(id);
-      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    } else {
-      var g = document.getElementById('wm-list');
-      if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      remember(id);
+      if (pushHash && location.hash !== '#workmap/' + id) { location.hash = 'workmap/' + id; }
+    } else if (pushHash && location.hash !== '#workmap') {
+      location.hash = 'workmap';
     }
   }
 
-  tiles.forEach(function (t) {
-    t.addEventListener('click', function () { show(t.dataset.wm); });
+  function hashCard() {
+    var parts = (location.hash || '').replace(/^#/, '').split('/');
+    return parts[0] === 'workmap' ? (parts[1] || '') : null;
+  }
+
+  clickable.forEach(function (t) {
+    t.addEventListener('click', function () { openCard(t.dataset.wm, true); });
   });
-  if (back) { back.addEventListener('click', function () { show(null); }); }
+  if (back) { back.addEventListener('click', function () { openCard(null, true); }); }
+
+  // เปิด/ปิดตาม URL (กด refresh แล้วอยู่หน้าเดิม · ปุ่มย้อนกลับของมือถือใช้ได้)
+  window.addEventListener('hashchange', function () {
+    var id = hashCard();
+    if (id === null) { return; }
+    setChrome(id || null);
+  });
+  window.addEventListener('pd:route', function (e) {
+    var h = (e.detail && e.detail.hash) || location.hash.replace(/^#/, '');
+    if (h.indexOf('workmap') !== 0) { return; }
+    setChrome(h.split('/')[1] || null);
+  });
+
+  // ค้นหางาน
+  if (search) {
+    search.addEventListener('input', function () {
+      var q = (search.value || '').trim().toLowerCase();
+      document.querySelectorAll('.wm-tiles').forEach(function (grid) {
+        var visible = 0;
+        grid.querySelectorAll('.wm-tile').forEach(function (t) {
+          var ok = !q || (t.textContent || '').toLowerCase().indexOf(q) >= 0;
+          t.hidden = !ok;
+          if (ok) visible++;
+        });
+        var title = grid.previousElementSibling;
+        if (title && title.classList.contains('wm-group-title')) { title.hidden = (visible === 0); }
+      });
+    });
+  }
+
+  // ป้าย "ดูล่าสุด"
+  function renderLast() {
+    if (!lastChip) return;
+    var id = '';
+    try { id = localStorage.getItem('pd_last_card') || ''; } catch (e) {}
+    var tile = id ? document.querySelector('.wm-tile[data-wm="' + id + '"]') : null;
+    if (!tile) { lastChip.hidden = true; return; }
+    var name = tile.querySelector('.wm-tile-name');
+    lastChip.hidden = false;
+    lastChip.innerHTML = '🕘 ดูครั้งล่าสุด: ';
+    var b = document.createElement('button');
+    b.className = 'wm-last-btn';
+    b.textContent = name ? name.textContent : id;
+    b.addEventListener('click', function () { openCard(id, true); });
+    lastChip.appendChild(b);
+  }
+
+  var initial = hashCard();
+  if (initial) { openCard(initial, false); } else { renderLast(); }
 })();
 </script>
 ```

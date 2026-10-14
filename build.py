@@ -219,6 +219,23 @@ def build():
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>พาเที่ยว Dashboard — ภาพรวมธุรกิจ Ichino Tour</title>
+<meta name="theme-color" content="#0f172a">
+<meta name="description" content="กระดานงาน พี่เจ &amp; พาเที่ยว — แผนที่งาน สถานะ และความคืบหน้า">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="พาเที่ยว">
+<script>
+  // โหมดสว่าง/มืด + ขนาดตัวอักษร: อ่านค่าที่จำไว้ก่อนวาดหน้า (กันหน้าสว่างวาบ) — เฟส 1, 14 ต.ค. 69
+  (function () {{
+    try {{
+      var t = localStorage.getItem('pd_theme');
+      if (t === 'light') document.documentElement.classList.add('light');
+      var f = localStorage.getItem('pd_font');
+      if (f) document.documentElement.style.fontSize = f + 'px';
+    }} catch (e) {{}}
+  }})();
+</script>
 <style>
 :root {{
   --bg:#0f172a; --card:#1e293b; --card2:#273449; --line:#334155;
@@ -234,6 +251,35 @@ header {{ position:sticky; top:0; background:rgba(15,23,42,.92); backdrop-filter
 nav {{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }}
 .nav-link {{ color:var(--muted); text-decoration:none; font-size:13px; padding:5px 12px; border:1px solid var(--line); border-radius:20px; }}
 .nav-link:hover, .nav-link.active {{ color:var(--bg); background:var(--accent); border-color:var(--accent); }}
+.brand-row {{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }}
+.tools {{ display:flex; gap:6px; align-items:center; }}
+.tool-btn {{ border:1px solid var(--line); background:var(--card2); color:var(--text); font-family:inherit;
+  font-size:13px; padding:5px 10px; border-radius:9px; cursor:pointer; line-height:1.2; }}
+.tool-btn:hover {{ border-color:var(--accent); color:var(--accent); }}
+.section {{ animation:secIn .22s ease-out; }}
+@keyframes secIn {{ from {{ opacity:0; transform:translateY(6px); }} to {{ opacity:1; transform:none; }} }}
+#to-top {{ position:fixed; right:16px; bottom:18px; z-index:20; display:none; width:46px; height:46px;
+  border-radius:50%; border:1px solid var(--line); background:var(--card2); color:var(--accent);
+  font-size:19px; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,.35); }}
+#to-top.show {{ display:block; animation:secIn .2s ease-out; }}
+@media (prefers-reduced-motion: reduce) {{ .section, #to-top.show {{ animation:none; }} }}
+/* โหมดสว่าง */
+html.light {{ --bg:#f6f7fb; --card:#ffffff; --card2:#eef2f7; --line:#d7dee8;
+  --text:#16202f; --muted:#5b6b80; --accent:#0b74c4; --good:#128a4b; --warn:#a9760a; --bad:#c0392b; --accent2:#4f46e5; }}
+html.light body {{ background:var(--bg); color:var(--text); }}
+html.light header {{ background:rgba(246,247,251,.92); }}
+html.light strong {{ color:#0b1220; }}
+html.light .tag.good {{ background:rgba(18,138,75,.12); }}
+html.light .tag.info {{ background:rgba(11,116,196,.12); }}
+html.light .tag.warn {{ background:rgba(169,118,10,.14); }}
+html.light .wm {{ background:linear-gradient(180deg,#ffffff,#f8fafc); }}
+html.light .wm-phase {{ background:#f4f7fb; }}
+html.light .wm-goal, html.light .wm-card, html.light .wm-step, html.light .wm-tile {{ background:#fff; }}
+html.light .wm-tile-name {{ color:#16202f; }}
+html.light .wm-progress .wm-bar {{ background:#e6ebf3; }}
+html.light .wm-pnum {{ color:#fff; }}
+html.light pre {{ background:#eef2f7; }}
+html.light .wm-glow {{ opacity:.5; }}
 main {{ max-width:1000px; margin:0 auto; padding:24px 16px 80px; }}
 .section {{ background:var(--card); border:1px solid var(--line); border-radius:16px; padding:24px; margin-bottom:24px; }}
 h1 {{ font-size:22px; color:var(--accent); margin-bottom:12px; }}
@@ -283,6 +329,14 @@ footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; b
 .wm-back {{ border:1px solid var(--line); background:var(--card2); color:var(--accent); font-family:inherit;
   font-size:13px; font-weight:700; padding:8px 14px; border-radius:10px; cursor:pointer; }}
 .wm-back:hover {{ background:var(--accent); color:#0b1220; }}
+.wm-tools {{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }}
+.wm-search {{ font-family:inherit; font-size:14px; color:var(--text); background:var(--card2);
+  border:1px solid var(--line); border-radius:10px; padding:8px 12px; min-width:240px; }}
+.wm-search:focus {{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,189,248,.15); }}
+.wm-last {{ font-size:13.5px; color:var(--muted); margin:2px 0 12px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }}
+.wm-last-btn {{ font-family:inherit; font-size:13.5px; cursor:pointer; border:1px dashed var(--line);
+  background:transparent; color:var(--accent); border-radius:999px; padding:4px 12px; }}
+.wm-last-btn:hover {{ border-style:solid; border-color:var(--accent); }}
 .wm-group-title {{ font-size:13px; color:var(--muted); margin:14px 0 8px; letter-spacing:.4px; }}
 .wm-tiles {{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:12px; margin-bottom:8px; }}
 .wm-tile {{ display:flex; flex-direction:column; gap:5px; text-align:left; cursor:pointer; font-family:inherit;
@@ -299,7 +353,7 @@ footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; b
 .wm-tile.is-empty:hover {{ transform:none; box-shadow:none; border-left-color:#475569; }}
 .wm-detail[hidden] {{ display:none !important; }}
 /* สำคัญ: element ที่มี display:grid/flex จาก CSS จะไม่สนใจ attribute hidden ⇒ ต้องสั่ง display:none เอง (14 ต.ค. 69) */
-.wm-list[hidden], .wm-group-title[hidden], .wm-tiles[hidden] {{ display:none !important; }}
+.wm-list[hidden], .wm-group-title[hidden], .wm-tiles[hidden], .wm-tile[hidden] {{ display:none !important; }}
 .wm-detail {{ animation:wmIn .32s ease-out; }}
 @keyframes wmIn {{ from {{ opacity:0; transform:translateY(10px); }} to {{ opacity:1; transform:none; }} }}
 @media (prefers-reduced-motion: reduce) {{ .wm-detail {{ animation:none; }} }}
@@ -396,11 +450,21 @@ footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; b
 <body>
 <header>
   <div class="brand">
-    <h1>🗺️ พาเที่ยว Dashboard</h1>
-    <span class="sub">ภาพรวมธุรกิจ Ichino Tour — กระดานโน้ต พี่เจ &amp; พาเที่ยว</span>
+    <div class="brand-row">
+      <div>
+        <h1>🗺️ พาเที่ยว Dashboard</h1>
+        <span class="sub">ภาพรวมธุรกิจ Ichino Tour — กระดานโน้ต พี่เจ &amp; พาเที่ยว</span>
+      </div>
+      <div class="tools">
+        <button class="tool-btn" id="btn-font-minus" title="ตัวอักษรเล็กลง">A−</button>
+        <button class="tool-btn" id="btn-font-plus" title="ตัวอักษรใหญ่ขึ้น">A+</button>
+        <button class="tool-btn" id="btn-theme" title="สลับโหมดสว่าง/มืด">☀️ สว่าง</button>
+      </div>
+    </div>
   </div>
   <nav>{nav}</nav>
 </header>
+<button id="to-top" aria-label="กลับขึ้นบนสุด" title="กลับขึ้นบนสุด">↑</button>
 <main>
 {''.join(sections)}
 </main>
@@ -462,18 +526,81 @@ document.getElementById('note-submit').addEventListener('click', async () => {{
   }}
 }});
 
+/* ---------- เฟส 1: นำทางด้วย URL (#งาน) · โหมดสว่าง-มืด · ขนาดตัวอักษร · ปุ่มขึ้นบนสุด · PWA ---------- */
+const FONT_STEPS = [15, 16, 17, 18, 20];
+
+function showSection(key, scrollTop) {{
+  var el = document.getElementById(key);
+  if (!el) {{ key = 'overview'; el = document.getElementById(key); }}
+  document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+  if (el) el.style.display = 'block';
+  document.querySelectorAll('.nav-link').forEach(x => x.classList.toggle('active', x.dataset.target === key));
+  if (scrollTop !== false) window.scrollTo({{ top: 0, behavior: 'smooth' }});
+}}
+
+function routeFromHash() {{
+  var h = (location.hash || '').replace(/^#/, '');
+  var key = h.split('/')[0] || 'overview';
+  showSection(key, false);
+  // แจ้งให้ส่วนอื่น (เช่น แผนที่งาน) รู้ว่ามีการเปลี่ยนเส้นทาง
+  window.dispatchEvent(new CustomEvent('pd:route', {{ detail: {{ hash: h }} }}));
+}}
+
 document.querySelectorAll('.nav-link').forEach(a => {{
   a.addEventListener('click', e => {{
     e.preventDefault();
-    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-    document.getElementById(a.dataset.target).style.display = 'block';
-    document.querySelectorAll('.nav-link').forEach(x => x.classList.remove('active'));
-    a.classList.add('active');
+    if (location.hash === '#' + a.dataset.target) {{ routeFromHash(); return; }}
+    location.hash = a.dataset.target;   // hashchange จะเรียก routeFromHash เอง
   }});
 }});
+window.addEventListener('hashchange', routeFromHash);
+
+/* ปุ่มขนาดตัวอักษร + โหมดสว่าง/มืด */
+function currentFont() {{
+  var v = parseInt(localStorage.getItem('pd_font') || '16', 10);
+  return FONT_STEPS.indexOf(v) >= 0 ? v : 16;
+}}
+function applyFont(px) {{
+  document.documentElement.style.fontSize = px + 'px';
+  try {{ localStorage.setItem('pd_font', String(px)); }} catch (e) {{}}
+}}
+document.getElementById('btn-font-plus').addEventListener('click', () => {{
+  const i = FONT_STEPS.indexOf(currentFont());
+  applyFont(FONT_STEPS[Math.min(i + 1, FONT_STEPS.length - 1)]);
+}});
+document.getElementById('btn-font-minus').addEventListener('click', () => {{
+  const i = FONT_STEPS.indexOf(currentFont());
+  applyFont(FONT_STEPS[Math.max(i - 1, 0)]);
+}});
+const themeBtn = document.getElementById('btn-theme');
+function syncThemeBtn() {{
+  const light = document.documentElement.classList.contains('light');
+  themeBtn.textContent = light ? '🌙 มืด' : '☀️ สว่าง';
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', light ? '#f6f7fb' : '#0f172a');
+}}
+themeBtn.addEventListener('click', () => {{
+  const light = document.documentElement.classList.toggle('light');
+  try {{ localStorage.setItem('pd_theme', light ? 'light' : 'dark'); }} catch (e) {{}}
+  syncThemeBtn();
+}});
+syncThemeBtn();
+
+/* ปุ่มกลับขึ้นบนสุด */
+const toTop = document.getElementById('to-top');
+window.addEventListener('scroll', () => {{
+  toTop.classList.toggle('show', window.scrollY > 480);
+}}, {{ passive: true }});
+toTop.addEventListener('click', () => window.scrollTo({{ top: 0, behavior: 'smooth' }}));
+
+/* PWA: ติดตั้งเป็นแอปบนมือถือ + เปิดอ่านได้ตอนเน็ตหลุด */
+if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {{
+  navigator.serviceWorker.register('./sw.js').catch(() => {{}});
+}}
+
 (function() {{
-  const first = document.querySelector('.section');
-  if (first) first.style.display = 'block';
+  if (!location.hash) {{ location.replace('#overview'); }}
+  routeFromHash();
   loadNotes();
 }})();
 </script>

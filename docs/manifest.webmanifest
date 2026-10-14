@@ -1,0 +1,17 @@
+{
+  "name": "พาเที่ยว Dashboard",
+  "short_name": "พาเที่ยว",
+  "description": "กระดานงาน พี่เจ & พาเที่ยว — แผนที่งาน สถานะ และความคืบหน้า",
+  "lang": "th",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
