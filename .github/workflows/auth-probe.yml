@@ -68,17 +68,7 @@ jobs:
             -d '{"options":{"requestedPolicyVersion":3}}')
           echo "getIamPolicy -> http=$code"
           if [ "$code" = "200" ]; then
-            python3 - <<'PY'
-import json, re
-d = json.load(open('/tmp/iam.json'))
-def mask(m):
-    if not m.startswith('user:'): return m
-    e = m[5:]; name, _, dom = e.partition('@')
-    return f"user:{name[:2]}***@{dom}"
-for b in d.get('bindings', []):
-    if b.get('role','').endswith(('owner','editor','firebaseauth.admin','firebase.projects.admin','firebaserules.admin')):
-        print(' ', b['role'], '->', ', '.join(mask(m) for m in b.get('members', [])[:5]))
-PY
+            python3 -c "import json;d=json.load(open('/tmp/iam.json'));f=lambda e:'user:'+e.split('@')[0][:2]+'***@'+e.split('@')[1];m=lambda x:x if not x.startswith('user:') else f(x[5:]);[print(' ',b['role'],'->',', '.join(m(x) for x in b.get('members',[])[:5])) for b in d.get('bindings',[]) if any(k in b.get('role','') for k in ('owner','editor','firebaseauth','firebase.projects','firebaserules'))]"
           else
             head -c 300 /tmp/iam.json; echo
           fi
