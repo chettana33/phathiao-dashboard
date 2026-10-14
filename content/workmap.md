@@ -16,6 +16,7 @@ type: "dashboard"
     <button class="wm-back" id="wm-back" hidden>← กลับไปดูงานทั้งหมด</button>
   </div>
 </div>
+<div class="wm-live" id="wm-live"><span class="wm-live-dot"></span><span class="wm-live-text">กำลังตรวจข้อมูลสด…</span></div>
 <div class="wm-last" id="wm-last" hidden></div>
 
 <div class="wm-group-title">🔵 กำลังทำอยู่ (4)</div>
@@ -452,8 +453,46 @@ type: "dashboard"
     });
   });
 
+  /* ---------- เฟส 2: สถานะสดจาก Firestore (dashboard_state) ---------- */
+  function renderLive(doc) {
+    var live = document.getElementById('wm-live');
+    if (!live) return;
+    var text = live.querySelector('.wm-live-text');
+    if (!doc) {
+      live.classList.add('is-stale');
+      if (text) text.textContent = 'ยังไม่ได้ดันสถานะสด (ใช้ตัวเลขจากไฟล์ล่าสุด)';
+      return;
+    }
+    var data = {};
+    try { data = JSON.parse(doc.payload || '{}'); } catch (e) {}
+    var when = doc.updatedAt && doc.updatedAt.toDate ? doc.updatedAt.toDate().toLocaleString('th-TH') : '';
+    (data.cards || []).forEach(function (c) {
+      var codeEl = Array.prototype.slice.call(document.querySelectorAll('.wm-tile-code'))
+        .filter(function (el) { return el.textContent.trim() === c.code; })[0];
+      if (!codeEl) return;
+      var tile = codeEl.closest('.wm-tile');
+      var meta = tile && tile.querySelector('.wm-tile-meta');
+      if (meta) { meta.textContent = meta.textContent.replace(/งานค้าง\s*\d+/, 'งานค้าง ' + c.pending); }
+    });
+    live.classList.remove('is-stale');
+    live.classList.add('is-fresh');
+    if (text) {
+      text.textContent = 'ข้อมูลสด · อัปเดต ' + when + ' · งานค้างรวม ' + (data.pendingTotal || 0) +
+        ' · checkpoint ' + (data.checkpointDate || '-');
+    }
+  }
+
+  function loadLive() {
+    try {
+      db.collection('dashboard_state').orderBy('updatedAt', 'desc').limit(1).get()
+        .then(function (snap) { renderLive(snap.empty ? null : snap.docs[0].data()); })
+        .catch(function () { renderLive(null); });
+    } catch (e) { renderLive(null); }
+  }
+
   var initial = hashCard();
   if (initial) { openCard(initial, false); } else { renderLast(); }
+  loadLive();
 })();
 </script>
 ```

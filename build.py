@@ -337,6 +337,14 @@ footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; b
 .wm-last-btn {{ font-family:inherit; font-size:13.5px; cursor:pointer; border:1px dashed var(--line);
   background:transparent; color:var(--accent); border-radius:999px; padding:4px 12px; }}
 .wm-last-btn:hover {{ border-style:solid; border-color:var(--accent); }}
+.wm-live {{ display:flex; align-items:center; gap:9px; font-size:13px; color:var(--muted);
+  background:rgba(15,23,42,.55); border:1px solid var(--line); border-radius:10px; padding:7px 12px; margin:0 0 12px; }}
+.wm-live-dot {{ width:9px; height:9px; border-radius:50%; background:#475569; flex:0 0 auto; }}
+.wm-live.is-fresh .wm-live-dot {{ background:var(--good); animation:wmLive 2.4s ease-in-out infinite; }}
+.wm-live.is-stale .wm-live-dot {{ background:var(--warn); }}
+@keyframes wmLive {{ 0%,100% {{ box-shadow:0 0 0 0 rgba(74,222,128,.5); }} 50% {{ box-shadow:0 0 0 6px rgba(74,222,128,0); }} }}
+html.light .wm-live {{ background:#f4f7fb; }}
+@media (prefers-reduced-motion: reduce) {{ .wm-live.is-fresh .wm-live-dot {{ animation:none; }} }}
 .wm-notes {{ margin-top:16px; background:rgba(15,23,42,.55); border:1px solid var(--line); border-radius:14px; padding:14px 16px; }}
 .wm-notes-head {{ font-size:14.5px; color:var(--accent); font-weight:700; margin-bottom:9px; }}
 .wm-notes-input textarea {{ width:100%; font-family:inherit; font-size:14.5px; color:var(--text); background:var(--card);
