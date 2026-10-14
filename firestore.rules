@@ -2,6 +2,13 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
+    // เจ้าของกระดาน (อนุญาตเฉพาะบัญชีของพี่เจ) — ใช้กับข้อมูลที่ไม่ขึ้นสาธารณะ
+    function isOwner() {
+      return request.auth != null
+             && request.auth.token.email_verified == true
+             && request.auth.token.email in ['kimonoland.jp1@gmail.com', 'chettana33@gmail.com'];
+    }
+
     // dashboard_notes: กระดานไอเดียกลาง — อ่านได้ทุกคน · เพิ่มได้ · แก้/ลบต้องทำในคอนโซล
     match /dashboard_notes/{noteId} {
       allow read: if true;
@@ -39,6 +46,19 @@ service cloud.firestore {
                     && request.resource.data.source.size() <= 40
                     && request.resource.data.payload is string
                     && request.resource.data.payload.size() <= 200000;
+      allow update, delete: if false;
+    }
+
+    // private_notes: โน้ตส่วนตัวของพี่เจ — อ่าน/เพิ่มได้เฉพาะบัญชีที่อนุญาต (ต้องล็อกอิน)
+    // คนอื่น (รวมคนที่ไม่ได้ล็อกอิน) อ่านไม่ได้เลย ⇒ ข้อมูลไม่รั่วแม้ URL เว็บเป็นสาธารณะ
+    match /private_notes/{noteId} {
+      allow read: if isOwner();
+      allow create: if isOwner()
+                    && request.resource.data.text is string
+                    && request.resource.data.text.size() >= 1
+                    && request.resource.data.text.size() <= 5000
+                    && request.resource.data.created is timestamp
+                    && request.resource.data.email is string;
       allow update, delete: if false;
     }
   }

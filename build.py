@@ -388,6 +388,17 @@ html.light .wm-notes-input textarea {{ background:#fff; }}
 html.light .pv-card {{ background:linear-gradient(180deg,#fff,#f6f9fc); }}
 html.light .pv-help {{ background:#f4f7fb; }}
 html.light .pv-box {{ background:#fff; }}
+/* โน้ตส่วนตัว */
+.pv-btn-sm {{ padding:8px 16px; font-size:13.5px; }}
+.pv-notes textarea {{ width:100%; font-family:inherit; font-size:14px; color:var(--text); background:var(--bg);
+  border:1px solid var(--line); border-radius:9px; padding:9px 11px; resize:vertical; }}
+.pv-notes textarea:focus {{ outline:none; border-color:var(--accent); }}
+.pv-notes-actions {{ display:flex; align-items:center; gap:10px; margin-top:7px; flex-wrap:wrap; }}
+.pv-notes-list {{ margin-top:10px; display:flex; flex-direction:column; gap:7px; max-height:260px; overflow:auto; }}
+.pv-note {{ background:var(--card2); border:1px solid var(--line); border-left:3px solid var(--good);
+  border-radius:9px; padding:8px 11px; font-size:13.5px; }}
+.pv-note-meta {{ color:var(--muted); font-size:11px; margin-top:3px; }}
+html.light .pv-note {{ background:#f4f7fb; }}
 .wm-tiles {{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:12px; margin-bottom:8px; }}
 .wm-tile {{ display:flex; flex-direction:column; gap:5px; text-align:left; cursor:pointer; font-family:inherit;
   background:linear-gradient(180deg, rgba(39,52,73,.9), rgba(30,41,59,.75)); color:var(--text);

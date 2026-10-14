@@ -42,6 +42,17 @@ type: "dashboard"
         </ul>
       </div>
       <div class="pv-box">
+        <h4>โน้ตส่วนตัวของพี่เจ</h4>
+        <div class="pv-notes">
+          <textarea id="pvn-text" rows="2" maxlength="5000" placeholder="พิมพ์เรื่องส่วนตัว/การเงิน/ลูกค้า… (เห็นเฉพาะตอนล็อกอิน)"></textarea>
+          <div class="pv-notes-actions">
+            <button class="pv-btn pv-btn-sm" id="pvn-save">บันทึก</button>
+            <span class="pv-msg" id="pvn-msg"></span>
+          </div>
+          <div class="pv-notes-list" id="pvn-list"><span class="pv-sub">กำลังโหลด…</span></div>
+        </div>
+      </div>
+      <div class="pv-box">
         <h4>สถานะระบบ</h4>
         <ul>
           <li>อ่านข้อมูลส่วนตัวจากฐานข้อมูลได้เฉพาะบัญชีที่อนุญาต</li>
@@ -84,12 +95,74 @@ type: "dashboard"
       return 'เข้าใช้ไม่สำเร็จ: ' + (code || raw || 'ไม่ทราบสาเหตุ');
     }
 
+    var ALLOW = ['kimonoland.jp1@gmail.com', 'chettana33@gmail.com'];
+
     firebase.auth().onAuthStateChanged(function (user) {
       var ok = !!user;
       locked.hidden = ok;
       inside.hidden = !ok;
-      if (ok) { who.textContent = 'บัญชี: ' + (user.email || '') + ' · ' + (user.displayName || ''); }
+      if (!ok) { return; }
+      var email = (user.email || '').toLowerCase();
+      if (ALLOW.indexOf(email) === -1) {
+        msg.textContent = 'บัญชีนี้ไม่ได้รับอนุญาตสำหรับพื้นที่ส่วนตัว (' + email + ') — กำลังออกจากระบบ';
+        firebase.auth().signOut();
+        return;
+      }
+      who.textContent = 'บัญชี: ' + email + ' · ' + (user.displayName || '');
+      loadPrivateNotes();
     });
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function loadPrivateNotes() {
+      var list = document.getElementById('pvn-list');
+      if (!list) return;
+      list.innerHTML = '<span class="pv-sub">กำลังโหลด…</span>';
+      db.collection('private_notes').get().then(function (snap) {
+        if (snap.empty) { list.innerHTML = '<span class="pv-sub">ยังไม่มีโน้ตส่วนตัว</span>'; return; }
+        var rows = snap.docs.map(function (d) { return d.data(); });
+        rows.sort(function (a, b) {
+          var ta = a.created && a.created.toDate ? a.created.toDate().getTime() : 0;
+          var tb = b.created && b.created.toDate ? b.created.toDate().getTime() : 0;
+          return tb - ta;
+        });
+        list.innerHTML = rows.slice(0, 30).map(function (r) {
+          var when = r.created && r.created.toDate ? r.created.toDate().toLocaleString('th-TH') : '';
+          return '<div class="pv-note"><div>' + esc(r.text) + '</div><div class="pv-note-meta">' +
+            esc(r.email || '') + ' · ' + esc(when) + '</div></div>';
+        }).join('');
+      }).catch(function (e) {
+        list.innerHTML = '<span class="pv-sub">โหลดไม่ได้: ' + esc(String(e.message || e)) + '</span>';
+      });
+    }
+
+    var saveBtn = document.getElementById('pvn-save');
+    if (saveBtn) {
+      saveBtn.addEventListener('click', function () {
+        var ta = document.getElementById('pvn-text');
+        var m = document.getElementById('pvn-msg');
+        var user = firebase.auth().currentUser;
+        var text = (ta && ta.value || '').trim();
+        if (!user) { if (m) m.textContent = 'ต้องล็อกอินก่อน'; return; }
+        if (!text) { if (m) m.textContent = 'พิมพ์ข้อความก่อน'; return; }
+        if (m) m.textContent = 'กำลังบันทึก…';
+        db.collection('private_notes').add({
+          text: text,
+          email: user.email || '',
+          created: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(function () {
+          if (ta) ta.value = '';
+          if (m) m.textContent = '✅ บันทึกแล้ว (เห็นเฉพาะบัญชีพี่เจ)';
+          loadPrivateNotes();
+        }).catch(function (e) {
+          if (m) m.textContent = '❌ บันทึกไม่ได้: ' + String(e.message || e);
+        });
+      });
+    }
 
     btnIn.addEventListener('click', function () {
       msg.textContent = 'กำลังเปิดหน้าต่างล็อกอิน…';
