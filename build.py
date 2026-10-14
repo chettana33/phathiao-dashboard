@@ -627,6 +627,9 @@ if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {{
   if (!location.hash) {{ location.replace('#overview'); }}
   routeFromHash();
   loadNotes();
+  // บอกส่วนอื่นในหน้า (เช่น แผนที่งาน) ว่า Firebase พร้อมแล้ว — กัน ReferenceError ตอนสคริปต์ในเนื้อหารันก่อน
+  window.__pdReady = true;
+  window.dispatchEvent(new CustomEvent('pd:ready'));
 }})();
 </script>
 </body>

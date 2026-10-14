@@ -326,7 +326,7 @@ type: "dashboard"
   function openCard(id, pushHash) {
     setChrome(id);
     renderLast();
-    if (id) { loadCardNotes(id.replace('pc', 'PC-')); }
+    if (id) { whenDb(function () { loadCardNotes(id.replace('pc', 'PC-')); }); }
     if (id) {
       remember(id);
       if (pushHash && location.hash !== '#workmap/' + id) { location.hash = 'workmap/' + id; }
@@ -356,7 +356,7 @@ type: "dashboard"
     if (h.indexOf('workmap') !== 0) { return; }
     var cid = h.split('/')[1] || null;
     setChrome(cid);
-    if (cid) { loadCardNotes(cid.replace('pc', 'PC-')); }
+    if (cid) { whenDb(function () { loadCardNotes(cid.replace('pc', 'PC-')); }); }
   });
 
   // ค้นหางาน
@@ -391,6 +391,12 @@ type: "dashboard"
     b.textContent = name ? name.textContent : id;
     b.addEventListener('click', function () { openCard(id, true); });
     lastChip.appendChild(b);
+  }
+
+  /* รอให้สคริปต์หลัก (ที่ init Firebase) ประกาศว่าพร้อมก่อน — กัน ReferenceError ตอนสคริปต์ในเนื้อหารันก่อน */
+  function whenDb(fn) {
+    if (window.__pdReady && typeof db !== 'undefined') { fn(); return; }
+    window.addEventListener('pd:ready', function () { fn(); }, { once: true });
   }
 
   /* ---------- เฟส 2: โน้ตต่อการ์ด (Firestore) ---------- */
@@ -437,6 +443,7 @@ type: "dashboard"
       var msg = document.querySelector('.wm-note-msg[data-card="' + card + '"]');
       var text = (ta && ta.value || '').trim();
       if (!text) { if (msg) msg.textContent = 'พิมพ์ข้อความก่อน'; return; }
+      if (!window.__pdReady) { if (msg) msg.textContent = 'ระบบยังโหลดไม่เสร็จ ลองอีกครั้ง'; return; }
       if (msg) msg.textContent = 'กำลังบันทึก…';
       db.collection('card_notes').add({
         card: card,
@@ -492,7 +499,7 @@ type: "dashboard"
 
   var initial = hashCard();
   if (initial) { openCard(initial, false); } else { renderLast(); }
-  loadLive();
+  whenDb(loadLive);
 })();
 </script>
 ```
