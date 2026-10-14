@@ -15,7 +15,7 @@ type: "dashboard"
 </div>
 
 <div class="wm-group-title">🔵 กำลังทำอยู่ (4)</div>
-<div class="wm-tiles" id="wm-tiles">
+<div class="wm-tiles wm-list" id="wm-list">
 
   <button class="wm-tile" data-wm="pc009">
     <span class="wm-tile-code">PC-009</span>
@@ -48,7 +48,7 @@ type: "dashboard"
 </div>
 
 <div class="wm-group-title">🟡 รอพี่เจ / รอของ (5)</div>
-<div class="wm-tiles">
+<div class="wm-tiles wm-list">
 
   <button class="wm-tile is-empty" disabled>
     <span class="wm-tile-code">PC-012</span>
@@ -88,7 +88,7 @@ type: "dashboard"
 </div>
 
 <div class="wm-group-title">⏳ รอคำสั่งเริ่ม (1)</div>
-<div class="wm-tiles">
+<div class="wm-tiles wm-list">
 
   <button class="wm-tile is-empty" disabled>
     <span class="wm-tile-code">PC-008</span>
@@ -274,11 +274,15 @@ type: "dashboard"
 
 <script>
 (function () {
-  var tiles = Array.prototype.slice.call(document.querySelectorAll('#wm-tiles .wm-tile[data-wm]'));
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.wm-tiles .wm-tile[data-wm]'));
   var panels = Array.prototype.slice.call(document.querySelectorAll('.wm-detail'));
   var back = document.getElementById('wm-back');
 
   function show(id) {
+    // ซ่อน "รายการงาน" ทั้งบล็อกเมื่อเปิดรายละเอียด (และกลับมาเมื่อกดกลับ)
+    document.querySelectorAll('.wm-list, .wm-group-title').forEach(function (el) {
+      el.hidden = !!id;
+    });
     panels.forEach(function (p) { p.hidden = (p.id !== id); });
     tiles.forEach(function (t) { t.classList.toggle('is-active', t.dataset.wm === id); });
     back.hidden = !id;
@@ -286,7 +290,7 @@ type: "dashboard"
       var el = document.getElementById(id);
       if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     } else {
-      var g = document.getElementById('wm-tiles');
+      var g = document.getElementById('wm-list');
       if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     }
   }

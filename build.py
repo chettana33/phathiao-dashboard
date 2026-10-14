@@ -298,6 +298,8 @@ footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; b
 .wm-tile.is-empty {{ cursor:default; opacity:.5; border-left-color:#475569; }}
 .wm-tile.is-empty:hover {{ transform:none; box-shadow:none; border-left-color:#475569; }}
 .wm-detail[hidden] {{ display:none !important; }}
+/* สำคัญ: element ที่มี display:grid/flex จาก CSS จะไม่สนใจ attribute hidden ⇒ ต้องสั่ง display:none เอง (14 ต.ค. 69) */
+.wm-list[hidden], .wm-group-title[hidden], .wm-tiles[hidden] {{ display:none !important; }}
 .wm-detail {{ animation:wmIn .32s ease-out; }}
 @keyframes wmIn {{ from {{ opacity:0; transform:translateY(10px); }} to {{ opacity:1; transform:none; }} }}
 @media (prefers-reduced-motion: reduce) {{ .wm-detail {{ animation:none; }} }}

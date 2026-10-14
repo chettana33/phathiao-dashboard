@@ -83,6 +83,8 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 .wm-tile.is-empty { cursor:default; opacity:.5; border-left-color:#475569; }
 .wm-tile.is-empty:hover { transform:none; box-shadow:none; border-left-color:#475569; }
 .wm-detail[hidden] { display:none !important; }
+/* สำคัญ: element ที่มี display:grid/flex จาก CSS จะไม่สนใจ attribute hidden ⇒ ต้องสั่ง display:none เอง (14 ต.ค. 69) */
+.wm-list[hidden], .wm-group-title[hidden], .wm-tiles[hidden] { display:none !important; }
 .wm-detail { animation:wmIn .32s ease-out; }
 @keyframes wmIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
 @media (prefers-reduced-motion: reduce) { .wm-detail { animation:none; } }
@@ -185,7 +187,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
   <nav><a href="#overview" class="nav-link" data-target="overview">ภาพรวม</a><a href="#workmap" class="nav-link" data-target="workmap">แผนที่งาน</a><a href="#status" class="nav-link" data-target="status">สถานะงาน</a><a href="#systemmap" class="nav-link" data-target="systemmap">System Map</a><a href="#minimax" class="nav-link" data-target="minimax">MiniMax Studio</a><a href="#characters" class="nav-link" data-target="characters">ตัวละคร</a><a href="#checkpoint" class="nav-link" data-target="checkpoint">Checkpoint</a><a href="#memory" class="nav-link" data-target="memory">MEMORY</a><a href="#roadmap" class="nav-link" data-target="roadmap">ลำดับถัดไป</a><a href="#ideas" class="nav-link" data-target="ideas">กระดานไอเดีย</a></nav>
 </header>
 <main>
-<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:13:57+07:00</div>
+<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
 <h1>🗺️ ภาพรวมธุรกิจ Ichino Tour</h1>
 <p><strong>แบรนด์หน้าฉาก:</strong> Ichino Tour (Thailand) — ตัวแทน Land Operation ประเทศญี่ปุ่น (Thailand Representative)</p>
 <p><strong>หลังฉาก:</strong> พันธมิตรญี่ปุ่น 2 เจ้าให้ Net Rate + สิทธิใช้ชื่อบริษัท — ยังไม่เปิดบริษัทเอง</p>
@@ -201,7 +203,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>ซัพพลายอื่น</h2>
 <div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>รายละเอียด</th></tr></thead><tbody><tr><td><strong>King BUS = SENEI KOTSU</strong></td><td>ใบขอรถ <code>rsv@cgman.jp</code> → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ)</td></tr><tr><td><strong>CHIグループ</strong></td><td>Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน)</td></tr><tr><td><strong>Supplier ฟูจิ/ยามานาชิ</strong></td><td>Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori</td></tr></tbody></table></div>
 <blockquote>⛔ <strong>ต้นสังกัด kimono</strong> — ห้ามปน / ห้ามให้รู้งานข้างเด็ดขาด (กฎ stealth)</blockquote>
-<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="workmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:13:57+07:00</div>
+<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="workmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
 <h1>🧭 แผนที่งาน (Work Map)</h1>
 <blockquote>เปิดมาเห็น <strong>ทุกงานในจอเดียว</strong> → กดช่องงานที่อยากดู → รายละเอียดเปิดในหน้านี้ ไม่ต้องเปลี่ยนหน้า</blockquote>
 <blockquote>เรียง <strong>งานที่กำลังทำอยู่ก่อน</strong> แล้วต่อด้วยงานที่รอพี่เจ/รอของ · ตัวเลขงานค้างจาก checkpoint รอบล่าสุด · อัปเดตโดยพาเที่ยวทุกครั้งที่ปิดงาน</blockquote>
@@ -211,7 +213,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 </div>
 
 <div class="wm-group-title">🔵 กำลังทำอยู่ (4)</div>
-<div class="wm-tiles" id="wm-tiles">
+<div class="wm-tiles wm-list" id="wm-list">
 
   <button class="wm-tile" data-wm="pc009">
     <span class="wm-tile-code">PC-009</span>
@@ -244,7 +246,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 </div>
 
 <div class="wm-group-title">🟡 รอพี่เจ / รอของ (5)</div>
-<div class="wm-tiles">
+<div class="wm-tiles wm-list">
 
   <button class="wm-tile is-empty" disabled>
     <span class="wm-tile-code">PC-012</span>
@@ -284,7 +286,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 </div>
 
 <div class="wm-group-title">⏳ รอคำสั่งเริ่ม (1)</div>
-<div class="wm-tiles">
+<div class="wm-tiles wm-list">
 
   <button class="wm-tile is-empty" disabled>
     <span class="wm-tile-code">PC-008</span>
@@ -470,11 +472,15 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 
 <script>
 (function () {
-  var tiles = Array.prototype.slice.call(document.querySelectorAll('#wm-tiles .wm-tile[data-wm]'));
+  var tiles = Array.prototype.slice.call(document.querySelectorAll('.wm-tiles .wm-tile[data-wm]'));
   var panels = Array.prototype.slice.call(document.querySelectorAll('.wm-detail'));
   var back = document.getElementById('wm-back');
 
   function show(id) {
+    // ซ่อน "รายการงาน" ทั้งบล็อกเมื่อเปิดรายละเอียด (และกลับมาเมื่อกดกลับ)
+    document.querySelectorAll('.wm-list, .wm-group-title').forEach(function (el) {
+      el.hidden = !!id;
+    });
     panels.forEach(function (p) { p.hidden = (p.id !== id); });
     tiles.forEach(function (t) { t.classList.toggle('is-active', t.dataset.wm === id); });
     back.hidden = !id;
@@ -482,7 +488,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
       var el = document.getElementById(id);
       if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     } else {
-      var g = document.getElementById('wm-tiles');
+      var g = document.getElementById('wm-list');
       if (g) { g.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     }
   }
@@ -492,7 +498,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
   });
   if (back) { back.addEventListener('click', function () { show(null); }); }
 })();
-</script></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:13:57+07:00</div>
+</script></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
 <h1>📊 สถานะงาน</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน (จาก checkpoint) — timestamp ด้านบน</blockquote>
 <h2>การ์ดงาน (Project Cards — PC_INDEX 7 ก.ย. 69)</h2>
@@ -507,7 +513,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>งานค้าง — ดูจาก section Checkpoint (อัตโนมัติ)</h2>
 <blockquote>รายการงานค้างที่เขียนมือในหน้านี้ <strong>ถูกลบออก 25 ก.ย. 69</strong> เพราะค้างมาตั้งแต่ 7 ก.ย. และไม่ตรงกับของจริงแล้ว</blockquote>
 <blockquote>ตั้งแต่นี้ให้อ่านจาก <strong>section Checkpoint</strong> ซึ่งดึง <code>CHECKPOINT_LATEST.md</code> จาก <code>phathiao-knowledge-brain</code> อัตโนมัติทุกชั่วโมง</blockquote>
-<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:13:57+07:00</div>
+<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
 <h1>🗺️ System Map</h1>
 <blockquote>อัปเดตล่าสุด <strong>26 ก.ย. 69 (รอบ 45)</strong> — เขียนจาก §9 System Map ของการ์ดจริง 14 ใบ (ครบทุกใบแล้ว)</blockquote>
 <blockquote>สถานะ: done (เขียว) · in_progress (ฟ้า) · blocked (แดง) · pending (เทา)</blockquote>
@@ -521,7 +527,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <p><strong>สาขา / เวอร์ชัน</strong></p>
 <div class="table-wrap"><table><thead><tr><th>ต้นทาง (ราก)</th><th>แตกเป็น / เวอร์ชัน</th><th>จำนวน</th><th>สถานะแต่ละตัว</th></tr></thead><tbody><tr><td>embedding engine</td><td>local bge-m3 (default) · API gemini (fallback) · MiniLM (สำรอง)</td><td>3</td><td>default · legacy <code>VEC_ENGINE=api</code> · collection แยก</td></tr><tr><td>collection</td><td><code>patheaw_work</code> · <code>patheaw_local</code> · <code>patheaw_bge</code></td><td>3</td><td>prod · ทดสอบ · ทดสอบ</td></tr><tr><td>วิธีเก็บเข้าคลัง</td><td>whitelist ชื่อไฟล์ (เดิม) · glob ต่อโฟลเดอร์ (26 ก.ย. 69)</td><td>2</td><td>เลิกใช้ · ใช้จริง</td></tr></tbody></table></div>
 <h2>หมายเหตุการดูแลหน้านี้</h2>
-<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:13:57+07:00</div>
+<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
 <h1>MiniMax Studio — เครื่องมือ + สถานะงาน</h1>
 <blockquote>อัปเดต 17 ก.ย. 69 (ตัวเลขจากของจริง: gateway <code>/api/v1/credit/wallet</code> · <code>list_capabilities</code> · <code>get_model_concurrency</code> · นับการใช้ tool จาก session log DSH 163 ไฟล์)</blockquote>
 <blockquote>ตัวเลขทุกบรรทัดมาจากการรันจริง — ไม่มีข้อไหนเป็น &quot;คาดว่า&quot;</blockquote>
@@ -590,7 +596,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <ul><li>โฟลเดอร์ <strong><code>พาเที่ยว_ลิงก์</code></strong> บน Desktop — shortcut เปิดแผ่นตัวละคร/โฟลเดอร์/ผลทดลอง + หน้า <code>index.html</code> รวมลิงก์</li><li>พาธฐานของแผ่น: <code>H:\My Drive\พาเที่ยว\Gochisou\TikTok\Raw\Characters &lt;ชื่อ&gt;\</code></li></ul></section><section id="checkpoint" class="section"><h1>📌 Checkpoint ล่าสุด</h1>
 <blockquote>ไฟล์นี้ถูก <strong>ดึงทับอัตโนมัติ</strong> จาก <code>phathiao-knowledge-brain</code> ตอน build (ทุก push + ทุกวัน 00:00 UTC)</blockquote>
 <blockquote>ห้ามแก้เอง — จะโดนทับ</blockquote>
-<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:13:57+07:00</div>
+<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
 <h1>🧠 พี่เจ_MEMORY — ทบทวนว่าระบบเราทำอะไรไปแล้วบ้าง</h1>
 <p>โน้ตนี้เขียนไว้ให้พี่เจอ่านกันลืม — อัปเดตเมื่อระบบเปลี่ยน ไม่ใช่บันทึกรายวัน</p>
 <h2>ระบบของเรา</h2>
@@ -607,7 +613,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>งานใหญ่ที่ค้าง</h2>
 <ul><li>ปรับ .md ทั้ง vault+repo เป็น format ใหม่ (เริ่มโปรเอกสารหลัก)</li><li>Master data: verify RAW 1,323, เติม supplier บัส, rate 13</li><li>B2B Smile Travel, ทดลอง slim, ขยาย Thin MCP 14 repo</li></ul>
 <h2>กำหนดการ</h2>
-<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:13:57+07:00</div>
+<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
 <h1>🗓️ ลำดับถัดไป (Roadmap)</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน</blockquote>
 <h2>ลำดับหลัก (ตกลงกับพี่เจแล้ว)</h2>
@@ -618,7 +624,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>Funnel ลูกค้า 3 ทาง</h2>
 <div class="table-wrap"><table><thead><tr><th>ทาง</th><th>ทำยังไง</th><th>สถานะ</th></tr></thead><tbody><tr><td>B2B direct</td><td>ทักหา 50 เจ้า ในนาม Ichino Tour + แนบ Sales Kit</td><td>ยังไม่เริ่ม (Smile #40 คิวแรก)</td></tr><tr><td>เว็บ + content</td><td>Gochisou (จองร้าน) LIVE → ลงโปรแกรมทัวร์จริง (NRT09/KIX67/CTS01) → contact form</td><td>Gochisou เริ่มแล้ว — ทัวร์ยังไม่เริ่ม</td></tr><tr><td>TikTok/Social (B2C)</td><td>1 ช่อง Gochisou — อาหาร/เคสจองจริง top-funnel → LINE/เว็บ</td><td>ตัดสินใจแล้ว — รอคอนเทนต์พร้อม</td></tr></tbody></table></div>
 <h2>ขั้นถัดไปทันที</h2>
-<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:13:57+07:00</div>
+<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:21:44+07:00</div>
 <h1>💡 กระดานไอเดีย</h1>
 <blockquote><strong>2 ช่องทางเขียน:</strong></blockquote>
 <blockquote>- <strong>พิมพ์ในเว็บ</strong> (ช่องด้านล่าง) → เก็บ Firestore → เห็นทุกเครื่อง</blockquote>
