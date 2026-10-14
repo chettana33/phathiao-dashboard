@@ -185,6 +185,18 @@ type: "dashboard"
     </div>
   </div>
 
+  <div class="wm-notes" data-card="PC-009">
+    <div class="wm-notes-head">📝 โน้ตของพี่เจ — ฝากถึงพาเที่ยวได้</div>
+    <div class="wm-notes-input">
+      <textarea class="wm-note-text" rows="2" maxlength="2000" placeholder="พิมพ์โน้ต/สิ่งที่อยากให้ทำกับงานนี้…"></textarea>
+      <div class="wm-notes-actions">
+        <button class="wm-note-save" data-card="PC-009">บันทึก</button>
+        <span class="wm-note-msg" data-card="PC-009"></span>
+      </div>
+    </div>
+    <div class="wm-notes-list" data-card="PC-009"><span class="muted">กำลังโหลดโน้ต…</span></div>
+  </div>
+
   <div class="wm-foot"><span>ที่มา: การ์ด PC-009</span><span>งานค้างทั้งหมดอยู่ใน «งานค้าง» ของการ์ด</span></div>
 </article>
 
@@ -273,6 +285,18 @@ type: "dashboard"
     </div>
   </div>
 
+  <div class="wm-notes" data-card="PC-017">
+    <div class="wm-notes-head">📝 โน้ตของพี่เจ — ฝากถึงพาเที่ยวได้</div>
+    <div class="wm-notes-input">
+      <textarea class="wm-note-text" rows="2" maxlength="2000" placeholder="พิมพ์โน้ต/สิ่งที่อยากให้ทำกับงานนี้…"></textarea>
+      <div class="wm-notes-actions">
+        <button class="wm-note-save" data-card="PC-017">บันทึก</button>
+        <span class="wm-note-msg" data-card="PC-017"></span>
+      </div>
+    </div>
+    <div class="wm-notes-list" data-card="PC-017"><span class="muted">กำลังโหลดโน้ต…</span></div>
+  </div>
+
   <div class="wm-foot"><span>ที่มา: การ์ด PC-017</span><span>งานค้างทั้งหมดอยู่ใน «งานค้าง» ของการ์ด</span></div>
 </article>
 
@@ -301,6 +325,7 @@ type: "dashboard"
   function openCard(id, pushHash) {
     setChrome(id);
     renderLast();
+    if (id) { loadCardNotes(id.replace('pc', 'PC-')); }
     if (id) {
       remember(id);
       if (pushHash && location.hash !== '#workmap/' + id) { location.hash = 'workmap/' + id; }
@@ -328,7 +353,9 @@ type: "dashboard"
   window.addEventListener('pd:route', function (e) {
     var h = (e.detail && e.detail.hash) || location.hash.replace(/^#/, '');
     if (h.indexOf('workmap') !== 0) { return; }
-    setChrome(h.split('/')[1] || null);
+    var cid = h.split('/')[1] || null;
+    setChrome(cid);
+    if (cid) { loadCardNotes(cid.replace('pc', 'PC-')); }
   });
 
   // ค้นหางาน
@@ -364,6 +391,66 @@ type: "dashboard"
     b.addEventListener('click', function () { openCard(id, true); });
     lastChip.appendChild(b);
   }
+
+  /* ---------- เฟส 2: โน้ตต่อการ์ด (Firestore) ---------- */
+  function notesListFor(card) { return document.querySelector('.wm-notes-list[data-card="' + card + '"]'); }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function loadCardNotes(card) {
+    var box = notesListFor(card);
+    if (!box) return;
+    box.innerHTML = '<span class="muted">กำลังโหลดโน้ต…</span>';
+    try {
+      db.collection('card_notes').where('card', '==', card).get()
+        .then(function (snap) {
+          if (snap.empty) { box.innerHTML = '<span class="muted">ยังไม่มีโน้ตของงานนี้</span>'; return; }
+          var rows = snap.docs.map(function (d) { return d.data(); });
+          rows.sort(function (a, b) {
+            var ta = a.created && a.created.toDate ? a.created.toDate().getTime() : 0;
+            var tb = b.created && b.created.toDate ? b.created.toDate().getTime() : 0;
+            return tb - ta;
+          });
+          box.innerHTML = rows.slice(0, 20).map(function (r) {
+            var when = r.created && r.created.toDate ? r.created.toDate().toLocaleString('th-TH') : '';
+            return '<div class="wm-note"><div>' + esc(r.text) + '</div><div class="wm-note-meta">✍️ ' +
+              esc(r.name || 'พี่เจ') + ' · ' + esc(when) + '</div></div>';
+          }).join('');
+        })
+        .catch(function (e) {
+          box.innerHTML = '<span class="muted">โหลดโน้ตไม่ได้: ' + esc(String(e.message || e)) + '</span>';
+        });
+    } catch (e) {
+      box.innerHTML = '<span class="muted">ต่อฐานข้อมูลไม่ได้: ' + esc(String(e.message || e)) + '</span>';
+    }
+  }
+
+  Array.prototype.slice.call(document.querySelectorAll('.wm-note-save')).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.dataset.card;
+      var ta = document.querySelector('.wm-notes[data-card="' + card + '"] .wm-note-text');
+      var msg = document.querySelector('.wm-note-msg[data-card="' + card + '"]');
+      var text = (ta && ta.value || '').trim();
+      if (!text) { if (msg) msg.textContent = 'พิมพ์ข้อความก่อน'; return; }
+      if (msg) msg.textContent = 'กำลังบันทึก…';
+      db.collection('card_notes').add({
+        card: card,
+        text: text,
+        name: 'พี่เจ',
+        created: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function () {
+        if (ta) ta.value = '';
+        if (msg) msg.textContent = '✅ บันทึกแล้ว';
+        loadCardNotes(card);
+      }).catch(function (e) {
+        if (msg) msg.textContent = '❌ บันทึกไม่ได้: ' + String(e.message || e);
+      });
+    });
+  });
 
   var initial = hashCard();
   if (initial) { openCard(initial, false); } else { renderLast(); }

@@ -337,6 +337,23 @@ footer {{ text-align:center; color:var(--muted); font-size:12px; padding:20px; b
 .wm-last-btn {{ font-family:inherit; font-size:13.5px; cursor:pointer; border:1px dashed var(--line);
   background:transparent; color:var(--accent); border-radius:999px; padding:4px 12px; }}
 .wm-last-btn:hover {{ border-style:solid; border-color:var(--accent); }}
+.wm-notes {{ margin-top:16px; background:rgba(15,23,42,.55); border:1px solid var(--line); border-radius:14px; padding:14px 16px; }}
+.wm-notes-head {{ font-size:14.5px; color:var(--accent); font-weight:700; margin-bottom:9px; }}
+.wm-notes-input textarea {{ width:100%; font-family:inherit; font-size:14.5px; color:var(--text); background:var(--card);
+  border:1px solid var(--line); border-radius:10px; padding:10px 12px; resize:vertical; }}
+.wm-notes-input textarea:focus {{ outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,189,248,.15); }}
+.wm-notes-actions {{ display:flex; align-items:center; gap:10px; margin-top:8px; flex-wrap:wrap; }}
+.wm-note-save {{ border:0; border-radius:9px; padding:8px 16px; font-family:inherit; font-size:13.5px; font-weight:700;
+  cursor:pointer; background:var(--accent); color:#0b1220; }}
+.wm-note-save:hover {{ opacity:.9; }}
+.wm-note-msg {{ font-size:13px; color:var(--muted); }}
+.wm-notes-list {{ margin-top:10px; display:flex; flex-direction:column; gap:8px; }}
+.wm-note {{ background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent);
+  border-radius:10px; padding:9px 12px; font-size:14px; }}
+.wm-note-meta {{ color:var(--muted); font-size:11.5px; margin-top:4px; }}
+html.light .wm-notes {{ background:#f4f7fb; }}
+html.light .wm-note {{ background:#fff; }}
+html.light .wm-notes-input textarea {{ background:#fff; }}
 .wm-group-title {{ font-size:13px; color:var(--muted); margin:14px 0 8px; letter-spacing:.4px; }}
 .wm-tiles {{ display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:12px; margin-bottom:8px; }}
 .wm-tile {{ display:flex; flex-direction:column; gap:5px; text-align:left; cursor:pointer; font-family:inherit;

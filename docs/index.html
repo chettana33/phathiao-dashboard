@@ -122,6 +122,23 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 .wm-last-btn { font-family:inherit; font-size:13.5px; cursor:pointer; border:1px dashed var(--line);
   background:transparent; color:var(--accent); border-radius:999px; padding:4px 12px; }
 .wm-last-btn:hover { border-style:solid; border-color:var(--accent); }
+.wm-notes { margin-top:16px; background:rgba(15,23,42,.55); border:1px solid var(--line); border-radius:14px; padding:14px 16px; }
+.wm-notes-head { font-size:14.5px; color:var(--accent); font-weight:700; margin-bottom:9px; }
+.wm-notes-input textarea { width:100%; font-family:inherit; font-size:14.5px; color:var(--text); background:var(--card);
+  border:1px solid var(--line); border-radius:10px; padding:10px 12px; resize:vertical; }
+.wm-notes-input textarea:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px rgba(56,189,248,.15); }
+.wm-notes-actions { display:flex; align-items:center; gap:10px; margin-top:8px; flex-wrap:wrap; }
+.wm-note-save { border:0; border-radius:9px; padding:8px 16px; font-family:inherit; font-size:13.5px; font-weight:700;
+  cursor:pointer; background:var(--accent); color:#0b1220; }
+.wm-note-save:hover { opacity:.9; }
+.wm-note-msg { font-size:13px; color:var(--muted); }
+.wm-notes-list { margin-top:10px; display:flex; flex-direction:column; gap:8px; }
+.wm-note { background:var(--card); border:1px solid var(--line); border-left:3px solid var(--accent);
+  border-radius:10px; padding:9px 12px; font-size:14px; }
+.wm-note-meta { color:var(--muted); font-size:11.5px; margin-top:4px; }
+html.light .wm-notes { background:#f4f7fb; }
+html.light .wm-note { background:#fff; }
+html.light .wm-notes-input textarea { background:#fff; }
 .wm-group-title { font-size:13px; color:var(--muted); margin:14px 0 8px; letter-spacing:.4px; }
 .wm-tiles { display:grid; grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); gap:12px; margin-bottom:8px; }
 .wm-tile { display:flex; flex-direction:column; gap:5px; text-align:left; cursor:pointer; font-family:inherit;
@@ -251,7 +268,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 </header>
 <button id="to-top" aria-label="กลับขึ้นบนสุด" title="กลับขึ้นบนสุด">↑</button>
 <main>
-<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
+<section id="overview" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:52:25+07:00</div>
 <h1>🗺️ ภาพรวมธุรกิจ Ichino Tour</h1>
 <p><strong>แบรนด์หน้าฉาก:</strong> Ichino Tour (Thailand) — ตัวแทน Land Operation ประเทศญี่ปุ่น (Thailand Representative)</p>
 <p><strong>หลังฉาก:</strong> พันธมิตรญี่ปุ่น 2 เจ้าให้ Net Rate + สิทธิใช้ชื่อบริษัท — ยังไม่เปิดบริษัทเอง</p>
@@ -267,7 +284,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>ซัพพลายอื่น</h2>
 <div class="table-wrap"><table><thead><tr><th>เจ้า</th><th>รายละเอียด</th></tr></thead><tbody><tr><td><strong>King BUS = SENEI KOTSU</strong></td><td>ใบขอรถ <code>rsv@cgman.jp</code> → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ)</td></tr><tr><td><strong>CHIグループ</strong></td><td>Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน)</td></tr><tr><td><strong>Supplier ฟูจิ/ยามานาชิ</strong></td><td>Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori</td></tr></tbody></table></div>
 <blockquote>⛔ <strong>ต้นสังกัด kimono</strong> — ห้ามปน / ห้ามให้รู้งานข้างเด็ดขาด (กฎ stealth)</blockquote>
-<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="workmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
+<blockquote>🔒 ห้ามมี password/token/ราคา margin ภายในในกระดานนี้ — repo สาธารณะ</blockquote></section><section id="workmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:52:25+07:00</div>
 <h1>🧭 แผนที่งาน (Work Map)</h1>
 <blockquote>เปิดมาเห็น <strong>ทุกงานในจอเดียว</strong> → กดช่องงานที่อยากดู → รายละเอียดเปิดในหน้านี้ ไม่ต้องเปลี่ยนหน้า</blockquote>
 <blockquote>เรียง <strong>งานที่กำลังทำอยู่ก่อน</strong> แล้วต่อด้วยงานที่รอพี่เจ/รอของ · ตัวเลขงานค้างจาก checkpoint รอบล่าสุด · อัปเดตโดยพาเที่ยวทุกครั้งที่ปิดงาน</blockquote>
@@ -447,6 +464,18 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
     </div>
   </div>
 
+  <div class="wm-notes" data-card="PC-009">
+    <div class="wm-notes-head">📝 โน้ตของพี่เจ — ฝากถึงพาเที่ยวได้</div>
+    <div class="wm-notes-input">
+      <textarea class="wm-note-text" rows="2" maxlength="2000" placeholder="พิมพ์โน้ต/สิ่งที่อยากให้ทำกับงานนี้…"></textarea>
+      <div class="wm-notes-actions">
+        <button class="wm-note-save" data-card="PC-009">บันทึก</button>
+        <span class="wm-note-msg" data-card="PC-009"></span>
+      </div>
+    </div>
+    <div class="wm-notes-list" data-card="PC-009"><span class="muted">กำลังโหลดโน้ต…</span></div>
+  </div>
+
   <div class="wm-foot"><span>ที่มา: การ์ด PC-009</span><span>งานค้างทั้งหมดอยู่ใน «งานค้าง» ของการ์ด</span></div>
 </article>
 
@@ -535,6 +564,18 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
     </div>
   </div>
 
+  <div class="wm-notes" data-card="PC-017">
+    <div class="wm-notes-head">📝 โน้ตของพี่เจ — ฝากถึงพาเที่ยวได้</div>
+    <div class="wm-notes-input">
+      <textarea class="wm-note-text" rows="2" maxlength="2000" placeholder="พิมพ์โน้ต/สิ่งที่อยากให้ทำกับงานนี้…"></textarea>
+      <div class="wm-notes-actions">
+        <button class="wm-note-save" data-card="PC-017">บันทึก</button>
+        <span class="wm-note-msg" data-card="PC-017"></span>
+      </div>
+    </div>
+    <div class="wm-notes-list" data-card="PC-017"><span class="muted">กำลังโหลดโน้ต…</span></div>
+  </div>
+
   <div class="wm-foot"><span>ที่มา: การ์ด PC-017</span><span>งานค้างทั้งหมดอยู่ใน «งานค้าง» ของการ์ด</span></div>
 </article>
 
@@ -563,6 +604,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
   function openCard(id, pushHash) {
     setChrome(id);
     renderLast();
+    if (id) { loadCardNotes(id.replace('pc', 'PC-')); }
     if (id) {
       remember(id);
       if (pushHash && location.hash !== '#workmap/' + id) { location.hash = 'workmap/' + id; }
@@ -590,7 +632,9 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
   window.addEventListener('pd:route', function (e) {
     var h = (e.detail && e.detail.hash) || location.hash.replace(/^#/, '');
     if (h.indexOf('workmap') !== 0) { return; }
-    setChrome(h.split('/')[1] || null);
+    var cid = h.split('/')[1] || null;
+    setChrome(cid);
+    if (cid) { loadCardNotes(cid.replace('pc', 'PC-')); }
   });
 
   // ค้นหางาน
@@ -627,10 +671,70 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
     lastChip.appendChild(b);
   }
 
+  /* ---------- เฟส 2: โน้ตต่อการ์ด (Firestore) ---------- */
+  function notesListFor(card) { return document.querySelector('.wm-notes-list[data-card="' + card + '"]'); }
+
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function loadCardNotes(card) {
+    var box = notesListFor(card);
+    if (!box) return;
+    box.innerHTML = '<span class="muted">กำลังโหลดโน้ต…</span>';
+    try {
+      db.collection('card_notes').where('card', '==', card).get()
+        .then(function (snap) {
+          if (snap.empty) { box.innerHTML = '<span class="muted">ยังไม่มีโน้ตของงานนี้</span>'; return; }
+          var rows = snap.docs.map(function (d) { return d.data(); });
+          rows.sort(function (a, b) {
+            var ta = a.created && a.created.toDate ? a.created.toDate().getTime() : 0;
+            var tb = b.created && b.created.toDate ? b.created.toDate().getTime() : 0;
+            return tb - ta;
+          });
+          box.innerHTML = rows.slice(0, 20).map(function (r) {
+            var when = r.created && r.created.toDate ? r.created.toDate().toLocaleString('th-TH') : '';
+            return '<div class="wm-note"><div>' + esc(r.text) + '</div><div class="wm-note-meta">✍️ ' +
+              esc(r.name || 'พี่เจ') + ' · ' + esc(when) + '</div></div>';
+          }).join('');
+        })
+        .catch(function (e) {
+          box.innerHTML = '<span class="muted">โหลดโน้ตไม่ได้: ' + esc(String(e.message || e)) + '</span>';
+        });
+    } catch (e) {
+      box.innerHTML = '<span class="muted">ต่อฐานข้อมูลไม่ได้: ' + esc(String(e.message || e)) + '</span>';
+    }
+  }
+
+  Array.prototype.slice.call(document.querySelectorAll('.wm-note-save')).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.dataset.card;
+      var ta = document.querySelector('.wm-notes[data-card="' + card + '"] .wm-note-text');
+      var msg = document.querySelector('.wm-note-msg[data-card="' + card + '"]');
+      var text = (ta && ta.value || '').trim();
+      if (!text) { if (msg) msg.textContent = 'พิมพ์ข้อความก่อน'; return; }
+      if (msg) msg.textContent = 'กำลังบันทึก…';
+      db.collection('card_notes').add({
+        card: card,
+        text: text,
+        name: 'พี่เจ',
+        created: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(function () {
+        if (ta) ta.value = '';
+        if (msg) msg.textContent = '✅ บันทึกแล้ว';
+        loadCardNotes(card);
+      }).catch(function (e) {
+        if (msg) msg.textContent = '❌ บันทึกไม่ได้: ' + String(e.message || e);
+      });
+    });
+  });
+
   var initial = hashCard();
   if (initial) { openCard(initial, false); } else { renderLast(); }
 })();
-</script></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
+</script></section><section id="status" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:52:25+07:00</div>
 <h1>📊 สถานะงาน</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน (จาก checkpoint) — timestamp ด้านบน</blockquote>
 <h2>การ์ดงาน (Project Cards — PC_INDEX 7 ก.ย. 69)</h2>
@@ -645,7 +749,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>งานค้าง — ดูจาก section Checkpoint (อัตโนมัติ)</h2>
 <blockquote>รายการงานค้างที่เขียนมือในหน้านี้ <strong>ถูกลบออก 25 ก.ย. 69</strong> เพราะค้างมาตั้งแต่ 7 ก.ย. และไม่ตรงกับของจริงแล้ว</blockquote>
 <blockquote>ตั้งแต่นี้ให้อ่านจาก <strong>section Checkpoint</strong> ซึ่งดึง <code>CHECKPOINT_LATEST.md</code> จาก <code>phathiao-knowledge-brain</code> อัตโนมัติทุกชั่วโมง</blockquote>
-<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
+<blockquote>งานค้างใน checkpoint จัดกลุ่มแล้ว (งานประจำ · รอพี่เจ · งานระบบ · คอนเทนต์ · Meawbin · ข้อมูล)</blockquote></section><section id="systemmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:52:25+07:00</div>
 <h1>🗺️ System Map</h1>
 <blockquote>อัปเดตล่าสุด <strong>26 ก.ย. 69 (รอบ 45)</strong> — เขียนจาก §9 System Map ของการ์ดจริง 14 ใบ (ครบทุกใบแล้ว)</blockquote>
 <blockquote>สถานะ: done (เขียว) · in_progress (ฟ้า) · blocked (แดง) · pending (เทา)</blockquote>
@@ -659,7 +763,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <p><strong>สาขา / เวอร์ชัน</strong></p>
 <div class="table-wrap"><table><thead><tr><th>ต้นทาง (ราก)</th><th>แตกเป็น / เวอร์ชัน</th><th>จำนวน</th><th>สถานะแต่ละตัว</th></tr></thead><tbody><tr><td>embedding engine</td><td>local bge-m3 (default) · API gemini (fallback) · MiniLM (สำรอง)</td><td>3</td><td>default · legacy <code>VEC_ENGINE=api</code> · collection แยก</td></tr><tr><td>collection</td><td><code>patheaw_work</code> · <code>patheaw_local</code> · <code>patheaw_bge</code></td><td>3</td><td>prod · ทดสอบ · ทดสอบ</td></tr><tr><td>วิธีเก็บเข้าคลัง</td><td>whitelist ชื่อไฟล์ (เดิม) · glob ต่อโฟลเดอร์ (26 ก.ย. 69)</td><td>2</td><td>เลิกใช้ · ใช้จริง</td></tr></tbody></table></div>
 <h2>หมายเหตุการดูแลหน้านี้</h2>
-<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
+<ul><li>ตัวเลขที่ต้องรีเฟรชทุกครั้งที่ปิดรอบ: corpus docs/src · สถานะการ์ด · ตัวเลข KPI ของ PC-009</li><li>หน้านี้สะท้อน <strong>§9 System Map ของการ์ด</strong> — ถ้าการ์ดเปลี่ยน หน้าต้องเปลี่ยนตาม (ไม่เขียนมือแยกจากหลักฐาน)</li><li>ห้ามใส่รายการงานค้างในหน้านี้ (งานค้างอยู่ที่ <code>03_AI_Checkpoints/PC-XXX.md</code> §10)</li></ul></section><section id="minimax" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:52:25+07:00</div>
 <h1>MiniMax Studio — เครื่องมือ + สถานะงาน</h1>
 <blockquote>อัปเดต 17 ก.ย. 69 (ตัวเลขจากของจริง: gateway <code>/api/v1/credit/wallet</code> · <code>list_capabilities</code> · <code>get_model_concurrency</code> · นับการใช้ tool จาก session log DSH 163 ไฟล์)</blockquote>
 <blockquote>ตัวเลขทุกบรรทัดมาจากการรันจริง — ไม่มีข้อไหนเป็น &quot;คาดว่า&quot;</blockquote>
@@ -728,7 +832,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <ul><li>โฟลเดอร์ <strong><code>พาเที่ยว_ลิงก์</code></strong> บน Desktop — shortcut เปิดแผ่นตัวละคร/โฟลเดอร์/ผลทดลอง + หน้า <code>index.html</code> รวมลิงก์</li><li>พาธฐานของแผ่น: <code>H:\My Drive\พาเที่ยว\Gochisou\TikTok\Raw\Characters &lt;ชื่อ&gt;\</code></li></ul></section><section id="checkpoint" class="section"><h1>📌 Checkpoint ล่าสุด</h1>
 <blockquote>ไฟล์นี้ถูก <strong>ดึงทับอัตโนมัติ</strong> จาก <code>phathiao-knowledge-brain</code> ตอน build (ทุก push + ทุกวัน 00:00 UTC)</blockquote>
 <blockquote>ห้ามแก้เอง — จะโดนทับ</blockquote>
-<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
+<p>_รอข้อมูล checkpoint — build ครั้งถัดไปจะดึงมาให้อัตโนมัติ_</p></section><section id="memory" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:52:26+07:00</div>
 <h1>🧠 พี่เจ_MEMORY — ทบทวนว่าระบบเราทำอะไรไปแล้วบ้าง</h1>
 <p>โน้ตนี้เขียนไว้ให้พี่เจอ่านกันลืม — อัปเดตเมื่อระบบเปลี่ยน ไม่ใช่บันทึกรายวัน</p>
 <h2>ระบบของเรา</h2>
@@ -745,7 +849,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>งานใหญ่ที่ค้าง</h2>
 <ul><li>ปรับ .md ทั้ง vault+repo เป็น format ใหม่ (เริ่มโปรเอกสารหลัก)</li><li>Master data: verify RAW 1,323, เติม supplier บัส, rate 13</li><li>B2B Smile Travel, ทดลอง slim, ขยาย Thin MCP 14 repo</li></ul>
 <h2>กำหนดการ</h2>
-<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
+<ul><li>HAI — 26 ธ.ค.</li><li>ma-meow — ม.ค.</li></ul></section><section id="roadmap" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:52:26+07:00</div>
 <h1>🗓️ ลำดับถัดไป (Roadmap)</h1>
 <blockquote>อัปเดตอัตโนมัติโดยพาเที่ยวทุกปิดงาน</blockquote>
 <h2>ลำดับหลัก (ตกลงกับพี่เจแล้ว)</h2>
@@ -756,7 +860,7 @@ footer { text-align:center; color:var(--muted); font-size:12px; padding:20px; bo
 <h2>Funnel ลูกค้า 3 ทาง</h2>
 <div class="table-wrap"><table><thead><tr><th>ทาง</th><th>ทำยังไง</th><th>สถานะ</th></tr></thead><tbody><tr><td>B2B direct</td><td>ทักหา 50 เจ้า ในนาม Ichino Tour + แนบ Sales Kit</td><td>ยังไม่เริ่ม (Smile #40 คิวแรก)</td></tr><tr><td>เว็บ + content</td><td>Gochisou (จองร้าน) LIVE → ลงโปรแกรมทัวร์จริง (NRT09/KIX67/CTS01) → contact form</td><td>Gochisou เริ่มแล้ว — ทัวร์ยังไม่เริ่ม</td></tr><tr><td>TikTok/Social (B2C)</td><td>1 ช่อง Gochisou — อาหาร/เคสจองจริง top-funnel → LINE/เว็บ</td><td>ตัดสินใจแล้ว — รอคอนเทนต์พร้อม</td></tr></tbody></table></div>
 <h2>ขั้นถัดไปทันที</h2>
-<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:40:09+07:00</div>
+<ul><li>[ ] PC-007 rate 13 + ตรวจ (พี่เจ)</li><li>[ ] Gochisou domain <code>gochisou.ichinotour-thailand.com</code> (Vercel)</li><li>[ ] ตรวจเนื้อหาเว็บหลัก (ราคา/เบอร์/LINE)</li><li>[ ] taicho PDF: หาวิธี PDF สวย + ส่งไฟล์จริงเข้า LINE (การบ้าน)</li></ul></section><section id="ideas" class="section"><div class="tag tag-good">📅 อัปเดตล่าสุด: 2026-10-14T23:52:26+07:00</div>
 <h1>💡 กระดานไอเดีย</h1>
 <blockquote><strong>2 ช่องทางเขียน:</strong></blockquote>
 <blockquote>- <strong>พิมพ์ในเว็บ</strong> (ช่องด้านล่าง) → เก็บ Firestore → เห็นทุกเครื่อง</blockquote>
