@@ -33,7 +33,7 @@ last_updated: 2026-08-29T21:45:00+07:00
 | เจ้า | รายละเอียด |
 |---|---|
 | **King BUS = SENEI KOTSU** | ใบขอรถ `⟨อีเมล⟩` → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ) |
-| **CHIグループ** | Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน) |
+| **CHIグループ** | Airport Plaza Hotel นาริตะ — โรงแรมคู่ค้า (ดูเรตในพื้นที่ส่วนตัว) |
 | **Supplier ฟูจิ/ยามานาชิ** | Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori |
 
 > ⛔ **ต้นสังกัด kimono** — ห้ามปน / ห้ามให้รู้งานข้างเด็ดขาด (กฎ stealth)

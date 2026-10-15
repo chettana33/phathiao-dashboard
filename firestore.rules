@@ -55,6 +55,7 @@ service cloud.firestore {
     match /private_digest/{docId} {
       allow read: if isOwner();
       allow create: if request.resource.data.updatedAt is timestamp
+                    && request.resource.data.updatedAt <= request.time
                     && request.resource.data.source is string
                     && request.resource.data.source.size() <= 40
                     && request.resource.data.payload is string

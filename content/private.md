@@ -54,7 +54,7 @@ type: "dashboard"
       </div>
       <div class="pv-box">
         <h4>🔒 ข้อมูลที่ถูกกันออกจากหน้า public</h4>
-        <p class="pv-sub">บรรทัดที่ระบบกรองออกก่อนขึ้นหน้าเว็บสาธารณะ (เช่น สถานะพอร์ตจริง · ชื่อโบรก · รหัสภายในของคู่ค้า · credential) — ต้นฉบับครบอยู่ใน Vault เสมอ</p>
+        <p class="pv-sub">บรรทัดที่ระบบกรองออกจาก <strong>หน้าที่ดึงอัตโนมัติ</strong> (checkpoint + ความจำ) — เช่น สถานะพอร์ตจริง · ชื่อโบรก · รหัสภายในของคู่ค้า · credential · หน้าอื่นทุกหน้าผ่านด่านกรองก่อน build เสมอ (เจอคำต้องห้าม = หยุด deploy) · ต้นฉบับครบอยู่ใน Vault</p>
         <div class="pv-notes-list" id="pvd-list"><span class="pv-sub">กำลังโหลด…</span></div>
       </div>
       <div class="pv-box">
@@ -124,14 +124,20 @@ type: "dashboard"
       var box = document.getElementById('pvd-list');
       if (!box) return;
       box.innerHTML = '<span class="pv-sub">กำลังโหลด…</span>';
-      db.collection('private_digest').orderBy('updatedAt', 'desc').limit(1).get().then(function (snap) {
+      /* อ่าน 5 อันล่าสุด แล้วเลือก "อันแรกที่ข้อมูลใช้ได้" — กันกรณีมี doc ขยะ/ทับของจริง (ผู้ตรวจ 15 ต.ค. 69) */
+      db.collection('private_digest').orderBy('updatedAt', 'desc').limit(5).get().then(function (snap) {
         if (snap.empty) { box.innerHTML = '<span class="pv-sub">ยังไม่มีบรรทัดที่ถูกกันออก</span>'; return; }
-        var doc = snap.docs[0].data();
-        var data = {};
-        try { data = JSON.parse(doc.payload || '{}'); } catch (e) {}
-        var items = data.items || [];
+        var doc = null, items = [];
+        snap.docs.forEach(function (d) {
+          if (doc) { return; }
+          var raw = d.data();
+          var parsed = {};
+          try { parsed = JSON.parse(raw.payload || '{}'); } catch (e) { return; }
+          if (!parsed.items || !parsed.items.length) { return; }
+          doc = raw; items = parsed.items;
+        });
+        if (!doc) { box.innerHTML = '<span class="pv-sub">ยังไม่มีบรรทัดที่ถูกกันออก</span>'; return; }
         var when = doc.updatedAt && doc.updatedAt.toDate ? doc.updatedAt.toDate().toLocaleString('th-TH') : '';
-        if (!items.length) { box.innerHTML = '<span class="pv-sub">ยังไม่มีบรรทัดที่ถูกกันออก</span>'; return; }
         box.innerHTML = '<div class="pv-note-meta">อัปเดต ' + esc(when) + ' · ' + items.length + ' บรรทัด</div>' +
           items.map(function (it) {
             return '<div class="pv-note"><div>' + esc(it.text) + '</div><div class="pv-note-meta">' +

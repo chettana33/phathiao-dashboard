@@ -44,22 +44,31 @@ jobs:
 
       - name: Pull public sanitizer (ด่านกรองข้อความอ่อนไหว)
         run: |
+          set -euo pipefail
           mkdir -p tools
           gh api "repos/chettana33/phathiao-knowledge-brain/contents/tools/public_sanitize.py" \
-            --jq ".content" | base64 -d > tools/public_sanitize.py \
-            || echo "WARN: ดึง sanitizer ไม่ได้ — จะข้ามการกรอง (อย่าปล่อยผ่าน!)"
+            --jq ".content" | base64 -d > tools/public_sanitize.py
+          test -s tools/public_sanitize.py || { echo "FAIL: ดึง sanitizer ไม่ได้/ว่าง — หยุดก่อน deploy"; exit 1; }
+          python tools/public_sanitize.py --self-test
         env:
           GH_TOKEN: ${{ secrets.KNOWLEDGE_BRAIN_TOKEN }}
 
       - name: Sanitize + gate (ห้ามข้อมูลอ่อนไหวขึ้นหน้าเว็บสาธารณะ)
         run: |
+          set -euo pipefail
           python tools/public_sanitize.py --in content/*.md
           python tools/public_sanitize.py --check content/*.md
 
       - name: Build dashboard
         run: |
+          set -euo pipefail
           export BUILD_TIME="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           python build.py
+
+      - name: Gate on published artifact (ด่านชั้นสุดท้าย — ตรวจไฟล์ที่จะ deploy จริง)
+        run: |
+          set -euo pipefail
+          python tools/public_sanitize.py --check-artifact docs/index.html
 
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
