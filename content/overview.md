@@ -23,8 +23,8 @@ last_updated: 2026-08-29T21:45:00+07:00
 
 | เจ้า | ผู้ติดต่อ | บทบาท |
 |---|---|---|
-| **Ichino Tour** (ญี่ปุ่น) | Kim-san / Jong-yeon — `ichinotour@gmail.com` | เจ้าที่ 1 — Net Rate + ใช้ชื่อได้ |
-| **HIC (株式会社エイチアイシー)** | Shu-san — `mirai358358@gmail.com` | เจ้าที่ 2 — 第3種旅行業/手配業, JTAC |
+| **Ichino Tour** (ญี่ปุ่น) | Kim-san / Jong-yeon — `⟨อีเมล⟩` | เจ้าที่ 1 — Net Rate + ใช้ชื่อได้ |
+| **HIC (株式会社エイチアイシー)** | Shu-san — `⟨อีเมล⟩` | เจ้าที่ 2 — 第3種旅行業/手配業, JTAC |
 
 **โมเดล:** Net Price / B2B Rate (ราคาทุน JPY) → บวก Margin เอง · เอกสารออกนาม "Thailand Representative"
 
@@ -32,7 +32,7 @@ last_updated: 2026-08-29T21:45:00+07:00
 
 | เจ้า | รายละเอียด |
 |---|---|
-| **King BUS = SENEI KOTSU** | ใบขอรถ `rsv@cgman.jp` → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ) |
+| **King BUS = SENEI KOTSU** | ใบขอรถ `⟨อีเมล⟩` → SENEI Flow — supplier รถบัส (台帳 อัตโนมัติ) |
 | **CHIグループ** | Airport Plaza Hotel นาริตะ — 4,500–7,000 เยน/คืน (10+ ท่าน) |
 | **Supplier ฟูจิ/ยามานาชิ** | Fujizakura, Hedistar, Fujisan Garden, Marroad, Kasugai View, Asia Kawaguchiko/Yamanakako, Yukari no Mori |
 

@@ -42,6 +42,20 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.KNOWLEDGE_BRAIN_TOKEN }}
 
+      - name: Pull public sanitizer (ด่านกรองข้อความอ่อนไหว)
+        run: |
+          mkdir -p tools
+          gh api "repos/chettana33/phathiao-knowledge-brain/contents/tools/public_sanitize.py" \
+            --jq ".content" | base64 -d > tools/public_sanitize.py \
+            || echo "WARN: ดึง sanitizer ไม่ได้ — จะข้ามการกรอง (อย่าปล่อยผ่าน!)"
+        env:
+          GH_TOKEN: ${{ secrets.KNOWLEDGE_BRAIN_TOKEN }}
+
+      - name: Sanitize + gate (ห้ามข้อมูลอ่อนไหวขึ้นหน้าเว็บสาธารณะ)
+        run: |
+          python tools/public_sanitize.py --in content/*.md
+          python tools/public_sanitize.py --check content/*.md
+
       - name: Build dashboard
         run: |
           export BUILD_TIME="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"

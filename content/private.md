@@ -53,10 +53,16 @@ type: "dashboard"
         </div>
       </div>
       <div class="pv-box">
+        <h4>🔒 ข้อมูลที่ถูกกันออกจากหน้า public</h4>
+        <p class="pv-sub">บรรทัดที่ระบบกรองออกก่อนขึ้นหน้าเว็บสาธารณะ (เช่น สถานะพอร์ตจริง · ชื่อโบรก · รหัสภายในของคู่ค้า · credential) — ต้นฉบับครบอยู่ใน Vault เสมอ</p>
+        <div class="pv-notes-list" id="pvd-list"><span class="pv-sub">กำลังโหลด…</span></div>
+      </div>
+      <div class="pv-box">
         <h4>สถานะระบบ</h4>
         <ul>
           <li>อ่านข้อมูลส่วนตัวจากฐานข้อมูลได้เฉพาะบัญชีที่อนุญาต</li>
           <li>เนื้อหาไม่ฝังในไฟล์เว็บ ⇒ ค้นหา/แชร์ลิงก์แล้วไม่เห็นข้อมูล</li>
+          <li>หน้าเว็บสาธารณะผ่านด่านกรองอัตโนมัติก่อน build ทุกครั้ง</li>
         </ul>
       </div>
     </div>
@@ -110,7 +116,31 @@ type: "dashboard"
       }
       who.textContent = 'บัญชี: ' + email + ' · ' + (user.displayName || '');
       loadPrivateNotes();
+      loadDigest();
     });
+
+    /* บรรทัดที่ถูกกันออกจากหน้า public (collection private_digest · อ่านได้เฉพาะบัญชีที่ล็อกอิน) */
+    function loadDigest() {
+      var box = document.getElementById('pvd-list');
+      if (!box) return;
+      box.innerHTML = '<span class="pv-sub">กำลังโหลด…</span>';
+      db.collection('private_digest').orderBy('updatedAt', 'desc').limit(1).get().then(function (snap) {
+        if (snap.empty) { box.innerHTML = '<span class="pv-sub">ยังไม่มีบรรทัดที่ถูกกันออก</span>'; return; }
+        var doc = snap.docs[0].data();
+        var data = {};
+        try { data = JSON.parse(doc.payload || '{}'); } catch (e) {}
+        var items = data.items || [];
+        var when = doc.updatedAt && doc.updatedAt.toDate ? doc.updatedAt.toDate().toLocaleString('th-TH') : '';
+        if (!items.length) { box.innerHTML = '<span class="pv-sub">ยังไม่มีบรรทัดที่ถูกกันออก</span>'; return; }
+        box.innerHTML = '<div class="pv-note-meta">อัปเดต ' + esc(when) + ' · ' + items.length + ' บรรทัด</div>' +
+          items.map(function (it) {
+            return '<div class="pv-note"><div>' + esc(it.text) + '</div><div class="pv-note-meta">' +
+              esc(it.source || '') + ' · บรรทัด ' + esc(String(it.line || '')) + '</div></div>';
+          }).join('');
+      }).catch(function (e) {
+        box.innerHTML = '<span class="pv-sub">โหลดไม่ได้ (ต้องล็อกอินบัญชีพี่เจ): ' + esc(String(e.message || e)) + '</span>';
+      });
+    }
 
     function esc(s) {
       return String(s).replace(/[&<>"']/g, function (c) {

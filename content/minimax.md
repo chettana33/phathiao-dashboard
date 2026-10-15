@@ -61,7 +61,7 @@ source_of_truth: "Obsidian & GitHub"
 
 ### 3.3 อ้างถึงแต่ไม่มีบันทึกการเรียก 7 (ไม่ยืนยัน)
 
-`ffmpeg` · `subtitle_format` · `preview_and_collect_feedback` · `canvas_group_recent_outputs` · `add_comfyui_workflow` · `save_comfyui_run_as_workflow` · (นับจาก mention สูงกว่า baseline แต่ parse record ไม่ได้)
+`ffmpeg` · `subtitle_format` · `preview_and_collect_feedback` · `canvas_group_recent_outputs` · `add_comfyui_workflow` · `save_comfyui_run_as_workflow` · (นับจาก mention สูงกว่า baseline แต่ parse ⟨รหัสภายใน⟩ไม่ได้)
 
 ## 4. ทดสอบสด 17 ก.ย. 69 — เฉพาะตัวที่ไม่กินเครดิตเจน
 

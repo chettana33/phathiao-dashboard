@@ -49,6 +49,19 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // private_digest: บรรทัดที่ "ถูกกันออก" จากหน้าเว็บสาธารณะ (กรองจาก checkpoint/memory)
+    // ⇒ พี่เจยังเห็นครบเมื่อล็อกอิน · คนอื่นอ่านไม่ได้เลย
+    // เขียนโดยสคริปต์ของพาเที่ยว (ไม่มี auth เหมือน dashboard_state) ⇒ เปิด create แต่ปิด read ให้เจ้าของเท่านั้น
+    match /private_digest/{docId} {
+      allow read: if isOwner();
+      allow create: if request.resource.data.updatedAt is timestamp
+                    && request.resource.data.source is string
+                    && request.resource.data.source.size() <= 40
+                    && request.resource.data.payload is string
+                    && request.resource.data.payload.size() <= 200000;
+      allow update, delete: if false;
+    }
+
     // private_notes: โน้ตส่วนตัวของพี่เจ — อ่าน/เพิ่มได้เฉพาะบัญชีที่อนุญาต (ต้องล็อกอิน)
     // คนอื่น (รวมคนที่ไม่ได้ล็อกอิน) อ่านไม่ได้เลย ⇒ ข้อมูลไม่รั่วแม้ URL เว็บเป็นสาธารณะ
     match /private_notes/{noteId} {
