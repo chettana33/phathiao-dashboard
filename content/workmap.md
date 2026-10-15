@@ -1325,6 +1325,13 @@ type: "dashboard"
       var tile = codeEl.closest('.wm-tile');
       var meta = tile && tile.querySelector('.wm-tile-meta');
       if (meta) { meta.textContent = meta.textContent.replace(/งานค้าง\s*\d+/, 'งานค้าง ' + c.pending); }
+      /* "ถัดไป: …" จาก checkpoint (แถวการ์ด) — อัปเดตเองทุกครั้งที่ปิดงาน (15 ต.ค. 69) */
+      var nextEl = tile && tile.querySelector('.wm-tile-next');
+      if (nextEl && c.next) {
+        var nt = String(c.next);
+        if (nt.length > 110) { nt = nt.slice(0, 110) + '…'; }
+        nextEl.textContent = 'ถัดไป: ' + nt;
+      }
     });
     live.classList.remove('is-stale');
     live.classList.add('is-fresh');
