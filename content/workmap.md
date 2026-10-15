@@ -32,7 +32,7 @@ type: "dashboard"
   <button class="wm-tile" data-wm="pc017">
     <span class="wm-tile-code">PC-017</span>
     <span class="wm-tile-name">Affiliate Marketing — ทำ affiliate เอง</span>
-    <span class="wm-tile-meta">🔵 กำลังทำ · งานค้าง 11</span>
+    <span class="wm-tile-meta">🔵 กำลังทำ · งานค้าง 8</span>
     <span class="wm-tile-next">ถัดไป: แผนที่โปรแกรม affiliate</span>
   </button>
 
@@ -99,7 +99,7 @@ type: "dashboard"
     <span class="wm-tile-code">PC-008</span>
     <span class="wm-tile-name">ย้ายบัญชี Google</span>
     <span class="wm-tile-meta">⏳ รอคำสั่งเริ่ม · งานค้าง 1</span>
-    <span class="wm-tile-next">รอพี่เจสั่ง "เริ่มย้าย" (แผน 36 ขั้นพร้อม)</span>
+    <span class="wm-tile-next">รอพี่เจสั่ง "เริ่มย้าย" — §4 เปิดค้าง 29 ขั้น</span>
   </button>
 
 </div>
@@ -309,7 +309,7 @@ type: "dashboard"
       <h2 class="wm-title">ระบบเครื่องมือ DSH และสมองความรู้ <span class="wm-sub">backlog ระบบความรู้ + งานอัตโนมัติ</span></h2>
     </div>
     <div class="wm-right">
-      <span class="tag info wm-status">🟢 งานหลักปิดแล้ว · เหลือข้อใหม่ 4</span>
+      <span class="tag good wm-status">🔵 งานหลักปิดแล้ว · เหลือข้อใหม่ 4</span>
     </div>
   </header>
 
@@ -343,7 +343,7 @@ type: "dashboard"
       <span class="wm-flow" aria-hidden="true"></span>
       <div class="wm-step is-done"><span class="wm-n">⑤</span>re-oauth cloudplatform token (7 ก.ย.)<em>3 jobs ENABLED</em></div>
       <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">⑥</span>re-oauth รอบ 2 (9 ก.ย.) helper port 8769</div>
+      <div class="wm-step is-done"><span class="wm-n">⑥</span>re-oauth รอบ 2 (9 ก.ย.)</div>
       <span class="wm-flow" aria-hidden="true"></span>
       <div class="wm-step is-done"><span class="wm-n">⑦</span>firebase token watchdog (8 ก.ย.)</div>
     </div>
@@ -354,7 +354,7 @@ type: "dashboard"
     <div class="wm-steps">
       <div class="wm-step is-done"><span class="wm-n">⑧</span>ส่วน 8 — /work auto-start + review มุมคนนอก</div>
       <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">⑨</span>SA + WIF + IAM + condition 4 repo</div>
+      <div class="wm-step is-done"><span class="wm-n">⑨</span>SA + WIF + IAM สำหรับงาน CI</div>
       <span class="wm-flow" aria-hidden="true"></span>
       <div class="wm-step is-done"><span class="wm-n">⑩</span>workflow รันเขียวจริง<em>cloud_health · vault_restore_test</em></div>
     </div>
@@ -395,7 +395,7 @@ type: "dashboard"
     <div class="wm-card is-wait">
       <h4>🙋 รอพี่เจ</h4>
       <ul>
-        <li>อนุมัติลบโปรแกรม opencode (มติ 11 ต.ค. 69)</li>
+        <li>อนุมัติลบโปรแกรม opencode (ค้างจากรายงาน 14 ต.ค. 69)</li>
         <li>.gdoc 3 ไฟล์ลบไม่ได้ — เป็น stub ของ DriveFS (สำรองไม่ได้)</li>
       </ul>
     </div>
@@ -515,9 +515,9 @@ type: "dashboard"
       <span class="wm-flow" aria-hidden="true"></span>
       <div class="wm-step is-doing"><span class="wm-n">28</span>คลิป 28-56 ทยอยทำวันละ 1-2 คลิป<em>ถัดไปบท 52 EP04</em></div>
       <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">29</span>ยืนยันตัวหารจริง = 55 บท<em>มติพี่เจ 27 ก.ย. 69</em></div>
+      <div class="wm-step is-done"><span class="wm-n">29</span>ยืนยันตัวหารจริง = 55 บท<em>มติพี่เจ 27 ก.ย. 69 · ปิด 6 ต.ค. 69</em></div>
       <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">30</span>สรุปครบทุกคลิป — ตัวหาร 55<em>ปิด 5 ต.ค. 69</em></div>
+      <div class="wm-step is-done"><span class="wm-n">30</span>สรุปตัวหารคลิป = 55 (ทะเบียน D)<em>ปิด 5 ต.ค. 69 · เนื้อหายังเหลือ 4 บท</em></div>
     </div>
   </div>
 
@@ -536,13 +536,13 @@ type: "dashboard"
       <ul>
         <li>บทถัดไป: EP04 ทบทวน Work Shop Grid Forex (บท 52)</li>
         <li>ตรวจ §6.4 ของโน้ตบท 48-51 แยก</li>
+        <li>หลังเรียนครบ 55 บท: ต้องตอบคำถามค้าง ≥35 ข้อ</li>
       </ul>
     </div>
     <div class="wm-card is-wait">
       <h4>🙋 รอพี่เจ</h4>
       <ul>
         <li>รอพี่เจสั่ง /เรียนต่อ — ตัวรันหยุดตามคำสั่ง /พอ</li>
-        <li>ปิดคอร์สต้องตอบคำถามค้าง ≥35 ข้อ หลังครบ 55 บท</li>
       </ul>
     </div>
   </div>
@@ -570,7 +570,7 @@ type: "dashboard"
       <h2 class="wm-title">เมลพี่เจ + งานอัตโนมัติในเครื่อง <span class="wm-sub">Journal · สำรอง Vault · Discord</span></h2>
     </div>
     <div class="wm-right">
-      <span class="tag info wm-status">🟡 รอคำสั่ง/สิทธิ์พี่เจ</span>
+      <span class="tag warn wm-status">🟡 รอคำสั่ง/สิทธิ์พี่เจ</span>
     </div>
   </header>
 
@@ -617,7 +617,7 @@ type: "dashboard"
     <div class="wm-card is-doing">
       <h4>👉 ก้าวต่อไป</h4>
       <ul>
-        <li>จัดรูป OM-2026-09-26-06 — งานเดียวที่พาเที่ยวเดินเองได้</li>
+        <li>งานที่พาเที่ยวเดินเองได้ตอนนี้ = 0 — ที่เหลือรอพี่เจ 5 เรื่อง (ดูช่อง «รอพี่เจ»)</li>
       </ul>
     </div>
     <div class="wm-card is-wait">
@@ -626,6 +626,7 @@ type: "dashboard"
         <li>รันเชลล์แบบ admin 1 ครั้ง — เพิ่ม trigger At log on ให้ VaultBackup</li>
         <li>GCP: grant serviceUsageViewer + re-auth token ชั้น repair</li>
         <li>เปิด Balance alert ในหน้าเว็บ DeepSeek</li>
+        <li>เมลค้าง 2 เรื่อง (ราคาต่อคน/ลีดไทม์ · ขอสิทธิ์โฟลเดอร์ Drive) + Discord ช่องเดียวเป็นจุดเสี่ยงพัง</li>
       </ul>
     </div>
   </div>
@@ -650,17 +651,17 @@ type: "dashboard"
   <header class="wm-head">
     <div class="wm-headtext">
       <div class="wm-code">PC-015 · MT5 Trading</div>
-      <h2 class="wm-title">เทรด MT5 (Vantage) + ระบบกติกา <span class="wm-sub">กติกาที่ทดสอบกับข้อมูลจริง</span></h2>
+      <h2 class="wm-title">เทรด MT5 + ระบบกติกา <span class="wm-sub">กติกาที่ทดสอบกับข้อมูลจริง</span></h2>
     </div>
     <div class="wm-right">
-      <span class="tag info wm-status">🟡 รอพี่เจเคาะกติกา</span>
+      <span class="tag warn wm-status">🟡 รอพี่เจเคาะกติกา</span>
       <div class="wm-progress" title="ขั้นตอนใน §4 ทำแล้ว 9 จาก 13"><span class="wm-bar" style="--p:69%"></span><b>69%</b></div>
     </div>
   </header>
 
   <div class="wm-goal">
     <span class="wm-goal-label">🎯 เป้าหมาย</span>
-    ต่อยอดคอร์สเทรดของพี่เจเป็น <strong>กติกาที่ทดสอบกับข้อมูลจริง</strong> บน MT5 (โบรกหลัก = Vantage) — EA ใช้คำนวณ/ออกแบบโซนเท่านั้น ไม่รันเทรดจริง
+    ต่อยอดคอร์สเทรดของพี่เจเป็น <strong>กติกาที่ทดสอบกับข้อมูลจริง</strong> บน MT5 — EA ใช้คำนวณ/ออกแบบโซนเท่านั้น ไม่รันเทรดจริง
   </div>
 
   <div class="wm-legend">
@@ -673,9 +674,9 @@ type: "dashboard"
   <div class="wm-phase">
     <div class="wm-phase-title"><span class="wm-pnum">1</span>สำรวจเครื่อง + โบรกแรก</div>
     <div class="wm-steps">
-      <div class="wm-step is-done"><span class="wm-n">①</span>สำรวจ MT5 ในเครื่อง — 5 โบรก<em>Vantage/VT/MTS/Valetax/TradeMax</em></div>
+      <div class="wm-step is-done"><span class="wm-n">①</span>สำรวจ MT5 ในเครื่อง — 5 โบรก<em>เลือกโบรกหลักได้แล้ว 1 ตัว</em></div>
       <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">②</span>คุยโบรกแรก Vantage ครบ</div>
+      <div class="wm-step is-done"><span class="wm-n">②</span>คุยโบรกแรกครบ (บัญชี / โซน / magic)</div>
     </div>
   </div>
 
@@ -721,7 +722,7 @@ type: "dashboard"
     <div class="wm-card is-done">
       <h4>✅ ทำเสร็จแล้ว</h4>
       <ul>
-        <li>สำรวจ 5 โบรก + ยืนยัน Vantage เป็นโบรกหลัก</li>
+        <li>สำรวจ 5 โบรก + ยืนยันโบรกหลักตัวเดียว</li>
         <li>Backtest 4 ระดับเสร็จ · เลือก L3 + rezone 6 เดือน</li>
         <li>ดัมป์ค่าจริงด้วย PaTeawAll.mq5 (27 ก.ย. 69)</li>
       </ul>
@@ -736,9 +737,9 @@ type: "dashboard"
     <div class="wm-card is-wait">
       <h4>🙋 รอพี่เจ</h4>
       <ul>
-        <li>ตั้ง SL จริงในจอ — 3 ไม้ที่ถือยัง sl=0.0</li>
-        <li>เลือกโบรกถัดไป (VT / MTS / Valetax / TradeMax)</li>
-        <li>ยืนยันที่มา RSI 55/43 (house rule)</li>
+        <li>ตั้งเกณฑ์ป้องกันความเสี่ยงในจอ (SL) หรือใช้เส้นตาย D1 แทน — ก่อนเริ่มเทรดจริง</li>
+        <li>เลือกโบรกถัดไป (เหลืออีก 4 ราย)</li>
+        <li>ขอคำยืนยันที่มา RSI 55/43 — ไม่บล็อกงาน</li>
       </ul>
     </div>
   </div>
@@ -766,7 +767,7 @@ type: "dashboard"
       <h2 class="wm-title">กรอกราคาค่าโดยสารลงระบบจอง 千栄交通 <span class="wm-sub">ทำจริงแล้ว 8 便 · ตรวจรับผ่านทุกตัว</span></h2>
     </div>
     <div class="wm-right">
-      <span class="tag info wm-status">🟢 รอต้นสังกัดส่งกระดาษ</span>
+      <span class="tag good wm-status">🟢 รอต้นสังกัดส่งกระดาษ</span>
       <div class="wm-progress" title="ขั้นตอนใน §4 ทำแล้ว 6 จาก 7"><span class="wm-bar" style="--p:86%"></span><b>86%</b></div>
     </div>
   </header>
@@ -797,11 +798,11 @@ type: "dashboard"
     <div class="wm-steps">
       <div class="wm-step is-done"><span class="wm-n">③</span>351 · 352 · 451 · 452</div>
       <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">④</span>แก้ 351 (調整額 500/300) · 352 record 1607 · ตัด 12/18 ออกจาก 452</div>
+      <div class="wm-step is-done"><span class="wm-n">④</span>แก้ส่วนเพิ่มค่าโดยสาร + แก้แถวของ 352 + ตัดวัน 12/18 ออกจาก 452</div>
       <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">⑤</span>601便 都内→京都・大阪<em>親 便ID 1008 / 子 1019</em></div>
+      <div class="wm-step is-done"><span class="wm-n">⑤</span>601便 都内→京都・大阪<em>ตัวแม่ + ตัวลูก บันทึกครบ</em></div>
       <span class="wm-flow" aria-hidden="true"></span>
-      <div class="wm-step is-done"><span class="wm-n">⑥</span>602便 大阪・京都→都内<em>親 便ID 1021 / 子 1020</em></div>
+      <div class="wm-step is-done"><span class="wm-n">⑥</span>602便 大阪・京都→都内<em>ตัวแม่ + ตัวลูก บันทึกครบ</em></div>
     </div>
   </div>
 
@@ -818,7 +819,7 @@ type: "dashboard"
       <h4>✅ ทำเสร็จแล้ว</h4>
       <ul>
         <li>กรอกครบ 8 便 เดือน 2026年12月 · ตรวจ persistence ผ่านทุกตัว</li>
-        <li>601/602 จาก SCAN0036 (12 ต.ค. 69) + 時間更新</li>
+        <li>601/602 บันทึกครบ + 時間更新 (12 ต.ค. 69)</li>
         <li>สรุป rules + Skill แยกตาม 便 ใช้ซ้ำได้</li>
       </ul>
     </div>
@@ -834,7 +835,8 @@ type: "dashboard"
       <ul>
         <li>รอต้นสังกัดส่งกระดาษ 便/เดือนถัดไป — ไม่มีกำหนดแน่นอน</li>
         <li>ยังไม่รู้ขั้นตอนยกเลิก/ลบวันเดินรถ — ห้ามกดจนพี่เจสอน</li>
-        <li>調整額 วัน 金/土/日 + ช่วง 12/25-12/30 อาจไม่ใช่ 500/300</li>
+        <li>ส่วนเพิ่มค่าโดยสารของวัน 金/土/日 + ช่วงปลายเดือน อาจไม่เหมือนรอบก่อน — อ่านหมายเหตุของไฟล์รอบนั้นทุกครั้ง</li>
+        <li>ยังไม่ยืนยันว่า 便 เลขชุดใหม่ที่พี่เจให้จะทำเมื่อไร</li>
       </ul>
     </div>
   </div>
@@ -862,7 +864,7 @@ type: "dashboard"
       <h2 class="wm-title">B2B Smile Travel + หาลูกค้าใหม่ <span class="wm-sub">ยิง outreach จริง 6 เจ้า</span></h2>
     </div>
     <div class="wm-right">
-      <span class="tag info wm-status">🟡 รอพี่เจอนุมัติส่งซ้ำ</span>
+      <span class="tag warn wm-status">🟡 รอพี่เจอนุมัติส่งซ้ำ</span>
       <div class="wm-progress" title="ขั้นตอนใน §4 ทำแล้ว 3 จาก 4"><span class="wm-bar" style="--p:75%"></span><b>75%</b></div>
     </div>
   </header>
@@ -911,13 +913,13 @@ type: "dashboard"
       <ul>
         <li>ส่งซ้ำ Next Trip ไปอีเมลใหม่</li>
         <li>กดส่งฉบับติดตาม 10 ฉบับ</li>
+        <li>ติดตามผู้รับที่ยังไม่ตอบกลับ (ยิงไป 5 ต.ค. 69)</li>
       </ul>
     </div>
     <div class="wm-card is-wait">
       <h4>🙋 รอพี่เจ</h4>
       <ul>
         <li>อนุมัติ 1 คลิก — ส่งซ้ำ Next Trip Holiday</li>
-        <li>ยังไม่มีผู้ตอบกลับทุกราย (5 ต.ค. 69)</li>
       </ul>
     </div>
   </div>
@@ -945,8 +947,8 @@ type: "dashboard"
       <h2 class="wm-title">Master Data (โรงแรม / ร้านอาหาร / รถ) <span class="wm-sub">ฐานราคากลางสำหรับใบเสนอราคา</span></h2>
     </div>
     <div class="wm-right">
-      <span class="tag info wm-status">🟡 ใช้จริงแล้ว · เหลือ verify RAW</span>
-      <div class="wm-progress" title="ขั้นตอนใน §4 ทำแล้ว 5 จาก 6"><span class="wm-bar" style="--p:83%"></span><b>83%</b></div>
+      <span class="tag warn wm-status">🟡 ใช้จริงแล้ว · เหลือ verify RAW</span>
+      <div class="wm-progress" title="§4 ทำแล้ว 5/6 · งานจริง (VERIFY) 855 จาก 1,323 = 65%"><span class="wm-bar" style="--p:83%"></span><b>83%</b></div>
     </div>
   </header>
 
@@ -1037,14 +1039,14 @@ type: "dashboard"
       <h2 class="wm-title">ย้ายบัญชี Google → chettana33 <span class="wm-sub">แผน 8 ระยะ · ยังไม่ลงมือ</span></h2>
     </div>
     <div class="wm-right">
-      <span class="tag info wm-status">⏳ รอพี่เจสั่ง "เริ่มย้าย"</span>
+      <span class="tag warn wm-status">⏳ รอพี่เจสั่ง "เริ่มย้าย"</span>
       <div class="wm-progress" title="ขั้นตอนใน §4 ทำแล้ว 2 จาก 31"><span class="wm-bar" style="--p:6%"></span><b>6%</b></div>
     </div>
   </header>
 
   <div class="wm-goal">
     <span class="wm-goal-label">🎯 เป้าหมาย</span>
-    ย้ายระบบทั้งหมดจากบัญชีหลักเดิม (kimonoland) ไปบัญชี <strong>chettana33</strong> อย่างเป็นขั้นตอน — ตอนนี้เป็น "แผนพร้อมรัน" ตามที่พี่เจสั่งให้ทำแผนไว้ก่อน ยังไม่ลงมือ
+    ย้ายระบบทั้งหมดจากบัญชีเดิม ไปบัญชีใหม่ <strong>chettana33</strong> อย่างเป็นขั้นตอน — ตอนนี้เป็น "แผนพร้อมรัน" ตามที่พี่เจสั่งให้ทำแผนไว้ก่อน ยังไม่ลงมือ
   </div>
 
   <div class="wm-legend">
@@ -1124,6 +1126,7 @@ type: "dashboard"
       <ul>
         <li>สั่ง "เริ่มย้าย" — 29 ขั้นที่เปิดอยู่ยังไม่เริ่ม</li>
         <li>ยังไม่แตะโฟลเดอร์ credential/token จนกว่าพี่เจสั่ง</li>
+        <li>หมายเหตุตัวเลข: การ์ดเรียกว่า "36 ขั้น" = §4 เปิดค้าง 29 + เกณฑ์ §7 อีก 7 (แถบ % ด้านบนนับเฉพาะ §4)</li>
       </ul>
     </div>
   </div>
