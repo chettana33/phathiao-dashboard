@@ -15,6 +15,7 @@ OUT = ROOT / "docs"
 
 NAV_ITEMS = [
     ("overview", "ภาพรวม"),
+    ("affiliate", "Affiliate 🛒"),
     ("workmap", "แผนที่งาน"),
     ("private", "ส่วนตัว 🔒"),
     ("status", "สถานะงาน"),
