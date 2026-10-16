@@ -31,6 +31,8 @@ last_updated: 2026-10-17T01:20:00+07:00
 |---|---|---|
 | ไฟล์งาน affiliate (โฟลเดอร์หลัก) | `D:\Affiliate\` | ลิงก์ · คำตอบที่ปรึกษา · รหัสสินค้า · ข้อความคำถาม |
 | ภาพสินค้า AFF-18 (มัทฉะ) | `D:\Affiliate\product_images\AFF-18\` | 14 ภาพ (aff18_01…15 — ตัด `aff18_03` ออกแล้ว) + `images.json` |
+| **ภาพที่ Gemini ใส่ effect ให้ข้อความ** | `D:\Affiliate\product_images\AFF-18\polished\` | `aff18_11_motion.png` · `aff18_12_motion.png` |
+| **ภาพตั้งต้นที่เลือกใช้ (4 ฉาก)** | `aff18_04.jpg` (ฉาก 1) · `aff18_13.png` (ฉาก 2) · `polished\aff18_12_motion.png` (ฉาก 3) · `polished\aff18_11_motion.png` (ฉาก 4) | ในโฟลเดอร์เดียวกัน |
 | ลิงก์ affiliate | `D:\Affiliate\affiliate_links.md` · `.json` | 3 ลิงก์ + หลักฐานการ์ดที่เลือก + หน้าดูรายละเอียด |
 | คำตอบที่ปรึกษา (ChatGPT) | `D:\Affiliate\คำตอบ-ChatGPT.txt` | คำตอบ 2 รอบ (รอบ 1 + รอบ 2) |
 | รหัสสินค้า ↔ ชื่อ | `D:\Affiliate\product_id_map.csv` | AFF-01…AFF-51 |
