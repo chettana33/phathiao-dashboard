@@ -36,7 +36,8 @@ last_updated: 2026-10-17T01:20:00+07:00
 | รหัสสินค้า ↔ ชื่อ | `D:\Affiliate\product_id_map.csv` | AFF-01…AFF-51 |
 | ภาพหน้าจอตรวจลิงก์ | `D:\Affiliate\aff23_customer.png` | มุมมองลูกค้า (ยืนยันช่วงราคาตามขนาด) |
 | **ชีตหลัก Affiliate (7+ แท็บ)** | `https://docs.google.com/spreadsheets/d/1GTHz7BQF38vWDhqG2IovSiSPOnlthTFvrKmbosfRcNc/edit` | หมวดของเรา · สินค้าดิบ 135 · ส่ง AI คัด 51 · ผล AI · ลิงก์ · PDCA · คู่มือ+รอบงาน |
-| **ชีต Google Flow Prompt (ร่างบท+prompt)** | `https://docs.google.com/spreadsheets/d/1rdrvX-T6lgFTjSVE9z2v2YodWciX1NJdOeiEl6CfMko/edit` | แท็บ `affiliate AFF-18 มัทฉะ` (4 ฉาก) |
+| **ชีต Google Flow Prompt (ของ Gochisou — อ้างอิง)** | `https://docs.google.com/spreadsheets/d/1rdrvX-T6lgFTjSVE9z2v2YodWciX1NJdOeiEl6CfMko/edit` | แท็บ `affiliate AFF-18 มัทฉะ` (สำรองไว้) |
+| **⭐ ชีต Affiliate Flow Prompt (ของงาน affiliate)** | `https://docs.google.com/spreadsheets/d/1rSw8o6hcUtPS8C2bwB45D-YwpEYwOEeIvnQ_V0Wk7G0/edit` | `คู่มือ+สถานะ` · `affiliate AFF-18 มัทฉะ` (4 ฉาก) · แท็บเปล่ารอ AFF-15/AFF-23 |
 | หลักการเลือกสินค้า (Vault) | `04_Sales_Marketing/Affiliate_Selection_Principle_v1.md` | ตัวกรอง 5 ชั้น + กลไกให้อาหารกลับ |
 | แผนคลิปชิ้นแรก (Vault) | `04_Sales_Marketing/Affiliate_Clip1_Plan_AFF18.md` | 4 ฉาก + ทางเลือกการผลิต |
 | สมุดงาน/รอบทดลอง (Vault) | `04_Sales_Marketing/Affiliate_Run_Log_v1.md` | SOP 12 ขั้น + บทเรียน 10 ข้อ |
@@ -45,8 +46,8 @@ last_updated: 2026-10-17T01:20:00+07:00
 ## 🎬 คลิปชิ้นแรก — AFF-18 (ขั้นตอนที่เหลือ)
 
 1. เปิด Google Flow (Edge โปรไฟล์ `_flow_profile` — พี่เจล็อกอินเอง)
-2. **เจนภาพตั้งต้น 4 ฉาก** จากคอลัมน์ Image Prompt ในชีต Flow (แท็บ `affiliate AFF-18 มัทฉะ`)
-   - ทางเลือก: ให้ **Gemini ช่วยปรับภาพสินค้าจริง** (ลบข้อความ/ลบฉากหลัง) แล้วใช้เป็นเฟรมตั้งต้น
+2. **เจนภาพตั้งต้น 4 ฉาก** จากคอลัมน์ Image Prompt ในชีต **Affiliate Flow Prompt** (แท็บ `affiliate AFF-18 มัทฉะ`)
+   - ทางที่เลือก: **เลือกภาพสินค้าจริงจาก `D:\Affiliate\product_images\AFF-18\`** (14 ภาพ) แล้ว **ให้ Gemini ช่วยลบข้อความ/ลบพื้นหลัง** ก่อนใช้เป็นเฟรมตั้งต้น
 3. **เจนวิดีโอ** (Frames to video) ฉากละ 1 เจน ≈ 4 เจน (~40–48 เครดิต · โควตาฟรี 50/วัน)
 4. ส่งไฟล์มาให้พาเที่ยว → QC (เสียง/แสง/ตัวอักษร) → ตัดต่อ + ใส่ข้อความเปิดเผยโฆษณา
 5. โพสต์ (Facebook ส่วนตัว + TikTok) → วัดผล 24/72 ชม. → บันทึกใน `09_คู่มือ+รอบงาน`
